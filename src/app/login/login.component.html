@@ -1,0 +1,39 @@
+<nb-card>
+  <nb-card-body>
+    <div class="flex-centered col-xl-4 col-lg-6 col-md-8 col-sm-12">
+
+
+      <h2 class="title">Ingresar</h2>
+      <small class="form-text sub-title">Ingrese su usuario y contraseña</small><br>
+      <form autocomplete="nope" novalidate="" class="ng-touched ng-dirty ng-invalid">
+        <!---->
+        <!---->
+        <div class="form-group">
+          <label class="sr-only" for="input-email">Email</label>
+          <input autofocus="" class="form-control ng-untouched ng-pristine ng-invalid" id="input-email" name="email" pattern=".+@.+..+"
+            placeholder="Email address" required="" [(ngModel)]="email">
+          <!---->
+          <!---->
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="input-password">Contraseña</label>
+          <input class="form-control ng-untouched ng-pristine ng-invalid" id="input-password" name="password" placeholder="Password"
+            type="password" required="" minlength="4" maxlength="50"  [(ngModel)]="password">
+          <!---->
+          <!---->
+        </div>
+        <div class="form-group accept-group col-sm-12">
+          <!-- <nb-checkbox name="rememberMe" class="ng-valid ng-touched ng-dirty">
+                              <label class="customised-control customised-checkbox">
+                                <input class="customised-control-input" type="checkbox">
+                                <span class="customised-control-indicator"></span>
+                                <span class="customised-control-description">Remember me</span>
+                              </label>
+                            </nb-checkbox> -->
+          <!-- <a class="forgot-password" routerlink="../request-password" href="#/auth/request-password">Forgot Password?</a> -->
+        </div>
+        <button class="btn btn-block btn-hero-success" (click)="login()"> Ingresar </button>
+      </form>
+    </div>
+  </nb-card-body>
+</nb-card>
