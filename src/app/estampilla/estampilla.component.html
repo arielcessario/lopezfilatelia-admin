@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-sm-7">
           <div class="form-group  tooltip-danger">
-            <label for="inputName">Nombre</label>
+            <label>Titulo</label>
             <input
               [tooltip]="formErrors['nombre']"
               placement="bottom"
@@ -16,7 +16,7 @@
               formControlName="nombre"
               class="form-control"
               id="nombre"
-              placeholder="Nombre"
+              placeholder="Titulo"
               [ngClass]="{
                 'form-control-danger': form.controls['nombre'].invalid
               }"
@@ -25,50 +25,61 @@
         </div>
         <div class="col-sm-5">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">País</label>
-            <input
-              [tooltip]="formErrors['pais']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="text"
-              formControlName="pais"
-              class="form-control"
-              id="pais"
-              placeholder="País"
-              [ngClass]="{
-                'form-control-danger': form.controls['pais'].invalid
-              }"
-            />
-          </div>
-        </div>
-      </div>
-      <h4>
-        Variedades
-      </h4>
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Estado</label>
-            <input
-              [tooltip]="formErrors['estado']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="date"
-              formControlName="estado"
-              class="form-control"
-              id="estado"
-              placeholder="Estado"
-              [ngClass]="{
-                'form-control-danger': form.controls['estado'].invalid
-              }"
-            />
+            <label>País</label>
+            <select class="form-control" formControlName="pais">
+              <option value="0" selected>Seleccione Pais</option>
+              <option value="1">Pais 1</option>
+              <option value="2">Pais 2</option>
+            </select>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-12">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">precio</label>
+            <label>Descripción</label>
+            <textarea class="form-control"></textarea>
+          </div>
+        </div>
+      </div>
+      <!--Fin seccion descripcion-->
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
+               class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
+                 class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
+                 class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
+                 class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group">
+            <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
+                 class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+      </div>
+      <!--Fin seccion imagen-->
+      <div class="row">
+        <div class="col-sm-1">
+          <div class="form-group  tooltip-danger">
+            <label>Nro YT</label>
             <input
               [tooltip]="formErrors['precio']"
               placement="bottom"
@@ -77,17 +88,16 @@
               formControlName="precio"
               class="form-control"
               id="precio"
-              placeholder="precio"
+              placeholder="Nro YT"
               [ngClass]="{
                 'form-control-danger': form.controls['precio'].invalid
               }"
             />
           </div>
         </div>
-
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Hectareas</label>
+            <label>Nro Arg</label>
             <input
               [tooltip]="formErrors['hectareas']"
               placement="bottom"
@@ -96,16 +106,16 @@
               formControlName="hectareas"
               class="form-control"
               id="hectareas"
-              placeholder="Hectareas"
+              placeholder="Nro Arg"
               [ngClass]="{
                 'form-control-danger': form.controls['hectareas'].invalid
               }"
             />
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-5">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Cantidad de Potreros</label>
+            <label>Nombre</label>
             <input
               [tooltip]="formErrors['cantidadPotreros']"
               placement="bottom"
@@ -114,121 +124,76 @@
               formControlName="cantidadPotreros"
               class="form-control"
               id="cantidadPotreros"
-              placeholder="Cantidad de Potreros"
+              placeholder="Nombre"
               [ngClass]="{
                 'form-control-danger': form.controls['cantidadPotreros'].invalid
               }"
             />
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-1">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Zona</label>
-            <select class="form-control" formControlName="zona">
-              <option value="0">DNI</option>
-              <option value="1">CI</option>
-              <option value="2">Pasaporte</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Región</label>
-            <select class="form-control" formControlName="region">
-              <option value="0">DNI</option>
-              <option value="1">CI</option>
-              <option value="2">Pasaporte</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Dirección</label>
+            <label>*</label>
             <input
-              [tooltip]="formErrors['direccion']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="text"
-              formControlName="direccion"
-              class="form-control"
-              id="direccion"
-              placeholder="Dirección"
-              [ngClass]="{
-                'form-control-danger': form.controls['direccion'].invalid
+                    [tooltip]="formErrors['precio']"
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    formControlName="precio"
+                    class="form-control"
+                    id="precio1"
+                    [ngClass]="{
+                'form-control-danger': form.controls['precio'].invalid
               }"
-            />
+                    />
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="form-group  tooltip-danger">
+            <label>$</label>
+            <input
+                    [tooltip]="formErrors['precio']"
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    formControlName="precio"
+                    class="form-control"
+                    id="precio2"
+                    [ngClass]="{
+                'form-control-danger': form.controls['precio'].invalid
+              }"
+                    />
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="form-group  tooltip-danger">
+            <label>#</label>
+            <input
+                    [tooltip]="formErrors['precio']"
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    formControlName="precio"
+                    class="form-control"
+                    id="precio3"
+                    [ngClass]="{
+                'form-control-danger': form.controls['precio'].invalid
+              }"
+                    />
+          </div>
+        </div>
+        <div class="col-sm-1">
+          <div class="" style="margin-top:27px; ">
+            <button
+                    type="button"
+                    (click)="submit()"
+                    class="btn btn-default" >
+              <span class="fa fa-trash-o fa-lg" aria-hidden="true"></span>
+            </button>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-6">
-          <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Teléfono</label>
-            <div class="row">
-              <div class="col-sm-3">
-                <input
-                  min="1"
-                  step="1"
-                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                  [tooltip]="formErrors['phonePrefix']"
-                  placement="bottom"
-                  triggers="focus keyup keydown"
-                  type="number"
-                  formControlName="phonePrefix"
-                  class="form-control"
-                  id="phonePrefix"
-                  placeholder="Pref."
-                  [ngClass]="{
-                    'form-control-danger': form.controls['phonePrefix'].invalid
-                  }"
-                />
-              </div>
-              <div class="col-sm-7">
-                <input
-                  min="1"
-                  step="1"
-                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                  [tooltip]="formErrors['phoneNumber']"
-                  placement="bottom"
-                  triggers="focus keyup keydown"
-                  type="number"
-                  formControlName="phoneNumber"
-                  class="form-control"
-                  id="phoneNumber"
-                  placeholder="Nro. de teléfono"
-                  [ngClass]="{
-                    'form-control-danger': form.controls['phoneNumber'].invalid
-                  }"
-                />
-              </div>
-              <div class="col-sm-2">
-                <nb-checkbox formControlName="mobile">Celular</nb-checkbox>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="form-group  tooltip-danger">
-            <label for="inputEmail">Email</label>
-            <input
-              [tooltip]="formErrors['mail']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="email"
-              formControlName="mail"
-              class="form-control "
-              id="inputEmail"
-              [ngClass]="{
-                'form-control-danger': form.controls['mail'].invalid
-              }"
-              placeholder="Email"
-            />
-          </div>
-        </div>
-      </div>
     </form>
     <div class="btn-group">
       <button
