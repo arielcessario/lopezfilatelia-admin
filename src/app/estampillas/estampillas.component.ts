@@ -33,52 +33,12 @@ export class EstampillasComponent implements OnInit {
       confirmDelete: true
     },
     columns: {
-      razonSocial: {
-        title: 'Razón Social',
+      nombre: {
+        title: 'Nombre',
         type: 'string'
       },
-      cuit: {
-        title: 'CUIT',
-        type: 'string'
-      },
-      fecha: {
-        title: 'Fecha',
-        type: 'date'
-      },
-      alias: {
-        title: 'Alias',
-        type: 'string'
-      },
-      region: {
-        title: 'Región',
-        type: 'string'
-      },
-      zona: {
-        title: 'Zona',
-        type: 'string'
-      },
-      direccion: {
-        title: 'Dirección',
-        type: 'string'
-      },
-      hectareas: {
-        title: 'Hectáreas',
-        type: 'string'
-      },
-      cantidadPotreros: {
-        title: 'Cant. Potreros',
-        type: 'number'
-      },
-      telefono: {
-        title: 'Teléfono',
-        type: 'string'
-      },
-      celular: {
-        title: 'Celular',
-        type: 'string'
-      },
-      mail: {
-        title: 'Mail',
+      pais: {
+        title: 'País',
         type: 'string'
       }
     }
@@ -112,16 +72,12 @@ export class EstampillasComponent implements OnInit {
       }
 
       if (encontrado > -1) {
-        this.data.splice(encontrado, 1);
-        this.source.load(this.data);
-        // this.proxy.getEstampillas().setItem('pluviometros', this.data).subscribe(
-        //   arg => {
-        //     console.log(arg);
-        //   },
-        //   err => {
-        //     console.log(err);
-        //   }
-        // );
+        this.proxy
+          .deleteEstampilla(this.data[encontrado].estampilla_id)
+          .subscribe(r => {
+            this.data.splice(encontrado, 1);
+            this.source.load(this.data);
+          });
       }
     } else {
       // event.confirm.reject();
@@ -129,10 +85,10 @@ export class EstampillasComponent implements OnInit {
   }
 
   update(event): void {
-    this.router.navigate(['establecimiento', 'datos-basicos', event.data.id]);
+    this.router.navigate(['estampilla', event.data.id]);
   }
 
   create() {
-    this.router.navigate(['establecimiento', 'datos-basicos']);
+    this.router.navigate(['estampilla']);
   }
 }

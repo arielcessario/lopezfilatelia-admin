@@ -1,57 +1,124 @@
 <nb-card>
-  <nb-card-header>
-    Datos Básicos
-  </nb-card-header>
+  <nb-card-header> {{ accion }} Estampilla </nb-card-header>
 
   <nb-card-body>
-
     <form [formGroup]="form" *ngIf="form">
       <!-- Document type and number -->
       <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
           <div class="form-group  tooltip-danger">
-            <label for="inputName">Razón Social</label>
-            <input [tooltip]="formErrors['razonSocial']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="razonSocial" class="form-control" id="razonSocial" placeholder="Razón Social" [ngClass]="{'form-control-danger': form.controls['razonSocial'].invalid}">
+            <label for="inputName">Nombre</label>
+            <input
+              [tooltip]="formErrors['nombre']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="nombre"
+              class="form-control"
+              id="nombre"
+              placeholder="Nombre"
+              [ngClass]="{
+                'form-control-danger': form.controls['nombre'].invalid
+              }"
+            />
           </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-5">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">CUIT</label>
-            <input [tooltip]="formErrors['cuit']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="cuit" class="form-control" id="cuit" placeholder="CUIT" [ngClass]="{'form-control-danger': form.controls['cuit'].invalid}">
+            <label for="inputFirstName">País</label>
+            <input
+              [tooltip]="formErrors['pais']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="pais"
+              class="form-control"
+              id="pais"
+              placeholder="País"
+              [ngClass]="{
+                'form-control-danger': form.controls['pais'].invalid
+              }"
+            />
           </div>
         </div>
+      </div>
+      <h4>
+        Variedades
+      </h4>
+      <div class="row">
         <div class="col-sm-3">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Fecha</label>
-            <input [tooltip]="formErrors['fecha']" placement="bottom" triggers="focus keyup keydown" type="date"
-              formControlName="fecha" class="form-control" id="fecha" placeholder="Fecha" [ngClass]="{'form-control-danger': form.controls['fecha'].invalid}">
+            <label for="inputFirstName">Estado</label>
+            <input
+              [tooltip]="formErrors['estado']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="date"
+              formControlName="estado"
+              class="form-control"
+              id="estado"
+              placeholder="Estado"
+              [ngClass]="{
+                'form-control-danger': form.controls['estado'].invalid
+              }"
+            />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group  tooltip-danger">
-            <label for="inputFirstName">Alias</label>
-            <input [tooltip]="formErrors['alias']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="alias" class="form-control" id="alias" placeholder="Alias" [ngClass]="{'form-control-danger': form.controls['alias'].invalid}">
+            <label for="inputFirstName">precio</label>
+            <input
+              [tooltip]="formErrors['precio']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="precio"
+              class="form-control"
+              id="precio"
+              placeholder="precio"
+              [ngClass]="{
+                'form-control-danger': form.controls['precio'].invalid
+              }"
+            />
           </div>
         </div>
 
         <div class="col-sm-3">
           <div class="form-group  tooltip-danger">
             <label for="inputFirstName">Hectareas</label>
-            <input [tooltip]="formErrors['hectareas']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="hectareas" class="form-control" id="hectareas" placeholder="Hectareas" [ngClass]="{'form-control-danger': form.controls['hectareas'].invalid}">
+            <input
+              [tooltip]="formErrors['hectareas']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="hectareas"
+              class="form-control"
+              id="hectareas"
+              placeholder="Hectareas"
+              [ngClass]="{
+                'form-control-danger': form.controls['hectareas'].invalid
+              }"
+            />
           </div>
         </div>
         <div class="col-sm-3">
           <div class="form-group  tooltip-danger">
             <label for="inputFirstName">Cantidad de Potreros</label>
-            <input [tooltip]="formErrors['cantidadPotreros']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="cantidadPotreros" class="form-control" id="cantidadPotreros" placeholder="Cantidad de Potreros"
-              [ngClass]="{'form-control-danger': form.controls['cantidadPotreros'].invalid}">
+            <input
+              [tooltip]="formErrors['cantidadPotreros']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="cantidadPotreros"
+              class="form-control"
+              id="cantidadPotreros"
+              placeholder="Cantidad de Potreros"
+              [ngClass]="{
+                'form-control-danger': form.controls['cantidadPotreros'].invalid
+              }"
+            />
           </div>
         </div>
       </div>
@@ -79,8 +146,19 @@
         <div class="col-sm-6">
           <div class="form-group  tooltip-danger">
             <label for="inputFirstName">Dirección</label>
-            <input [tooltip]="formErrors['direccion']" placement="bottom" triggers="focus keyup keydown" type="text"
-              formControlName="direccion" class="form-control" id="direccion" placeholder="Dirección" [ngClass]="{'form-control-danger': form.controls['direccion'].invalid}">
+            <input
+              [tooltip]="formErrors['direccion']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="direccion"
+              class="form-control"
+              id="direccion"
+              placeholder="Dirección"
+              [ngClass]="{
+                'form-control-danger': form.controls['direccion'].invalid
+              }"
+            />
           </div>
         </div>
       </div>
@@ -91,14 +169,40 @@
             <label for="inputFirstName">Teléfono</label>
             <div class="row">
               <div class="col-sm-3">
-                <input min="1" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [tooltip]="formErrors['phonePrefix']"
-                  placement="bottom" triggers="focus keyup keydown" type="number" formControlName="phonePrefix" class="form-control"
-                  id="phonePrefix" placeholder="Pref." [ngClass]="{'form-control-danger': form.controls['phonePrefix'].invalid}">
+                <input
+                  min="1"
+                  step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                  [tooltip]="formErrors['phonePrefix']"
+                  placement="bottom"
+                  triggers="focus keyup keydown"
+                  type="number"
+                  formControlName="phonePrefix"
+                  class="form-control"
+                  id="phonePrefix"
+                  placeholder="Pref."
+                  [ngClass]="{
+                    'form-control-danger': form.controls['phonePrefix'].invalid
+                  }"
+                />
               </div>
               <div class="col-sm-7">
-                <input min="1" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57" [tooltip]="formErrors['phoneNumber']"
-                  placement="bottom" triggers="focus keyup keydown" type="number" formControlName="phoneNumber" class="form-control"
-                  id="phoneNumber" placeholder="Nro. de teléfono" [ngClass]="{'form-control-danger': form.controls['phoneNumber'].invalid}">
+                <input
+                  min="1"
+                  step="1"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                  [tooltip]="formErrors['phoneNumber']"
+                  placement="bottom"
+                  triggers="focus keyup keydown"
+                  type="number"
+                  formControlName="phoneNumber"
+                  class="form-control"
+                  id="phoneNumber"
+                  placeholder="Nro. de teléfono"
+                  [ngClass]="{
+                    'form-control-danger': form.controls['phoneNumber'].invalid
+                  }"
+                />
               </div>
               <div class="col-sm-2">
                 <nb-checkbox formControlName="mobile">Celular</nb-checkbox>
@@ -109,17 +213,42 @@
         <div class="col-sm-6">
           <div class="form-group  tooltip-danger">
             <label for="inputEmail">Email</label>
-            <input [tooltip]="formErrors['mail']" placement="bottom" triggers="focus keyup keydown" type="email"
-              formControlName="mail" class="form-control " id="inputEmail" [ngClass]="{'form-control-danger': form.controls['mail'].invalid}"
-              placeholder="Email">
+            <input
+              [tooltip]="formErrors['mail']"
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="email"
+              formControlName="mail"
+              class="form-control "
+              id="inputEmail"
+              [ngClass]="{
+                'form-control-danger': form.controls['mail'].invalid
+              }"
+              placeholder="Email"
+            />
           </div>
         </div>
       </div>
     </form>
     <div class="btn-group">
-      <button *ngIf="form" type="button" [disabled]="!form.valid" (click)="submit()" class="btn btn-primary">Guardar</button>
+      <button
+        *ngIf="form"
+        type="button"
+        [disabled]="!form.valid"
+        (click)="submit()"
+        class="btn btn-primary"
+      >
+        Guardar
+      </button>
 
-      <button *ngIf="form" type="button" (click)="submit()" class="btn btn-danger">Cancelar</button>
+      <button
+        *ngIf="form"
+        type="button"
+        (click)="submit()"
+        class="btn btn-danger"
+      >
+        Cancelar
+      </button>
     </div>
   </nb-card-body>
 </nb-card>

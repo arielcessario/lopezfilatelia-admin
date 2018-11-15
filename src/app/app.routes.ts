@@ -1,3 +1,4 @@
+import { EstampillaComponent } from './estampilla/estampilla.component';
 import { EstampillasComponent } from './estampillas/estampillas.component';
 import { LoginComponent } from './login/login.component';
 import { ModuleWithProviders } from '@angular/core';
@@ -19,8 +20,13 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'estampillas/:id',
-    component: EstampillasComponent,
+    path: 'estampilla',
+    component: EstampillaComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'estampilla/:id',
+    component: EstampillaComponent,
     canActivate: [AuthGuard]
   }
 ];

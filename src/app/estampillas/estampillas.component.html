@@ -1,11 +1,16 @@
 <nb-card>
-  <nb-card-header>
-    Establecimientos
-  </nb-card-header>
+  <nb-card-header> Estampillas </nb-card-header>
 
   <nb-card-body>
-    <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)" (create)="create()"
-      (edit)="update($event)" (delete)="onDeleteConfirm($event)" (userRowSelect)="update($event)">
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (create)="create()"
+      (edit)="update($event)"
+      (delete)="onDeleteConfirm($event)"
+      (userRowSelect)="update($event)"
+    >
     </ng2-smart-table>
   </nb-card-body>
 </nb-card>
