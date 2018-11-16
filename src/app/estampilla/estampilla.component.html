@@ -9,16 +9,16 @@
           <div class="form-group  tooltip-danger">
             <label>Titulo</label>
             <input
-              [tooltip]="formErrors['nombre']"
+              [tooltip]="formErrors['titulo']"
               placement="bottom"
               triggers="focus keyup keydown"
               type="text"
-              formControlName="nombre"
+              formControlName="titulo"
               class="form-control"
-              id="nombre"
+              id="titulo"
               placeholder="Titulo"
               [ngClass]="{
-                'form-control-danger': form.controls['nombre'].invalid
+                'form-control-danger': form.controls['titulo'].invalid
               }"
             />
           </div>
@@ -26,7 +26,7 @@
         <div class="col-sm-5">
           <div class="form-group  tooltip-danger">
             <label>País</label>
-            <select class="form-control" formControlName="pais">
+            <select class="form-control" formControlName="pais_id" id="pais_id">
               <option value="0" selected>Seleccione Pais</option>
               <option value="1">Pais 1</option>
               <option value="2">Pais 2</option>
@@ -38,7 +38,15 @@
         <div class="col-sm-12">
           <div class="form-group  tooltip-danger">
             <label>Descripción</label>
-            <textarea class="form-control"></textarea>
+            <textarea
+                    [tooltip]="formErrors['descripcion']"
+                    formControlName="descripcion"
+                    id="descripcion"
+                    class="form-control"
+                    [ngClass]="{
+                      'form-control-danger': form.controls['descripcion'].invalid
+                    }"
+                    ></textarea>
           </div>
         </div>
       </div>
@@ -81,16 +89,16 @@
           <div class="form-group  tooltip-danger">
             <label>Nro YT</label>
             <input
-              [tooltip]="formErrors['precio']"
+              [tooltip]="formErrors['catalogo_codigo']"
               placement="bottom"
               triggers="focus keyup keydown"
               type="text"
-              formControlName="precio"
+              formControlName="catalogo_codigo"
               class="form-control"
-              id="precio"
+              id="catalogo_codigo"
               placeholder="Nro YT"
               [ngClass]="{
-                'form-control-danger': form.controls['precio'].invalid
+                'form-control-danger': form.controls['catalogo_codigo'].invalid
               }"
             />
           </div>
@@ -99,16 +107,16 @@
           <div class="form-group  tooltip-danger">
             <label>Nro Arg</label>
             <input
-              [tooltip]="formErrors['hectareas']"
+              [tooltip]="formErrors['catalogo_id']"
               placement="bottom"
               triggers="focus keyup keydown"
               type="text"
-              formControlName="hectareas"
+              formControlName="catalogo_id"
               class="form-control"
-              id="hectareas"
+              id="catalogo_id"
               placeholder="Nro Arg"
               [ngClass]="{
-                'form-control-danger': form.controls['hectareas'].invalid
+                'form-control-danger': form.controls['catalogo_id'].invalid
               }"
             />
           </div>
@@ -117,16 +125,16 @@
           <div class="form-group  tooltip-danger">
             <label>Nombre</label>
             <input
-              [tooltip]="formErrors['cantidadPotreros']"
+              [tooltip]="formErrors['nombre']"
               placement="bottom"
               triggers="focus keyup keydown"
               type="text"
-              formControlName="cantidadPotreros"
+              formControlName="nombre"
               class="form-control"
-              id="cantidadPotreros"
+              id="nombre"
               placeholder="Nombre"
               [ngClass]="{
-                'form-control-danger': form.controls['cantidadPotreros'].invalid
+                'form-control-danger': form.controls['nombre'].invalid
               }"
             />
           </div>
@@ -141,7 +149,7 @@
                     type="text"
                     formControlName="precio"
                     class="form-control"
-                    id="precio1"
+                    id="precio"
                     [ngClass]="{
                 'form-control-danger': form.controls['precio'].invalid
               }"
@@ -152,15 +160,15 @@
           <div class="form-group  tooltip-danger">
             <label>$</label>
             <input
-                    [tooltip]="formErrors['precio']"
+                    [tooltip]="formErrors['precio2']"
                     placement="bottom"
                     triggers="focus keyup keydown"
                     type="text"
-                    formControlName="precio"
+                    formControlName="precio2"
                     class="form-control"
                     id="precio2"
                     [ngClass]="{
-                'form-control-danger': form.controls['precio'].invalid
+                'form-control-danger': form.controls['precio2'].invalid
               }"
               />
           </div>
@@ -169,15 +177,15 @@
           <div class="form-group  tooltip-danger">
             <label>#</label>
             <input
-                    [tooltip]="formErrors['precio']"
+                    [tooltip]="formErrors['precio3']"
                     placement="bottom"
                     triggers="focus keyup keydown"
                     type="text"
-                    formControlName="precio"
+                    formControlName="precio3"
                     class="form-control"
                     id="precio3"
                     [ngClass]="{
-                'form-control-danger': form.controls['precio'].invalid
+                'form-control-danger': form.controls['precio3'].invalid
               }"
                     />
           </div>

@@ -26,22 +26,30 @@ export class EstampillaComponent implements OnInit {
 
   public estampilla_id = 0;
   public nombre = '';
+  public titulo = '';
   public pais_id = 0;
   public estado_id = 0;
   public precio = 0.0;
+  public precio2 = 0.0;
+  public precio3 = 0.0;
   public catalogo_codigo = 0;
   public catalogo_id = 0;
   public estampilla_variedad_id = 0;
   public variedad = '';
+  public descripcion = '';
 
   formErrors: any = {
     estampilla_id: '',
     nombre: '',
+    titulo: '',
     pais_id: '',
     estado_id: '',
     precio: '',
+    precio2: '',
+    precio3: '',
     catalogo_codigo: '',
-    catalogo_id: ''
+    catalogo_id: '',
+    descripcion: ''
   };
 
   validationMessages = {
@@ -79,11 +87,15 @@ export class EstampillaComponent implements OnInit {
       id: this.id,
       estampilla_id: this.form.get('estampilla_id').value,
       nombre: this.form.get('nombre').value,
+      titulo: this.form.get('titulo').value,
       pais_id: this.form.get('pais_id').value,
       estado_id: this.form.get('estado_id').value,
       precio: this.form.get('precio').value,
+      precio2: this.form.get('precio2').value,
+      precio3: this.form.get('precio3').value,
       catalogo_codigo: this.form.get('catalogo_codigo').value,
-      catalogo_id: this.form.get('catalogo_id').value
+      catalogo_id: this.form.get('catalogo_id').value,
+      descripcion: this.form.get('descripcion').value
     };
   }
 
@@ -100,11 +112,15 @@ export class EstampillaComponent implements OnInit {
           Validators.maxLength(15)
         ]
       ],
+      titulo: [this.titulo, [Validators.required]],
       pais_id: [this.pais_id, [Validators.required]],
       estado_id: [this.estado_id, [Validators.required]],
       precio: [this.precio, [Validators.required]],
+      precio2: [this.precio2, [Validators.required]],
+      precio3: [this.precio3, [Validators.required]],
       catalogo_codigo: [this.catalogo_codigo, [Validators.required]],
-      catalogo_id: [this.catalogo_id, [Validators.required]]
+      catalogo_id: [this.catalogo_id, [Validators.required]],
+      descripcion: [this.descripcion, [Validators.required]]
     };
 
     this.fb = new FormBuilder();
@@ -112,22 +128,30 @@ export class EstampillaComponent implements OnInit {
 
     form.controls['estampilla_id'].setValue(0);
     form.controls['nombre'].setValue('');
+    form.controls['titulo'].setValue('');
     form.controls['pais_id'].setValue(0);
     form.controls['estado_id'].setValue(0);
     form.controls['precio'].setValue(0.0);
+    form.controls['precio2'].setValue(0.0);
+    form.controls['precio3'].setValue(0.0);
     form.controls['catalogo_codigo'].setValue(0);
     form.controls['catalogo_id'].setValue(0);
+    form.controls['descripcion'].setValue('');
 
     if (this.id !== -1) {
       form.controls['estampilla_id'].setValue(this.estampilla['estampilla_id']);
       form.controls['nombre'].setValue(this.estampilla['nombre']);
+      form.controls['titulo'].setValue(this.estampilla['titulo']);
       form.controls['pais_id'].setValue(this.estampilla['pais_id']);
       form.controls['estado_id'].setValue(this.estampilla['estado_id']);
       form.controls['precio'].setValue(this.estampilla['precio']);
+      form.controls['precio2'].setValue(this.estampilla['precio2']);
+      form.controls['precio3'].setValue(this.estampilla['precio3']);
       form.controls['catalogo_codigo'].setValue(
         this.estampilla['catalogo_codigo']
       );
       form.controls['catalogo_id'].setValue(this.estampilla['catalogo_id']);
+      form.controls['descripcion'].setValue(this.estampilla['descripcion']);
     }
 
     this.form = form;

@@ -85,6 +85,7 @@ export class EstampillasComponent implements OnInit {
   }
 
   update(event): void {
+    console.log(event);
     this.router.navigate(['estampilla', event.data.id]);
   }
 
