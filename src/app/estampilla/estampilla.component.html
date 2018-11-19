@@ -7,18 +7,17 @@
       <div class="row">
         <div class="col-sm-7">
           <div class="form-group  tooltip-danger">
-            <label>Titulo</label>
+            <label>Nombre Estampilla</label>
             <input
-              [tooltip]="formErrors['titulo']"
               placement="bottom"
               triggers="focus keyup keydown"
               type="text"
-              formControlName="titulo"
+              formControlName="nombre"
               class="form-control"
-              id="titulo"
-              placeholder="Titulo"
+              id="nombre"
+              placeholder="Nombre Estampilla"
               [ngClass]="{
-                'form-control-danger': form.controls['titulo'].invalid
+                'form-control-danger': form.controls['nombre'].invalid
               }"
             />
           </div>
@@ -27,9 +26,12 @@
           <div class="form-group  tooltip-danger">
             <label>País</label>
             <select class="form-control" formControlName="pais_id" id="pais_id">
-              <option value="0" selected>Seleccione Pais</option>
-              <option value="1">Pais 1</option>
-              <option value="2">Pais 2</option>
+              <option value="0" selected>SELECCIONE PAIS</option>
+              <option value="1">ARGENTINA</option>
+              <option value="2">BRASIL</option>
+              <option value="3">URUGUAY</option>
+              <option value="4">PARAGUAY</option>
+              <option value="5">CHILE</option>
             </select>
           </div>
         </div>
@@ -39,7 +41,6 @@
           <div class="form-group  tooltip-danger">
             <label>Descripción</label>
             <textarea
-                    [tooltip]="formErrors['descripcion']"
                     formControlName="descripcion"
                     id="descripcion"
                     class="form-control"
@@ -52,162 +53,149 @@
       </div>
       <!--Fin seccion descripcion-->
       <div class="row">
-        <div class="col-sm-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="form-group">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
                class="img-responsive img-thumbnail img-fluid" height="100" width="100">
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="form-group">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
                  class="img-responsive img-thumbnail img-fluid" height="100" width="100">
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="form-group">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
                  class="img-responsive img-thumbnail img-fluid" height="100" width="100">
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="form-group">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
                  class="img-responsive img-thumbnail img-fluid" height="100" width="100">
           </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2">
           <div class="form-group">
             <img src="https://cdn3.iconfinder.com/data/icons/document-icons-2/30/647709-image-512.png"
                  class="img-responsive img-thumbnail img-fluid" height="100" width="100">
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-3 col-lg-2" style="padding-right: 45px">
+          <div class="" style="margin-top:60px; ">
+            <button
+                    type="button"
+                    (click)="addVariedad()"
+                    class="btn btn-primary" title="Agregar Variedad">
+              <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+            </button>
           </div>
         </div>
       </div>
       <!--Fin seccion imagen-->
-      <div class="row">
-        <div class="col-sm-1">
+      <div *ngFor="let item of variedades" class="row">
+        <div class="col-6 col-sm-3 col-md-3 col-lg-2">
           <div class="form-group  tooltip-danger">
             <label>Nro YT</label>
             <input
-              [tooltip]="formErrors['catalogo_codigo']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="text"
-              formControlName="catalogo_codigo"
-              class="form-control"
-              id="catalogo_codigo"
-              placeholder="Nro YT"
-              [ngClass]="{
-                'form-control-danger': form.controls['catalogo_codigo'].invalid
-              }"
-            />
-          </div>
-        </div>
-        <div class="col-sm-2">
-          <div class="form-group  tooltip-danger">
-            <label>Nro Arg</label>
-            <input
-              [tooltip]="formErrors['catalogo_id']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="text"
-              formControlName="catalogo_id"
-              class="form-control"
-              id="catalogo_id"
-              placeholder="Nro Arg"
-              [ngClass]="{
-                'form-control-danger': form.controls['catalogo_id'].invalid
-              }"
-            />
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <div class="form-group  tooltip-danger">
-            <label>Nombre</label>
-            <input
-              [tooltip]="formErrors['nombre']"
-              placement="bottom"
-              triggers="focus keyup keydown"
-              type="text"
-              formControlName="nombre"
-              class="form-control"
-              id="nombre"
-              placeholder="Nombre"
-              [ngClass]="{
-                'form-control-danger': form.controls['nombre'].invalid
-              }"
-            />
-          </div>
-        </div>
-        <div class="col-sm-1">
-          <div class="form-group  tooltip-danger">
-            <label>*</label>
-            <input
-                    [tooltip]="formErrors['precio']"
                     placement="bottom"
                     triggers="focus keyup keydown"
                     type="text"
-                    formControlName="precio"
                     class="form-control"
-                    id="precio"
-                    [ngClass]="{
-                'form-control-danger': form.controls['precio'].invalid
-              }"
-              />
-          </div>
-        </div>
-        <div class="col-sm-1">
-          <div class="form-group  tooltip-danger">
-            <label>$</label>
-            <input
-                    [tooltip]="formErrors['precio2']"
-                    placement="bottom"
-                    triggers="focus keyup keydown"
-                    type="text"
-                    formControlName="precio2"
-                    class="form-control"
-                    id="precio2"
-                    [ngClass]="{
-                'form-control-danger': form.controls['precio2'].invalid
-              }"
-              />
-          </div>
-        </div>
-        <div class="col-sm-1">
-          <div class="form-group  tooltip-danger">
-            <label>#</label>
-            <input
-                    [tooltip]="formErrors['precio3']"
-                    placement="bottom"
-                    triggers="focus keyup keydown"
-                    type="text"
-                    formControlName="precio3"
-                    class="form-control"
-                    id="precio3"
-                    [ngClass]="{
-                'form-control-danger': form.controls['precio3'].invalid
-              }"
+                    placeholder="Nro YT"
+                    [(ngModel)]="item.codigo_yt"
+                    [ngModelOptions]="{standalone: true}"
                     />
           </div>
         </div>
-        <div class="col-sm-1">
+        <div class="col-6 col-sm-3 col-md-3 col-lg-2">
+          <div class="form-group  tooltip-danger">
+            <label>Nro Arg</label>
+            <input
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nro Arg"
+                    [(ngModel)]="item.codigo_arg"
+                    [ngModelOptions]="{standalone: true}"
+                    />
+          </div>
+        </div>
+        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+          <div class="form-group  tooltip-danger">
+            <label>Variedad</label>
+            <input
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    class="form-control"
+                    placeholder="variedad"
+                    [(ngModel)]="item.variedad"
+                    [ngModelOptions]="{standalone: true}"
+                    />
+          </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 col-lg-1">
+          <div class="form-group  tooltip-danger">
+            <label>*</label>
+            <input
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="item.precio"
+                    [ngModelOptions]="{standalone: true}"
+                    />
+          </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 col-lg-1">
+          <div class="form-group  tooltip-danger">
+            <label>$</label>
+            <input
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="item.precio2"
+                    [ngModelOptions]="{standalone: true}"
+                    />
+          </div>
+        </div>
+        <div class="col-6 col-sm-3 col-md-3 col-lg-1">
+          <div class="form-group  tooltip-danger">
+            <label>#</label>
+            <input
+                    placement="bottom"
+                    triggers="focus keyup keydown"
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="item.precio3"
+                    [ngModelOptions]="{standalone: true}"
+                    />
+          </div>
+        </div>
+        <div class="col-6 col-sm-1 col-md-1 col-lg-1">
           <div class="" style="margin-top:27px; ">
             <button
                     type="button"
-                    (click)="submit()"
-                    class="btn btn-default" >
+                    (click)="removeVariedad(item)"
+                    class="btn btn-default" title="Quitar Variedad">
               <span class="fa fa-trash-o fa-lg" aria-hidden="true"></span>
             </button>
           </div>
         </div>
       </div>
+      <!--Fin del row de variedades denamico-->
+
 
     </form>
-    <div class="btn-group">
+    <div class="btn-group" style="margin-top: 20px">
       <button
         *ngIf="form"
         type="button"
-        [disabled]="!form.valid"
         (click)="submit()"
         class="btn btn-primary"
       >
@@ -217,7 +205,7 @@
       <button
         *ngIf="form"
         type="button"
-        (click)="submit()"
+        (click)="cancel()"
         class="btn btn-danger"
       >
         Cancelar

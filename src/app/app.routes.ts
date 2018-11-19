@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: 'estampilla/:id',
     component: EstampillaComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   }
 ];
 

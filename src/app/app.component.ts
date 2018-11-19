@@ -37,10 +37,10 @@ export class AppComponent implements OnInit {
 
     console.log(this.authService.getLoginStatus());
 
-    this.proxy.getEstampillas().subscribe(data=>{
-      console.log(data);
-
-    })
+    //this.proxy.getEstampillas().subscribe(data=>{
+    //  console.log(data);
+    //
+    //})
 
     this.coreService.getLoginStatus.subscribe(data => {
       this.logged = data;
