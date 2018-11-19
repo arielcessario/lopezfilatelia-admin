@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  //imagesPath: 'http://localhost/rxcx/src/images/'
+  imagesPath: 'http://localhost/rxcx/src/images/'
 };
 
 /*

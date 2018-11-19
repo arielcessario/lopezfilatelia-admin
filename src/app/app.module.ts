@@ -34,7 +34,8 @@ if (environment.production) {
 const projectConfig = {
   env: env,
   company: 'lopezfilatelia-admin',
-  providers: []
+  providers: [],
+  imagesPath: environment.imagesPath
 };
 
 @NgModule({
