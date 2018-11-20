@@ -1,6 +1,7 @@
 import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
 import { CoreService } from 'ac-core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {
@@ -26,6 +27,17 @@ export class EstampillaComponent implements OnInit {
   //id = 17;
   accion = 'Crear';
   err: string;
+
+  // Nombres de las Imagenes
+  _img01Name = 'no_image.png';
+  _img02Name = 'no_image.png';
+  _img03Name = 'no_image.png';
+  _img04Name = 'no_image.png';
+  _img05Name = 'no_image.png';
+
+  images = [];
+
+  imagesPath = environment.imagesPath;
 
   public variedades = [];
   //public variedades = [{codigo_yt: "",
@@ -78,6 +90,12 @@ export class EstampillaComponent implements OnInit {
           this.estampilla = e;
           console.log(this.estampilla);
           this.buildForm();
+          this.proxy.getEstampillaImagenes(this.id).subscribe(imagenes => {
+            this.images = [];
+            for (let i = 0; i < imagenes.length; i++) {
+              this.images.push(imagenes[i].path);
+            }
+          });
         });
       } else {
         console.log("nuevo");
@@ -98,7 +116,8 @@ export class EstampillaComponent implements OnInit {
       catalogo_id: this.form.get('catalogo_id').value,
       descripcion: this.form.get('descripcion').value,
       status: this.status,
-      variedades: this.variedades
+      variedades: this.variedades,
+      imagenes: this.images
     };
 
     console.log('guardar', plu);
@@ -243,4 +262,22 @@ export class EstampillaComponent implements OnInit {
   //
   //  return validator;
   //}
+
+  updateEstampillaImages(e, id) {
+    const _id = 'img' + id;
+    //this.definicion[_id] = e[_id];
+    //console.log(this.definicion);
+  }
+
+  loadedImage(e, index) {
+    this.images[index] = e.originalName;
+    console.log(this.images);
+  }
+
+  setImageName(_obj, val) {
+    setTimeout(() => {
+      this[_obj] = val;
+    }, 0);
+  }
+
 }
