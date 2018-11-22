@@ -55,12 +55,14 @@ export class EstampillaComponent implements OnInit {
   public estado_id = 0;
   public catalogo_id = 0;
   public estampilla_variedad_id = 0;
+  public anio = 0;
 
 
   formErrors: any = {
     estampilla_id: '',
     nombre: '',
     pais_id: '',
+    anio: 0,
     estado_id: '',
     catalogo_id: '',
     descripcion: ''
@@ -112,6 +114,7 @@ export class EstampillaComponent implements OnInit {
       estampilla_id: this.id,
       nombre: this.form.get('nombre').value,
       pais_id: this.form.get('pais_id').value,
+      anio: this.form.get('anio').value,
       estado_id: this.form.get('estado_id').value,
       catalogo_id: this.form.get('catalogo_id').value,
       descripcion: this.form.get('descripcion').value,
@@ -157,7 +160,9 @@ export class EstampillaComponent implements OnInit {
       variedad: "",
       precio: "",
       precio2: "",
-      precio3: ""
+      precio3: "",
+      precio4: "",
+      precio5: ""
     });
   }
 
@@ -185,6 +190,7 @@ export class EstampillaComponent implements OnInit {
         ]
       ],
       pais_id: [this.pais_id, [Validators.required]],
+      anio: [this.anio, [Validators.required]],
       estado_id: [this.estado_id, [Validators.required]],
       catalogo_id: [this.catalogo_id, [Validators.required]],
       descripcion: [this.descripcion, [Validators.required]]
@@ -196,6 +202,7 @@ export class EstampillaComponent implements OnInit {
     //form.controls['estampilla_id'].setValue(0);
     form.controls['nombre'].setValue('');
     form.controls['pais_id'].setValue(0);
+    form.controls['anio'].setValue(0);
     form.controls['estado_id'].setValue(0);
     form.controls['descripcion'].setValue('');
 
@@ -203,6 +210,7 @@ export class EstampillaComponent implements OnInit {
       //form.controls['estampilla_id'].setValue(this.estampilla['estampilla_id']);
       form.controls['nombre'].setValue(this.estampilla[0].nombre);
       form.controls['pais_id'].setValue(this.estampilla[0].pais_id);
+      form.controls['anio'].setValue(this.estampilla[0].anio);
       form.controls['estado_id'].setValue(this.estampilla[0].estado_id);
       //form.controls['catalogo_id'].setValue(this.estampilla['catalogo_id']);
       form.controls['descripcion'].setValue(this.estampilla[0].descripcion);
@@ -221,7 +229,9 @@ export class EstampillaComponent implements OnInit {
           variedad: element.nombre,
           precio: element.precio,
           precio2: element.precio2,
-          precio3: element.precio3
+          precio3: element.precio3,
+          precio4: element.precio4,
+          precio5: element.precio5
         });
       });
 

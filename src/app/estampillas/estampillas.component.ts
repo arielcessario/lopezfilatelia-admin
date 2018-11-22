@@ -41,6 +41,10 @@ export class EstampillasComponent implements OnInit {
         title: 'País',
         type: 'string'
       },
+      anio: {
+        title: 'Año',
+        type: 'string'
+      },
       descripcion: {
         title: 'Descripción',
         type: 'string'
