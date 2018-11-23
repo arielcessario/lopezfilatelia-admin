@@ -5,6 +5,11 @@ import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'ac-core';
 import { MainComponent } from './main/main.component';
+import { PaisesComponent } from './paises/paises.component';
+import { LotesComponent } from './lotes/lotes.component';
+import { LoteComponent } from './lote/lote.component';
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -28,7 +33,32 @@ const routes: Routes = [
     path: 'estampilla/:id',
     component: EstampillaComponent,
     //canActivate: [AuthGuard]
-  }
+  },
+  {
+    path: 'paises',
+    component: PaisesComponent,
+    canActivate: [AuthGuard]
+  },
+  //{
+  //  path: 'pais',
+  //  component: PaisComponent,
+  //  canActivate: [AuthGuard]
+  //},
+  //{
+  //  path: 'pais/:id',
+  //  component: PaisComponent,
+  //  canActivate: [AuthGuard]
+  //},
+  {
+    path: 'lotes',
+    component: LotesComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'lote',
+    component: LoteComponent,
+    canActivate: [AuthGuard]
+  },
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);

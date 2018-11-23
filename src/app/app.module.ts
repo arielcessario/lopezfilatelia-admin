@@ -25,6 +25,11 @@ import { NbMenuInternalService, NbMenuService } from '@nebular/theme/components/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { EstampillaComponent } from './estampilla/estampilla.component';
+import { PaisesComponent } from './paises/paises.component';
+//import { PaisComponent } from './pais/pais.component';
+import { LotesComponent } from './lotes/lotes.component';
+import { LoteComponent } from './lote/lote.component';
+
 
 let env = 'dev';
 if (environment.production) {
@@ -39,7 +44,8 @@ const projectConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, EstampillasComponent, EstampillaComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, EstampillasComponent, EstampillaComponent,
+    PaisesComponent, LotesComponent, LoteComponent],
   imports: [
     BrowserModule,
     NbThemeModule.forRoot({ name: 'default' }),

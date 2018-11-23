@@ -1,0 +1,46 @@
+<nb-card>
+    <nb-card-header> {{ accion }} Lote </nb-card-header>
+
+    <nb-card-body>
+        <form [formGroup]="form" *ngIf="form">
+            <!-- Document type and number -->
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="form-group  tooltip-danger">
+                        <label>Nombre Estampilla</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                class="form-control"
+                                id="nombre"
+                                placeholder="Nombre Lote"
+
+                                />
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <div class="btn-group" style="margin-top: 20px">
+            <button
+                    *ngIf="form"
+                    type="button"
+                    (click)="submit()"
+                    class="btn btn-primary"
+                    >
+                Guardar
+            </button>
+
+            <button
+                    *ngIf="form"
+                    type="button"
+                    (click)="cancel()"
+                    class="btn btn-default"
+                    >
+                Cancelar
+            </button>
+        </div>
+    </nb-card-body>
+</nb-card>

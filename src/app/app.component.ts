@@ -21,8 +21,16 @@ export class AppComponent implements OnInit {
         {
           title: 'Estampillas',
           link: '/estampillas'
+        },
+        {
+          title: 'Lotes',
+          link: '/lotes'
+        },
+        {
+          title: 'Paises',
+          link: '/paises'
         }
-      ]
+      ],
     }
   ];
 
