@@ -14,7 +14,7 @@ export class PaisesComponent implements OnInit {
     settings = {
         mode: 'external',
         actions: {
-            delete: true
+            delete: false
         },
         add: {
             addButtonContent: '<i class="nb-plus"></i>',
@@ -33,8 +33,8 @@ export class PaisesComponent implements OnInit {
             confirmDelete: true
         },
         columns: {
-            pais: {
-                title: 'pais',
+            nombre: {
+                title: 'Pais',
                 type: 'string'
             },
         }

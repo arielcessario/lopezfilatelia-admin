@@ -5,10 +5,8 @@
         <ng2-smart-table
                 [settings]="settings"
                 [source]="source"
-                (deleteConfirm)="onDeleteConfirm($event)"
                 (create)="create()"
                 (edit)="update($event)"
-                (delete)="onDeleteConfirm($event)"
                 (userRowSelect)="update($event)"
                 >
         </ng2-smart-table>

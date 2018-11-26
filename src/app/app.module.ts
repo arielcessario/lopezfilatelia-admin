@@ -26,9 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { EstampillaComponent } from './estampilla/estampilla.component';
 import { PaisesComponent } from './paises/paises.component';
-//import { PaisComponent } from './pais/pais.component';
+import { PaisComponent } from './pais/pais.component';
 import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
+import { ToasterModule, ToasterService } from 'angular2-toaster';
 
 
 let env = 'dev';
@@ -44,8 +45,17 @@ const projectConfig = {
 };
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, EstampillasComponent, EstampillaComponent,
-    PaisesComponent, LotesComponent, LoteComponent],
+  declarations: [
+    AppComponent,
+    MainComponent,
+    LoginComponent,
+    EstampillasComponent,
+    EstampillaComponent,
+    PaisesComponent,
+    LotesComponent,
+    LoteComponent,
+    PaisComponent
+  ],
   imports: [
     BrowserModule,
     NbThemeModule.forRoot({ name: 'default' }),
@@ -61,7 +71,8 @@ const projectConfig = {
     BrowserAnimationsModule,
     TooltipModule.forRoot(),
     NbCheckboxModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    ToasterModule.forRoot(),
   ],
   providers: [NbSidebarService, LopezfilateliaAdminProxy],
   bootstrap: [AppComponent]

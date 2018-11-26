@@ -1,5 +1,19 @@
 <nb-card>
-  <nb-card-header> {{ accion }} Estampilla </nb-card-header>
+  <nb-card-header style="padding: 10px 20px;">
+      <div class="row">
+          <div class="col-6">
+              {{ accion }} Estampilla
+          </div>
+          <div class="col-6" style="text-align: right;">
+              <button   style="padding: 0.2rem 0.5rem;"
+                      type="button"
+                      (click)="showHelp()"
+                      class="btn btn-info" title="Ayuda en linea">
+                  <span class="fa fa-question-circle-o" aria-hidden="true"></span>
+              </button>
+          </div>
+      </div>
+  </nb-card-header>
 
   <nb-card-body>
     <form [formGroup]="form" *ngIf="form">
@@ -23,15 +37,12 @@
           </div>
         </div>
         <div class="col-sm-4">
-          <div class="form-group  tooltip-danger">
+          <div class="form-group">
             <label>País</label>
-            <select class="form-control" formControlName="pais_id" id="pais_id">
-              <option value="0" selected>SELECCIONE PAIS</option>
-              <option value="1">ARGENTINA</option>
-              <option value="2">BRASIL</option>
-              <option value="3">URUGUAY</option>
-              <option value="4">PARAGUAY</option>
-              <option value="5">CHILE</option>
+            <select [(ngModel)]="pais_id" [ngModelOptions]="{standalone: true}" class="form-control"  >
+                <option *ngFor="let item of paises"
+                        [ngValue]="item.pais_id"
+                        [attr.selected]="item.pais_id==pais_id ? true : null">{{item.nombre}}</option>
             </select>
           </div>
         </div>

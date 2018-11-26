@@ -1,0 +1,43 @@
+<nb-card>
+    <nb-card-header> {{ accion }} Pais </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="form" *ngIf="form">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group  tooltip-danger">
+                        <label>Pais</label>
+                        <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="nombre"
+                            class="form-control" style="text-transform: uppercase;"
+                            id="nombre"
+                            placeholder="Pais"
+                            />
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <div class="btn-group" style="margin-top: 20px">
+            <button
+                    *ngIf="form"
+                    type="button"
+                    (click)="submit()"
+                    class="btn btn-primary"
+                    >
+                Guardar
+            </button>
+
+            <button
+                    *ngIf="form"
+                    type="button"
+                    (click)="cancel()"
+                    class="btn btn-default"
+                    >
+                Cancelar
+            </button>
+        </div>
+    </nb-card-body>
+</nb-card>

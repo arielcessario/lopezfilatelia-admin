@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'ac-core';
 import { MainComponent } from './main/main.component';
 import { PaisesComponent } from './paises/paises.component';
+import { PaisComponent } from './pais/pais.component';
 import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
 
@@ -39,16 +40,16 @@ const routes: Routes = [
     component: PaisesComponent,
     canActivate: [AuthGuard]
   },
-  //{
-  //  path: 'pais',
-  //  component: PaisComponent,
-  //  canActivate: [AuthGuard]
-  //},
-  //{
-  //  path: 'pais/:id',
-  //  component: PaisComponent,
-  //  canActivate: [AuthGuard]
-  //},
+  {
+    path: 'pais',
+    component: PaisComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pais/:id',
+    component: PaisComponent,
+    //canActivate: [AuthGuard]
+  },
   {
     path: 'lotes',
     component: LotesComponent,
@@ -58,6 +59,11 @@ const routes: Routes = [
     path: 'lote',
     component: LoteComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'lote/:id',
+    component: LoteComponent,
+    //canActivate: [AuthGuard]
   },
 ];
 

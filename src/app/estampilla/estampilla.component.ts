@@ -24,9 +24,9 @@ export class EstampillaComponent implements OnInit {
   private fb: FormBuilder;
   estampilla: any;
   id = -1;
-  //id = 17;
   accion = 'Crear';
   err: string;
+  paises: Array<any> = [];
 
   // Nombres de las Imagenes
   _img01Name = 'no_image.png';
@@ -40,18 +40,12 @@ export class EstampillaComponent implements OnInit {
   imagesPath = environment.imagesPath;
 
   public variedades = [];
-  //public variedades = [{codigo_yt: "",
-  //  codigo_arg: "",
-  //  variedad: "",
-  //  precio: "",
-  //  precio2: "",
-  //  precio3: ""}];
 
   public descripcion = '';
   public status = 1;
   public estampilla_id = 0;
   public nombre = '';
-  public pais_id = 0;
+  public pais_id = 1;
   public estado_id = 0;
   public catalogo_id = 0;
   public estampilla_variedad_id = 0;
@@ -61,7 +55,6 @@ export class EstampillaComponent implements OnInit {
   formErrors: any = {
     estampilla_id: '',
     nombre: '',
-    pais_id: '',
     anio: 0,
     estado_id: '',
     catalogo_id: '',
@@ -84,13 +77,27 @@ export class EstampillaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    //Cargo listado de paises
+    this.cargarPaises();
+
+    //Determino si es update o insert
+    this.saveOrUpdate();
+  }
+
+  cargarPaises() {
+    this.proxy.getPaises().subscribe(e => {
+      this.paises = e;
+    });
+  }
+
+  saveOrUpdate() {
     this.route.params.subscribe((p: { id: number }) => {
       if (p.id) {
         this.accion = 'Modificar';
         this.id = p.id;
         this.proxy.getEstampilla(this.id).subscribe(e => {
           this.estampilla = e;
-          console.log(this.estampilla);
+
           this.buildForm();
           this.proxy.getEstampillaImagenes(this.id).subscribe(imagenes => {
             this.images = [];
@@ -100,7 +107,6 @@ export class EstampillaComponent implements OnInit {
           });
         });
       } else {
-        console.log("nuevo");
         this.accion = 'Nueva';
         this.buildForm();
       }
@@ -113,7 +119,7 @@ export class EstampillaComponent implements OnInit {
       //estampilla_id: this.form.get('estampilla_id').value,
       estampilla_id: this.id,
       nombre: this.form.get('nombre').value,
-      pais_id: this.form.get('pais_id').value,
+      pais_id: this.pais_id,
       anio: this.form.get('anio').value,
       estado_id: this.form.get('estado_id').value,
       catalogo_id: this.form.get('catalogo_id').value,
@@ -131,7 +137,6 @@ export class EstampillaComponent implements OnInit {
             this.router.navigate(['estampillas']);
           }, error => {
             this.err = error;
-            //setTimeout(() => (this.err = undefined), 4000);
           }
       );
     } else {
@@ -140,7 +145,6 @@ export class EstampillaComponent implements OnInit {
             this.router.navigate(['estampillas']);
           }, error => {
             this.err = error;
-            //setTimeout(() => (this.err = undefined), 4000);
           }
       );
     }
@@ -171,8 +175,6 @@ export class EstampillaComponent implements OnInit {
       if (item.codigo_yt == this.variedades[i].codigo_yt && item.codigo_arg == this.variedades[i].codigo_arg
           && item.variedad == this.variedades[i].variedad && item.precio == this.variedades[i].precio
           && item.precio2 == this.variedades[i].precio2 && item.precio3 == this.variedades[i].precio3) {
-        console.log(i);
-        console.log(this.variedades[i]);
         this.variedades.splice(i, 1);
       }
     }
@@ -189,7 +191,7 @@ export class EstampillaComponent implements OnInit {
           Validators.maxLength(15)
         ]
       ],
-      pais_id: [this.pais_id, [Validators.required]],
+      //pais_id: [this.pais_id, [Validators.required]],
       anio: [this.anio, [Validators.required]],
       estado_id: [this.estado_id, [Validators.required]],
       catalogo_id: [this.catalogo_id, [Validators.required]],
@@ -201,7 +203,7 @@ export class EstampillaComponent implements OnInit {
 
     //form.controls['estampilla_id'].setValue(0);
     form.controls['nombre'].setValue('');
-    form.controls['pais_id'].setValue(0);
+    //form.controls['pais_id'].setValue(0);
     form.controls['anio'].setValue(0);
     form.controls['estado_id'].setValue(0);
     form.controls['descripcion'].setValue('');
@@ -209,14 +211,17 @@ export class EstampillaComponent implements OnInit {
     if (this.id !== -1) {
       //form.controls['estampilla_id'].setValue(this.estampilla['estampilla_id']);
       form.controls['nombre'].setValue(this.estampilla[0].nombre);
-      form.controls['pais_id'].setValue(this.estampilla[0].pais_id);
+      //form.controls['pais_id'].setValue(this.estampilla[0].pais_id);
       form.controls['anio'].setValue(this.estampilla[0].anio);
       form.controls['estado_id'].setValue(this.estampilla[0].estado_id);
       //form.controls['catalogo_id'].setValue(this.estampilla['catalogo_id']);
       form.controls['descripcion'].setValue(this.estampilla[0].descripcion);
 
+      this.pais_id = this.estampilla[0].pais_id;
+      console.log(this.pais_id);
+
+
       var aux = this.estampilla["variedades"];
-      console.log(aux);
       var temp = new Array();
 
       aux.forEach(function(element) {
@@ -288,6 +293,11 @@ export class EstampillaComponent implements OnInit {
     setTimeout(() => {
       this[_obj] = val;
     }, 0);
+  }
+
+
+  showHelp() {
+
   }
 
 }

@@ -5,23 +5,153 @@
         <form [formGroup]="form" *ngIf="form">
             <!-- Document type and number -->
             <div class="row">
-                <div class="col-sm-7">
+                <div class="col-sm-6">
                     <div class="form-group  tooltip-danger">
-                        <label>Nombre Estampilla</label>
+                        <label>Nombre Lote</label>
                         <input
                                 placement="bottom"
                                 triggers="focus keyup keydown"
                                 type="text"
+                                formControlName="nombre"
                                 class="form-control"
                                 id="nombre"
                                 placeholder="Nombre Lote"
-
                                 />
                     </div>
                 </div>
-
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Fecha Inicio</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                formControlName="fecha_inicio"
+                                class="form-control"
+                                id="fecha_inicio"
+                                placeholder="aaaa/mm/dd HH:mm:ss"
+                                />
+                        <!--<div class="btn-group">-->
+                            <!--<input-->
+                                    <!--class="form-control"-->
+                                    <!--placeholder="dd/mm/aaaa"-->
+                                    <!--name="dp"-->
+                                    <!--ngbDatepicker-->
+                                    <!--#d="ngbDatepicker"-->
+                                    <!--formControlName="fecha_inicio"-->
+                                    <!--/>-->
+                            <!--<button-->
+                                    <!--class="btn btn-primary btn-group-icon btn-group-divider"-->
+                                    <!--(click)="d.toggle()"-->
+                                    <!-->-->
+                                <!--<i class="fa fa-calendar" aria-hidden="true"></i>-->
+                            <!--</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group  tooltip-danger">
+                        <label>Fecha Fin</label>
+                        <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="fecha_fin"
+                            class="form-control"
+                            id="fecha_fin"
+                            placeholder="aaaa/mm/dd HH:mm:ss"
+                            />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Precio</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                formControlName="precio"
+                                class="form-control"
+                                id="precio"
+                                placeholder="Precio"
+                                />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Código YT</label>
+                        <div class="input-group">
+                            <input
+                                    placement="bottom"
+                                    triggers="focus keyup keydown"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="codigo_yt"
+                                    [ngModelOptions]="{standalone: true}"
+                                    placeholder="Código YT"
+                                    />
+                            <div class="input-group-append">
+                                <button type="button"
+                                        (click)="searchYT()"
+                                        class="btn btn-default" title="Buscar por Código YT">
+                                    <span class="fa fa-search fa-lg" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Código Arg</label>
+                        <div class="input-group">
+                            <input
+                                    placement="bottom"
+                                    triggers="focus keyup keydown"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="codigo_arg"
+                                    [ngModelOptions]="{standalone: true}"
+                                    placeholder="Código Arg"
+                                    />
+                            <div class="input-group-append">
+                                <button type="button"
+                                        (click)="searchArg()"
+                                        class="btn btn-default" title="Buscar por Código Arg">
+                                    <span class="fa fa-search fa-lg" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12" style="margin-top: 20px;">
+                    <table class="table table-bordered table-hover ">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Código YT</th>
+                            <th scope="col">Código Arg</th>
+                            <th scope="col">Estampilla</th>
+                            <th scope="col">Quitar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let item of estampillas" >
+                            <th scope="row">{{item.estampilla_id}}</th>
+                            <td>{{item.codigo_yt}}</td>
+                            <td>{{item.codigo_arg}}</td>
+                            <td>{{item.nombre}}</td>
+                            <td>
+                                <button type="button"
+                                        (click)="quitarEstampilla(item)"
+                                        class="btn btn-default">
+                                    <span class="fa fa-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
         </form>
         <div class="btn-group" style="margin-top: 20px">
             <button
