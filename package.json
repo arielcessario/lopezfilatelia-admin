@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^6.0.2",
     "@angular/router": "^6.0.2",
     "@nebular/theme": "^2.0.2",
+    "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "angular-font-awesome": "^3.1.2",
     "angular2-toaster": "^7.0.0",
     "bootstrap": "^4.1.3",

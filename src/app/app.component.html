@@ -1,16 +1,21 @@
 <nb-layout>
   <nb-layout-header fixed *ngIf="logged">
+    <button  status="success" class="btn btn-default" (click)="toggle()">
+      <span class="fa fa-navicon" aria-hidden="true"></span>
+    </button>
     <div class="d-flex p-2 flex-row-reverse" style="width: 100%;">
       <i class="fa fa-sign-out fa-3x " style="margin-right: 0;" aria-hidden="true" (click)="logout()"></i>
     </div>
   </nb-layout-header>
 
-  <nb-sidebar responsive *ngIf="logged">
-    <nb-menu [items]="menu"></nb-menu>
+  <nb-sidebar left responsive *ngIf="logged">
+    <nb-menu [items]="menu" ></nb-menu>
   </nb-sidebar>
 
   <nb-layout-column>
     <router-outlet></router-outlet>
-    <toaster-container></toaster-container>
   </nb-layout-column>
+
 </nb-layout>
+
+<toaster-container [toasterconfig]="config"></toaster-container>

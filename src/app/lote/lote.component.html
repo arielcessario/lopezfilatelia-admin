@@ -16,51 +16,72 @@
                                 class="form-control"
                                 id="nombre"
                                 placeholder="Nombre Lote"
+
                                 />
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label>Fecha Inicio</label>
-                        <input
-                                placement="bottom"
-                                triggers="focus keyup keydown"
-                                type="text"
-                                formControlName="fecha_inicio"
-                                class="form-control"
-                                id="fecha_inicio"
-                                placeholder="aaaa/mm/dd HH:mm:ss"
-                                />
-                        <!--<div class="btn-group">-->
-                            <!--<input-->
-                                    <!--class="form-control"-->
-                                    <!--placeholder="dd/mm/aaaa"-->
-                                    <!--name="dp"-->
-                                    <!--ngbDatepicker-->
-                                    <!--#d="ngbDatepicker"-->
-                                    <!--formControlName="fecha_inicio"-->
-                                    <!--/>-->
-                            <!--<button-->
-                                    <!--class="btn btn-primary btn-group-icon btn-group-divider"-->
-                                    <!--(click)="d.toggle()"-->
-                                    <!-->-->
-                                <!--<i class="fa fa-calendar" aria-hidden="true"></i>-->
-                            <!--</button>-->
-                        <!--</div>-->
+                        <!--<input-->
+                                <!--placement="bottom"-->
+                                <!--triggers="focus keyup keydown"-->
+                                <!--type="text"-->
+                                <!--formControlName="fecha_inicio"-->
+                                <!--class="form-control"-->
+                                <!--id="fecha_inicio"-->
+                                <!--placeholder="aaaa/mm/dd HH:mm:ss"-->
+                                <!--/>-->
+                        <div class="btn-group">
+                            <input
+                                    class="form-control"
+                                    placeholder="dd/mm/aaaa"
+                                    name="dp"
+                                    ngbDatepicker
+                                    #d="ngbDatepicker"
+                                    [(ngModel)]="fecha_inicio"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly
+                                    />
+                            <button
+                                    class="btn btn-primary btn-group-icon btn-group-divider"
+                                    (click)="d.toggle()"
+                                    >
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <div class="form-group  tooltip-danger">
+                    <div class="form-group">
                         <label>Fecha Fin</label>
-                        <input
-                            placement="bottom"
-                            triggers="focus keyup keydown"
-                            type="text"
-                            formControlName="fecha_fin"
-                            class="form-control"
-                            id="fecha_fin"
-                            placeholder="aaaa/mm/dd HH:mm:ss"
-                            />
+                        <!--<input-->
+                            <!--placement="bottom"-->
+                            <!--triggers="focus keyup keydown"-->
+                            <!--type="text"-->
+                            <!--formControlName="fecha_fin"-->
+                            <!--class="form-control"-->
+                            <!--id="fecha_fin"-->
+                            <!--placeholder="aaaa/mm/dd HH:mm:ss"-->
+                            <!--/>-->
+                        <div class="btn-group">
+                            <input
+                                    class="form-control"
+                                    placeholder="dd/mm/aaaa"
+                                    name="dp2"
+                                    ngbDatepicker
+                                    #d2="ngbDatepicker"
+                                    [(ngModel)]="fecha_fin"
+                                    [ngModelOptions]="{standalone: true}"
+                                    readonly
+                                    />
+                            <button
+                                    class="btn btn-primary btn-group-icon btn-group-divider"
+                                    (click)="d2.toggle()"
+                                    >
+                                <i class="fa fa-calendar" aria-hidden="true"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-sm-2">

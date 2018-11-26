@@ -2,9 +2,15 @@ import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
 import { CoreService } from 'ac-core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-//import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-//import { NgbDatepickerConfig, NgbDateParserFormatter } from '@ng-bootstrap/ng-bootstrap';
+
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+
+import {
+    NgbDatepickerConfig,
+    NgbDateParserFormatter
+} from '@ng-bootstrap/ng-bootstrap';
 //import { NgbDateFRParserFormatter } from '../core/ngb-date-fr-parser-formatter';
+
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {

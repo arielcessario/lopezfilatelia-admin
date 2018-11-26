@@ -163,7 +163,7 @@ export class PaisComponent implements OnInit {
 
             if(plu.id > 0) {
                 this.proxy.updatePais(plu).subscribe( data => {
-                        this.toasterService.pop("success", "Exito", "Operacion exitosa");
+                        this.toasterService.pop("success", "Exito", "Se actualizo el pais satisfactoriamente");
                         this.router.navigate(['paises']);
                     }, error => {
                         this.toasterService.pop('error', 'Error', 'Error actualizando el Pais');
@@ -172,6 +172,7 @@ export class PaisComponent implements OnInit {
                 );
             } else {
                 this.proxy.createPais(plu).subscribe( data => {
+                        this.toasterService.pop("success", "Exito", "Se creo el pais satisfactoriamente");
                         this.router.navigate(['paises']);
                     }, error => {
                         this.toasterService.pop('error', 'Error', 'Error creando el Pais');
@@ -180,7 +181,7 @@ export class PaisComponent implements OnInit {
                 );
             }
         } else {
-            alert("El campo pais es obligatorio");
+            this.toasterService.pop("warning", "Advertencia", "El campo pais es obligatorio");
         }
     }
 

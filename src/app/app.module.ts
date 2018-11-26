@@ -30,6 +30,7 @@ import { PaisComponent } from './pais/pais.component';
 import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 let env = 'dev';
@@ -73,8 +74,9 @@ const projectConfig = {
     NbCheckboxModule,
     Ng2SmartTableModule,
     ToasterModule.forRoot(),
+    NgbModule.forRoot()
   ],
-  providers: [NbSidebarService, LopezfilateliaAdminProxy],
+  providers: [NbSidebarService, NbMenuService, LopezfilateliaAdminProxy],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

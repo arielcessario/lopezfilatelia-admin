@@ -27,7 +27,8 @@
               "./node_modules/font-awesome/scss/font-awesome.scss",
               "./node_modules/@nebular/theme/styles/prebuilt/cosmic.css",
               "./node_modules/@nebular/theme/styles/prebuilt/corporate.css",
-              "./node_modules/nebular-icons/scss/nebular-icons.scss"
+              "./node_modules/nebular-icons/scss/nebular-icons.scss",
+              "./node_modules/angular2-toaster/toaster.css"
             ],
             "scripts": []
           },

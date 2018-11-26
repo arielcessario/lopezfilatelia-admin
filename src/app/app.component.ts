@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CoreService, AuthenticationService } from 'ac-core';
 import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
+import {
+    NbMediaBreakpoint,
+    NbMediaBreakpointsService,
+    NbMenuItem,
+    NbMenuService,
+    NbSidebarService,
+    NbThemeService,
+} from '@nebular/theme';
+//import { StateService } from '../../../@core/data/state.service';
 
 import {
     ToasterService,
@@ -84,6 +93,11 @@ export class AppComponent implements OnInit {
   ];
 
 
+  sidebar: any = {};
+  private alive = true;
+  currentTheme: string;
+
+
   private toasterService: ToasterService;
 
   constructor(
@@ -91,13 +105,17 @@ export class AppComponent implements OnInit {
     private coreService: CoreService,
     private proxy: LopezfilateliaAdminProxy,
     private authService: AuthenticationService,
-    toasterService: ToasterService
-  ) {
-    this.toasterService = toasterService;
+    toasterService: ToasterService,
+    //protected menuService: NbMenuService,
+    //protected themeService: NbThemeService,
+    //protected bpService: NbMediaBreakpointsService,
+    protected sidebarService: NbSidebarService) {
 
-    this.coreService.showToast.subscribe(toast => {
-      this.makeToast(toast);
-    });
+      this.toasterService = toasterService;
+
+      this.coreService.showToast.subscribe(toast => {
+        this.makeToast(toast);
+      });
 
   }
 
@@ -153,6 +171,10 @@ export class AppComponent implements OnInit {
       bodyOutputType: BodyOutputType.TrustedHtml
     };
     this.toasterService.popAsync(toast);
+  }
+
+  toggle() {
+    this.sidebarService.toggle();
   }
 
 
