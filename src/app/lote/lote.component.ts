@@ -10,6 +10,7 @@ import {
     NgbDateParserFormatter
 } from '@ng-bootstrap/ng-bootstrap';
 //import { NgbDateFRParserFormatter } from '../core/ngb-date-fr-parser-formatter';
+import { ToasterService } from 'angular2-toaster';
 
 
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
@@ -33,6 +34,8 @@ import { Location } from '@angular/common';
 })
 export class LoteComponent implements OnInit {
 
+    private toasterService: ToasterService;
+
     form: FormGroup;
     private fb: FormBuilder;
     lote: any;
@@ -43,12 +46,13 @@ export class LoteComponent implements OnInit {
     estampillas: Array<any> = [];
 
     public nombre = '';
-    public fecha_inicio = '';
-    public fecha_fin = '';
+    public fecha_inicio: any = {};
+    public fecha_fin: any = {};
     public precio = '';
     public codigo_yt = "";
     public codigo_arg = "";
-
+    public hora_inicio: any = {};
+    //public hora_fin = {};
 
     formErrors: any = {
         lote_id: '',
@@ -67,8 +71,12 @@ export class LoteComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private location: Location,
-        private proxy: LopezfilateliaAdminProxy
-    ) {}
+        private proxy: LopezfilateliaAdminProxy,
+        toasterService: ToasterService) {
+
+        this.toasterService = toasterService;
+
+    }
 
     ngOnInit() {
         this.route.params.subscribe((p: { id: number }) => {
@@ -77,6 +85,7 @@ export class LoteComponent implements OnInit {
                 this.id = p.id;
                 this.proxy.getLote(this.id).subscribe(e => {
                     this.lote = e;
+                    console.log(this.lote);
                     this.buildForm();
                 });
             } else {
@@ -85,11 +94,9 @@ export class LoteComponent implements OnInit {
             }
         });
 
-        //var estampilla1 = {estampilla_id: 1, codigo_yt: 12, codigo_arg: 123, nombre: "test 1"};
-        //this.estampillas.push(estampilla1);
-        //
-        //var estampilla2 = {estampilla_id: 2, codigo_yt: 22, codigo_arg: 1.23, nombre: "test 2"};
-        //this.estampillas.push(estampilla2);
+
+        //this.hora_fin = {hour: 10, minute: 00};
+        this.hora_inicio = {hour: 10, minute: 0};
     }
 
     submit() {
@@ -97,17 +104,20 @@ export class LoteComponent implements OnInit {
             id: this.id,
             lote_id: this.id,
             nombre: this.form.get('nombre').value,
-            fecha_inicio: this.form.get('fecha_inicio').value,
-            fecha_fin: this.form.get('fecha_fin').value,
+            fecha_inicio: this.fecha_inicio,
+            fecha_fin: this.fecha_fin,
             precio: this.form.get('precio').value,
             estampillas: this.estampillas
         };
 
+        console.log(this.fecha_inicio );
+        console.log(this.hora_inicio);
         console.log('guardar', plu);
 
         if(plu.estampillas.length > 0) {
             if(plu.id > 0) {
                 this.proxy.updateLote(plu).subscribe( data => {
+                        this.toasterService.pop("success", "Exito", "Se actualizo el lote satisfactoriamente");
                         this.router.navigate(['lotes']);
                     }, error => {
                         this.err = error;
@@ -115,6 +125,7 @@ export class LoteComponent implements OnInit {
                 );
             } else {
                 this.proxy.createLote(plu).subscribe( data => {
+                        this.toasterService.pop("success", "Exito", "Se creó el lote satisfactoriamente");
                         this.router.navigate(['lotes']);
                     }, error => {
                         this.err = error;
@@ -123,7 +134,7 @@ export class LoteComponent implements OnInit {
             }
         }
         else {
-            alert("Debe agregar estampillas al lote");
+            this.toasterService.pop("warning", "Advertencia", "Debe agregar estampillas al lote");
         }
 
     }
@@ -152,15 +163,19 @@ export class LoteComponent implements OnInit {
         const form = this.fb.group(group);
 
         form.controls['nombre'].setValue('');
-        form.controls['fecha_inicio'].setValue('');
-        form.controls['fecha_fin'].setValue('');
         form.controls['precio'].setValue('');
+        this.fecha_inicio = {};
+        this.fecha_fin = {};
 
         if (this.id !== -1) {
+            console.log(this.lote[0]);
             form.controls['nombre'].setValue(this.lote[0].nombre);
-            form.controls['fecha_inicio'].setValue(this.lote[0].fecha_inicio);
-            form.controls['fecha_fin'].setValue(this.lote[0].fecha_fin);
             form.controls['precio'].setValue(this.lote[0].precio);
+
+            var aux1 = new Date(this.lote[0].fecha_inicio);
+            var aux2 = new Date(this.lote[0].fecha_fin);
+            this.fecha_inicio = { year: aux1.getFullYear(), month: aux1.getMonth() + 1, day: aux1.getDate() };
+            this.fecha_fin = { year: aux2.getFullYear(), month: aux2.getMonth() + 1, day: aux2.getDate() };
 
             var aux = this.lote["estampillas"];
             var temp = new Array();
@@ -200,7 +215,7 @@ export class LoteComponent implements OnInit {
                     }
                 }
                 if(!encontrado) {
-                    alert("No existe el codigo ingresado");
+                    this.toasterService.pop("warning", "Advertencia", "No existe el codigo ingresado");
                 }
             }
         });
@@ -219,7 +234,7 @@ export class LoteComponent implements OnInit {
                     }
                 }
                 if(!encontrado) {
-                    alert("No existe el codigo ingresado");
+                    this.toasterService.pop("warning", "Advertencia", "No existe el codigo ingresado");
                 }
             }
         });
