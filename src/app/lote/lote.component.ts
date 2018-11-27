@@ -48,11 +48,12 @@ export class LoteComponent implements OnInit {
     public nombre = '';
     public fecha_inicio: any = {};
     public fecha_fin: any = {};
+    public hora_inicio: any = {};
+    public hora_fin: any = {};
     public precio = '';
     public codigo_yt = "";
     public codigo_arg = "";
-    public hora_inicio: any = {};
-    //public hora_fin = {};
+
 
     formErrors: any = {
         lote_id: '',
@@ -104,9 +105,11 @@ export class LoteComponent implements OnInit {
             id: this.id,
             lote_id: this.id,
             nombre: this.form.get('nombre').value,
+            precio: this.form.get('precio').value,
             fecha_inicio: this.fecha_inicio,
             fecha_fin: this.fecha_fin,
-            precio: this.form.get('precio').value,
+            hora_inicio: this.hora_inicio,
+            hora_fin: this.hora_fin,
             estampillas: this.estampillas
         };
 
@@ -154,8 +157,8 @@ export class LoteComponent implements OnInit {
                     Validators.maxLength(15)
                 ]
             ],
-            fecha_inicio: [this.fecha_inicio, [Validators.required]],
-            fecha_fin: [this.fecha_fin, [Validators.required]],
+            //fecha_inicio: [this.fecha_inicio, [Validators.required]],
+            //fecha_fin: [this.fecha_fin, [Validators.required]],
             precio: [this.precio, [Validators.required]],
         };
 
@@ -166,6 +169,8 @@ export class LoteComponent implements OnInit {
         form.controls['precio'].setValue('');
         this.fecha_inicio = {};
         this.fecha_fin = {};
+        this.hora_inicio = {};
+        this.hora_fin = {};
 
         if (this.id !== -1) {
             console.log(this.lote[0]);
@@ -175,7 +180,9 @@ export class LoteComponent implements OnInit {
             var aux1 = new Date(this.lote[0].fecha_inicio);
             var aux2 = new Date(this.lote[0].fecha_fin);
             this.fecha_inicio = { year: aux1.getFullYear(), month: aux1.getMonth() + 1, day: aux1.getDate() };
+            this.hora_inicio = { hour: aux1.getHours(), minute: aux1.getMinutes(), second: 0 };
             this.fecha_fin = { year: aux2.getFullYear(), month: aux2.getMonth() + 1, day: aux2.getDate() };
+            this.hora_fin = { hour: aux2.getHours(), minute: aux2.getMinutes(), second: 0 };
 
             var aux = this.lote["estampillas"];
             var temp = new Array();

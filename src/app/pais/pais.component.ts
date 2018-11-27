@@ -13,8 +13,7 @@ import {
     ValidatorFn
 } from '@angular/forms';
 import { Location } from '@angular/common';
-import {ToasterModule, ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
-
+import { ToasterService } from 'angular2-toaster';
 
 
 @Component({
@@ -26,47 +25,6 @@ export class PaisComponent implements OnInit {
 
     private toasterService: ToasterService;
 
-    position = 'toast-top-center';
-    animationType = 'fade';
-    title = 'HI there!';
-    content = `I'm cool toaster!`;
-    timeout = 5000;
-    toastsLimit = 5;
-    type = 'default';
-    isNewestOnTop = true;
-    isHideOnClick = true;
-    isDuplicatesPrevented = false;
-    isCloseButton = true;
-
-    config: ToasterConfig = new ToasterConfig({
-        positionClass: this.position,
-        timeout: this.timeout,
-        newestOnTop: this.isNewestOnTop,
-        tapToDismiss: this.isHideOnClick,
-        preventDuplicates: this.isDuplicatesPrevented,
-        animation: this.animationType,
-        limit: this.toastsLimit
-    });
-
-    types: string[] = ['default', 'info', 'success', 'warning', 'error'];
-    animations: string[] = [
-        'fade',
-        'flyLeft',
-        'flyRight',
-        'slideDown',
-        'slideUp'
-    ];
-    positions: string[] = [
-        'toast-top-full-width',
-        'toast-bottom-full-width',
-        'toast-top-left',
-        'toast-top-center',
-        'toast-top-right',
-        'toast-bottom-right',
-        'toast-bottom-center',
-        'toast-bottom-left',
-        'toast-center'
-    ];
 
     form: FormGroup;
     private fb: FormBuilder;
@@ -99,38 +57,6 @@ export class PaisComponent implements OnInit {
     ) {
         this.toasterService = toasterService;
 
-        this.coreService.showToast.subscribe(toast => {
-            console.log(toast);
-            this.makeToast(toast);
-        });
-    }
-
-
-    makeToast(toast) {
-        console.log(toast);
-        this.showToast(toast.type, toast.title, toast.body);
-    }
-
-    private showToast(type: string, title: string, body: string) {
-        console.log(title);
-        this.config = new ToasterConfig({
-            positionClass: this.position,
-            timeout: this.timeout,
-            newestOnTop: this.isNewestOnTop,
-            tapToDismiss: this.isHideOnClick,
-            preventDuplicates: this.isDuplicatesPrevented,
-            animation: this.animationType,
-            limit: this.toastsLimit
-        });
-        const toast: Toast = {
-            type: type,
-            title: title,
-            body: body,
-            timeout: this.timeout,
-            showCloseButton: this.isCloseButton,
-            bodyOutputType: BodyOutputType.TrustedHtml
-        };
-        this.toasterService.popAsync(toast);
     }
 
 
