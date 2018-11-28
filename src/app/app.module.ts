@@ -31,6 +31,7 @@ import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 let env = 'dev';
@@ -76,7 +77,13 @@ const projectConfig = {
     ToasterModule.forRoot(),
     NgbModule.forRoot()
   ],
-  providers: [NbSidebarService, NbMenuService, LopezfilateliaAdminProxy],
+  providers: [
+    NbSidebarService,
+    NbMenuService,
+    LopezfilateliaAdminProxy,
+    NgbModalConfig,
+    NgbModal
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -7,7 +7,7 @@
           <div class="col-6" style="text-align: right;">
               <button   style="padding: 0.2rem 0.5rem;"
                       type="button"
-                      (click)="showHelp()"
+                      (click)="showHelp(content)"
                       class="btn btn-info" title="Ayuda en linea">
                   <span class="fa fa-question-circle-o" aria-hidden="true"></span>
               </button>
@@ -36,7 +36,7 @@
             />
           </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
           <div class="form-group">
             <label>País</label>
             <select [(ngModel)]="pais_id" [ngModelOptions]="{standalone: true}" class="form-control"  >
@@ -46,17 +46,17 @@
             </select>
           </div>
         </div>
-          <div class="col-sm-1">
+          <div class="col-sm-2">
               <div class="form-group  tooltip-danger">
                   <label>Año</label>
                   <input
                           placement="bottom"
                           triggers="focus keyup keydown"
-                          type="text"
+                          type="number"
                           formControlName="anio"
                           class="form-control"
                           id="anio"
-                          placeholder="Año"
+                          placeholder="0000"
                           [ngClass]="{
                 'form-control-danger': form.controls['anio'].invalid
               }"
@@ -302,3 +302,35 @@
     </div>
   </nb-card-body>
 </nb-card>
+<!--./Fin del panel-->
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Crear/Modificar Estampillas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="body-panel" style="max-height: 360px; overflow-y: auto;">
+            <p>Para poder crear o modificar una estampilla debe ingresar los siguientes campos:</p>
+            <p><strong>Nombre:</strong> Representa el nombre de la estampilla. Es un campo obligatorio y acepta un maximo de 150 carácteres.</p>
+            <p><strong>Pais:</strong> Listado de Paises cargados desde el mantenedor de Paises.</p>
+            <p><strong>Año:</strong> Representa el año de la estampilla. Solo se admiten valores numericos.</p>
+            <p><strong>Descripción:</strong> Es una descripción de la estampilla. Se muestra en la web que ve el cliente y le sirve de ayuda para saber más detalle de la estampilla.</p>
+            <p><strong>Fotos:</strong> Se pueden adjuntar hasta un máximo de 5 imagenes.</p>
+            <p><strong>Nro YT:</strong> Código YT para identificar la estampilla.</p>
+            <p><strong>Nro Arg:</strong> Código Arg para identificar la estampilla.</p>
+            <p><strong>Variedad:</strong> Nombre de la variedad de una estampilla, ya que una estampilla puede tener distintas variedades.</p>
+            <p><strong>Precios:</strong> Son los distintos precios que puede tener una estampilla.</p>
+            <p>Ya que una estampilla puede tener N variedades, la carga de las variedades es dinamica. Solo basta con darle click al botón azul "Agregar Variedad".
+                En caso de querer quitar una variedad, solo basta con presionar el botón que dice "Quitar Variedad".Luego se presiona "Guardar" y la nueva estampilla
+                aparacerá en la grilla de estampillas.</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+    </div>
+</ng-template>
+<!--./Fin de la ayuda modal-->

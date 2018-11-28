@@ -2,7 +2,6 @@ import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
 import { CoreService } from 'ac-core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {
   FormGroup,
@@ -13,6 +12,9 @@ import {
   ValidatorFn
 } from '@angular/forms';
 import { Location } from '@angular/common';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @Component({
   selector: 'lfa-estampilla',
@@ -20,6 +22,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./estampilla.component.scss']
 })
 export class EstampillaComponent implements OnInit {
+
   form: FormGroup;
   private fb: FormBuilder;
   estampilla: any;
@@ -73,8 +76,14 @@ export class EstampillaComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private location: Location,
-    private proxy: LopezfilateliaAdminProxy
-  ) {}
+    private proxy: LopezfilateliaAdminProxy,
+    config: NgbModalConfig,
+    private modalService: NgbModal) {
+
+    config.backdrop = 'static';
+    config.keyboard = false;
+
+  }
 
   ngOnInit() {
     //Cargo listado de paises
@@ -296,8 +305,8 @@ export class EstampillaComponent implements OnInit {
   }
 
 
-  showHelp() {
-
+  showHelp(content) {
+    this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
   }
 
 }
