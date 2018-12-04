@@ -1,9 +1,11 @@
 import { CoreService } from 'ac-core';
-
 import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
+import { ToasterService } from 'angular2-toaster';
+
+
 
 @Component({
     selector: 'lfa-lotes',
@@ -11,6 +13,9 @@ import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
     styleUrls: ['./lotes.component.scss']
 })
 export class LotesComponent implements OnInit {
+
+    private toasterService: ToasterService;
+
     settings = {
         mode: 'external',
         actions: {
@@ -49,6 +54,10 @@ export class LotesComponent implements OnInit {
                 title: 'Precio',
                 type: 'string'
             },
+            status_nombre: {
+                title: 'Estado',
+                type: 'string'
+            },
         }
     };
 
@@ -59,8 +68,12 @@ export class LotesComponent implements OnInit {
     constructor(
         private router: Router,
         private coreService: CoreService,
-        private proxy: LopezfilateliaAdminProxy
-    ) {}
+        private proxy: LopezfilateliaAdminProxy,
+        toasterService: ToasterService) {
+
+        this.toasterService = toasterService;
+
+    }
 
     ngOnInit() {
         this.loadGrid();
@@ -76,7 +89,6 @@ export class LotesComponent implements OnInit {
     }
 
     onDeleteConfirm(event): void {
-        console.log(event);
         if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
             this.proxy.deleteLote(event.data.lote_id)
                 .subscribe(r => {
@@ -88,7 +100,14 @@ export class LotesComponent implements OnInit {
     }
 
     update(event): void {
-        this.router.navigate(['lote', event.data.lote_id]);
+        if(event.data.status === 1 || event.data.status === 4) {
+            this.router.navigate(['lote', event.data.lote_id]);
+        } else if (event.data.status === 2){
+            this.toasterService.pop("warning", "Advertencia", "No se puede modificar un Lote Vendido");
+        } else {
+            this.toasterService.pop("warning", "Advertencia", "No se puede modificar un Lote Finalizado");
+        }
+
     }
 
     create() {
