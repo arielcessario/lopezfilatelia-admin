@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  imagesPath: 'http://localhost/src/images/'
+  imagesPath: 'http://localhost:80/lopezfilatelia-admin/src/images/'
 };
 
 /*

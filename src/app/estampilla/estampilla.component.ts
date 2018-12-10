@@ -13,7 +13,7 @@ import {
 } from '@angular/forms';
 import { Location } from '@angular/common';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { ToasterService } from 'angular2-toaster';
 
 
 @Component({
@@ -22,6 +22,9 @@ import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./estampilla.component.scss']
 })
 export class EstampillaComponent implements OnInit {
+
+  private toasterService: ToasterService;
+
 
   form: FormGroup;
   private fb: FormBuilder;
@@ -78,10 +81,13 @@ export class EstampillaComponent implements OnInit {
     private location: Location,
     private proxy: LopezfilateliaAdminProxy,
     config: NgbModalConfig,
-    private modalService: NgbModal) {
+    private modalService: NgbModal,
+    toasterService: ToasterService) {
 
     config.backdrop = 'static';
     config.keyboard = false;
+
+    this.toasterService = toasterService;
 
   }
 
@@ -123,40 +129,47 @@ export class EstampillaComponent implements OnInit {
   }
 
   submit() {
-    const plu = {
-      id: this.id,
-      //estampilla_id: this.form.get('estampilla_id').value,
-      estampilla_id: this.id,
-      nombre: this.form.get('nombre').value,
-      pais_id: this.pais_id,
-      anio: this.form.get('anio').value,
-      estado_id: this.form.get('estado_id').value,
-      catalogo_id: this.form.get('catalogo_id').value,
-      descripcion: this.form.get('descripcion').value,
-      status: this.status,
-      variedades: this.variedades,
-      imagenes: this.images
-    };
 
-    console.log('guardar', plu);
+    if(this.variedades.length > 0) {
+      const plu = {
+        id: this.id,
+        //estampilla_id: this.form.get('estampilla_id').value,
+        estampilla_id: this.id,
+        nombre: this.form.get('nombre').value,
+        pais_id: this.pais_id,
+        anio: this.form.get('anio').value,
+        estado_id: this.form.get('estado_id').value,
+        catalogo_id: this.form.get('catalogo_id').value,
+        descripcion: this.form.get('descripcion').value,
+        status: this.status,
+        variedades: this.variedades,
+        imagenes: this.images
+      };
 
-    if(plu.id > 0) {
-      this.proxy.updateEstampilla(plu).subscribe( data => {
-            console.log(data);
-            this.router.navigate(['estampillas']);
-          }, error => {
-            this.err = error;
-          }
-      );
+      console.log('guardar', plu);
+
+      if(plu.id > 0) {
+        this.proxy.updateEstampilla(plu).subscribe( data => {
+              console.log(data);
+              this.router.navigate(['estampillas']);
+            }, error => {
+              this.err = error;
+            }
+        );
+      } else {
+        this.proxy.createEstampilla(plu).subscribe( data => {
+              console.log(data);
+              this.router.navigate(['estampillas']);
+            }, error => {
+              this.err = error;
+            }
+        );
+      }
     } else {
-      this.proxy.createEstampilla(plu).subscribe( data => {
-            console.log(data);
-            this.router.navigate(['estampillas']);
-          }, error => {
-            this.err = error;
-          }
-      );
+      this.toasterService.pop("warning", "Advertencia", "Debe cargar una variedad");
     }
+
+
 
   }
 
