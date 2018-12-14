@@ -32,6 +32,8 @@ import { LoteComponent } from './lote/lote.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ColoresComponent } from './colores/colores.component';
+import { ColorComponent } from './color/color.component';
 
 
 let env = 'dev';
@@ -56,7 +58,9 @@ const projectConfig = {
     PaisesComponent,
     LotesComponent,
     LoteComponent,
-    PaisComponent
+    PaisComponent,
+    ColoresComponent,
+    ColorComponent
   ],
   imports: [
     BrowserModule,

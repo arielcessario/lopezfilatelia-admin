@@ -29,10 +29,12 @@ export class EstampillaComponent implements OnInit {
   form: FormGroup;
   private fb: FormBuilder;
   estampilla: any;
+  color: any;
   id = -1;
   accion = 'Crear';
   err: string;
   paises: Array<any> = [];
+  colores: Array<any> = [];
 
   // Nombres de las Imagenes
   _img01Name = 'no_image.png';
@@ -56,6 +58,8 @@ export class EstampillaComponent implements OnInit {
   public catalogo_id = 0;
   public estampilla_variedad_id = 0;
   public anio = 0;
+  //public color_id = 0;
+  //public oferta = 0;
 
 
   formErrors: any = {
@@ -94,9 +98,9 @@ export class EstampillaComponent implements OnInit {
   ngOnInit() {
     //Cargo listado de paises
     this.cargarPaises();
-
+    this.cargarColores();
     //Determino si es update o insert
-    this.saveOrUpdate();
+    this.getEmpleado();
   }
 
   cargarPaises() {
@@ -105,7 +109,13 @@ export class EstampillaComponent implements OnInit {
     });
   }
 
-  saveOrUpdate() {
+  cargarColores() {
+    this.proxy.getColores().subscribe(e => {
+      this.colores = e;
+    });
+  }
+
+  getEmpleado() {
     this.route.params.subscribe((p: { id: number }) => {
       if (p.id) {
         this.accion = 'Modificar';
@@ -120,6 +130,7 @@ export class EstampillaComponent implements OnInit {
               this.images.push(imagenes[i].path);
             }
           });
+
         });
       } else {
         this.accion = 'Nueva';
@@ -150,7 +161,7 @@ export class EstampillaComponent implements OnInit {
 
       if(plu.id > 0) {
         this.proxy.updateEstampilla(plu).subscribe( data => {
-              console.log(data);
+              //console.log(data);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;
@@ -158,7 +169,7 @@ export class EstampillaComponent implements OnInit {
         );
       } else {
         this.proxy.createEstampilla(plu).subscribe( data => {
-              console.log(data);
+              //console.log(data);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;
@@ -183,12 +194,15 @@ export class EstampillaComponent implements OnInit {
     this.variedades.push({
       codigo_yt: "",
       codigo_arg: "",
+      codigo_jalil: "",
       variedad: "",
       precio: "",
       precio2: "",
       precio3: "",
       precio4: "",
-      precio5: ""
+      precio5: "",
+      color_id: 1,
+      oferta: 0
     });
   }
 
@@ -240,20 +254,20 @@ export class EstampillaComponent implements OnInit {
       form.controls['descripcion'].setValue(this.estampilla[0].descripcion);
 
       this.pais_id = this.estampilla[0].pais_id;
-      console.log(this.pais_id);
 
-
-      var aux = this.estampilla["variedades"];
-      var temp = new Array();
+      let aux = this.estampilla["variedades"];
+      let temp = new Array();
 
       aux.forEach(function(element) {
-        console.log(element);
         temp.push({
           estampilla_id: element.estampilla_id,
           estampilla_variedad_id: element.estampilla_variedad_id,
+          codigo_jalil: element.codigo_jalil,
           codigo_yt: element.codigo_yt,
           codigo_arg: element.codigo_arg,
           variedad: element.nombre,
+          oferta: element.oferta,
+          color_id: element.color_id,
           precio: element.precio,
           precio2: element.precio2,
           precio3: element.precio3,
@@ -282,7 +296,7 @@ export class EstampillaComponent implements OnInit {
   }
 
   onActivate(e) {
-    console.log(e);
+    //console.log(e);
   }
 
   //minSelectedCheckboxes(min = 1) {
@@ -308,7 +322,6 @@ export class EstampillaComponent implements OnInit {
 
   loadedImage(e, index) {
     this.images[index] = e.originalName;
-    console.log(this.images);
   }
 
   setImageName(_obj, val) {
@@ -320,6 +333,15 @@ export class EstampillaComponent implements OnInit {
 
   showHelp(content) {
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+  }
+
+  selectChange($event, item) {
+    //In my case $event come with a id value
+    //item = this.colores[$event];
+    console.log($event);
+    console.log(item);
+    console.log(this.colores[$event]);
+    item.color_id = $event;
   }
 
 }

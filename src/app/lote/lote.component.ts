@@ -50,6 +50,7 @@ export class LoteComponent implements OnInit {
     public codigo_yt = "";
     public codigo_arg = "";
     public status = 1;
+    public pausar = 0;
 
 
     formErrors: any = {
@@ -103,7 +104,7 @@ export class LoteComponent implements OnInit {
             hora_inicio: this.hora_inicio,
             hora_fin: this.hora_fin,
             estampillas: this.estampillas,
-            status: this.status
+            status: (this.pausar == 1) ? 4 : 1
         };
 
         let aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month, this.fecha_inicio.day);
@@ -143,6 +144,15 @@ export class LoteComponent implements OnInit {
         this.router.navigate(['lotes']);
     }
 
+    changeStatus() {
+        if(this.status == 1) {
+            this.status = 4;
+        } else if(this.status == 4) {
+            this.status = 1;
+        }
+
+    }
+
 
     buildForm() {
         const group: any = {
@@ -174,6 +184,7 @@ export class LoteComponent implements OnInit {
             form.controls['nombre'].setValue(this.lote[0].nombre);
             form.controls['precio'].setValue(this.lote[0].precio);
             this.status = this.lote[0].status;
+            this.pausar = (this.lote[0].status == 4) ? 1 : 0;
 
             let aux1 = new Date(this.lote[0].fecha_inicio);
             let aux2 = new Date(this.lote[0].fecha_fin);
@@ -186,11 +197,13 @@ export class LoteComponent implements OnInit {
             let temp = new Array();
 
             aux.forEach(function(element) {
+                console.log(element);
                 temp.push({
                     estampilla_id: element.estampilla_id,
                     codigo_yt: element.codigo_yt,
                     codigo_arg: element.codigo_arg,
-                    nombre: element.nombre
+                    nombre: element.nombre,
+                    estampilla_variedad_id: element.estampilla_variedad_id
                 });
             });
 
@@ -211,7 +224,13 @@ export class LoteComponent implements OnInit {
                 let encontrado = false;
                 for (var i = 0; i < data.length; i++) {
                     if (this.codigo_yt == data[i].codigo_yt) {
-                        let aux = {estampilla_id: data[i].estampilla_id, codigo_yt: data[i].codigo_yt, codigo_arg: data[i].codigo_arg, nombre: data[i].nombre};
+                        let aux = {
+                            estampilla_id: data[i].estampilla_id,
+                            codigo_yt: data[i].codigo_yt,
+                            codigo_arg: data[i].codigo_arg,
+                            nombre: data[i].nombre,
+                            estampilla_variedad_id: data[i].estampilla_variedad_id
+                        };
                         this.estampillas.push(aux);
                         this.codigo_yt = "";
                         encontrado = true;
@@ -230,7 +249,13 @@ export class LoteComponent implements OnInit {
                 let encontrado = false;
                 for (var i = 0; i < data.length; i++) {
                     if (this.codigo_arg == data[i].codigo_arg) {
-                        let aux = {estampilla_id: data[i].estampilla_id, codigo_yt: data[i].codigo_yt, codigo_arg: data[i].codigo_arg, nombre: data[i].nombre};
+                        let aux = {
+                            estampilla_id: data[i].estampilla_id,
+                            codigo_yt: data[i].codigo_yt,
+                            codigo_arg: data[i].codigo_arg,
+                            nombre: data[i].nombre,
+                            estampilla_variedad_id: data[i].estampilla_variedad_id
+                        };
                         this.estampillas.push(aux);
                         this.codigo_arg = "";
                         encontrado = true;

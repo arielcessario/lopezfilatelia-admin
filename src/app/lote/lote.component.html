@@ -147,11 +147,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-6 col-sm-3 col-md-3 col-lg-1">
+                    <div class="form-check" style="margin-top:25px;">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                               [checked]="pausar" (change)="pausar = !pausar">
+                        <label class="form-check-label" for="exampleCheck1">Pausar</label>
+                    </div>
+                </div>
                 <div class="col-12" style="margin-top: 20px;">
-                    <table class="table table-bordered table-hover ">
+                    <table class="table table-bordered table-hover " style="font-size: 0.8rem;">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">#</th>
+                            <th scope="col">Estampilla</th>
                             <th scope="col">Código YT</th>
                             <th scope="col">Código Arg</th>
                             <th scope="col">Estampilla</th>
@@ -165,7 +172,7 @@
                             <td>{{item.codigo_arg}}</td>
                             <td>{{item.nombre}}</td>
                             <td>
-                                <button type="button"
+                                <button type="button" style="padding: 0.2rem 0.5rem;"
                                         (click)="quitarEstampilla(item)"
                                         class="btn btn-default">
                                     <span class="fa fa-trash" aria-hidden="true"></span>

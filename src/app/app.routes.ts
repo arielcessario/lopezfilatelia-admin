@@ -9,7 +9,8 @@ import { PaisesComponent } from './paises/paises.component';
 import { PaisComponent } from './pais/pais.component';
 import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
-
+import { ColoresComponent } from './colores/colores.component';
+import { ColorComponent } from './color/color.component'
 
 
 const routes: Routes = [
@@ -63,6 +64,21 @@ const routes: Routes = [
   {
     path: 'lote/:id',
     component: LoteComponent,
+    //canActivate: [AuthGuard]
+  },
+  {
+    path: 'colores',
+    component: ColoresComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'color',
+    component: ColorComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'color/:id',
+    component: ColorComponent,
     //canActivate: [AuthGuard]
   },
 ];
