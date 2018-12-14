@@ -5,12 +5,13 @@
               {{ accion }} Estampilla
           </div>
           <div class="col-6" style="text-align: right;">
-              <button   style="padding: 0.2rem 0.5rem;"
-                      type="button"
-                      (click)="showHelp(content)"
-                      class="btn btn-info" title="Ayuda en linea">
-                  <span class="fa fa-question-circle-o" aria-hidden="true"></span>
-              </button>
+              <!--<button   style="padding: 0.2rem 0.5rem;"-->
+                      <!--type="button"-->
+                      <!--(click)="showHelp(content)"-->
+                      <!--class="btn btn-info" title="Ayuda en linea">-->
+                  <!--<span class="fa fa-question-circle-o" aria-hidden="true"></span>-->
+              <!--</button>-->
+              <a (click)="showHelp(content)" title="Ayuda" style="cursor: pointer"><span class="fa fa-question-circle-o" aria-hidden="true"></span></a>
           </div>
       </div>
   </nb-card-header>
@@ -132,12 +133,13 @@
         <!--</div>-->
         <div class="col-6 col-sm-4 col-md-3 col-lg-2" style="padding-right: 45px">
           <div class="" style="margin-top:10px; ">
-            <button
-                    type="button"
-                    (click)="addVariedad()"
-                    class="btn btn-primary" title="Agregar Variedad">
-              <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
-            </button>
+            <!--<button-->
+                    <!--type="button"-->
+                    <!--(click)="addVariedad()"-->
+                    <!--class="btn btn-primary" title="Agregar Variedad">-->
+              <!--<span class="fa fa-plus fa-lg" aria-hidden="true"></span>-->
+            <!--</button>-->
+              <a (click)="addVariedad()" title="Agregar Variedad" style="cursor: pointer"><span class="fa fa-plus fa-lg" aria-hidden="true"></span></a>
           </div>
         </div>
       </div>
@@ -294,12 +296,13 @@
           </div>
         <div class="col-6 col-sm-1 col-md-1 col-lg-1" style="display:flex;justify-content: center;align-items: center;">
           <div class="">
-            <button
-                    type="button"
-                    (click)="removeVariedad(item)"
-                    class="btn btn-danger" title="Quitar Variedad">
-              <span class="fa fa-trash-o fa-lg" aria-hidden="true"></span>
-            </button>
+            <!--<button-->
+                    <!--type="button"-->
+                    <!--(click)="removeVariedad(item)"-->
+                    <!--class="btn btn-danger" title="Quitar Variedad">-->
+              <!--<span class="fa fa-trash-o fa-lg" aria-hidden="true"></span>-->
+            <!--</button>-->
+              <a (click)="removeVariedad(item)" title="Quitar Variedad" style="cursor: pointer"><span class="fa fa-trash-o fa-lg" aria-hidden="true"></span></a>
           </div>
         </div>
         <div class="col-12">

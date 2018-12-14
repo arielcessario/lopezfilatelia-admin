@@ -34,9 +34,9 @@
                                 />
                     </div>
                 </div>
-                <div class="col-12">
+                <div class="col-6">
                     <div class="row">
-                        <div class="col-sm-3" style="margin-top: 15px">
+                        <div class="col-sm-6" style="">
                             <div class="form-group">
                                 <label>Fecha Inicio</label>
                                 <div class="btn-group">
@@ -59,15 +59,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <ngb-timepicker [(ngModel)]="hora_inicio"
-                                                [ngModelOptions]="{standalone: true}">
+                        <!--<div class="col-sm-3">-->
+                            <!--<div class="form-group">-->
+                                <!--<ngb-timepicker [(ngModel)]="hora_inicio"-->
+                                                <!--[ngModelOptions]="{standalone: true}">-->
 
-                                </ngb-timepicker>
-                            </div>
-                        </div>
-                        <div class="col-sm-3" style="margin-top: 15px">
+                                <!--</ngb-timepicker>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <div class="col-sm-6" style="">
                             <div class="form-group">
                                 <label>Fecha Fin</label>
                                 <div class="btn-group">
@@ -90,14 +90,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="form-group">
-                                <ngb-timepicker [(ngModel)]="hora_fin"
-                                                [ngModelOptions]="{standalone: true}">
+                        <!--<div class="col-sm-3">-->
+                            <!--<div class="form-group">-->
+                                <!--<ngb-timepicker [(ngModel)]="hora_fin"-->
+                                                <!--[ngModelOptions]="{standalone: true}">-->
 
-                                </ngb-timepicker>
-                            </div>
-                        </div>
+                                <!--</ngb-timepicker>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </div>
 
@@ -117,7 +117,7 @@
                             <div class="input-group-append">
                                 <button type="button"
                                         (click)="searchYT()"
-                                        class="btn btn-default" title="Buscar por Código YT">
+                                        class="btn btn-primary" title="Buscar por Código YT">
                                     <span class="fa fa-search fa-lg" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -140,7 +140,7 @@
                             <div class="input-group-append">
                                 <button type="button"
                                         (click)="searchArg()"
-                                        class="btn btn-default" title="Buscar por Código Arg">
+                                        class="btn btn-primary" title="Buscar por Código Arg">
                                     <span class="fa fa-search fa-lg" aria-hidden="true"></span>
                                 </button>
                             </div>
@@ -172,11 +172,12 @@
                             <td>{{item.codigo_arg}}</td>
                             <td>{{item.nombre}}</td>
                             <td>
-                                <button type="button" style="padding: 0.2rem 0.5rem;"
-                                        (click)="quitarEstampilla(item)"
-                                        class="btn btn-default">
-                                    <span class="fa fa-trash" aria-hidden="true"></span>
-                                </button>
+                                <!--<button type="button" style="padding: 0.2rem 0.5rem;"-->
+                                        <!--(click)="quitarEstampilla(item)"-->
+                                        <!--class="btn">-->
+                                    <!--<span class="fa fa-trash" aria-hidden="true"></span>-->
+                                <!--</button>-->
+                                <a (click)="quitarEstampilla(item)" title="Quitar" style="cursor: pointer;"><span class="fa fa-trash" aria-hidden="true"></span></a>
                             </td>
                         </tr>
                         </tbody>

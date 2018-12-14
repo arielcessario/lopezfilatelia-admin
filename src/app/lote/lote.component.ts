@@ -44,8 +44,8 @@ export class LoteComponent implements OnInit {
     public nombre = '';
     public fecha_inicio: any = {};
     public fecha_fin: any = {};
-    public hora_inicio: any = {};
-    public hora_fin: any = {};
+    //public hora_inicio: any = {};
+    //public hora_fin: any = {};
     public precio = '';
     public codigo_yt = "";
     public codigo_arg = "";
@@ -101,8 +101,8 @@ export class LoteComponent implements OnInit {
             precio: this.form.get('precio').value,
             fecha_inicio: this.fecha_inicio,
             fecha_fin: this.fecha_fin,
-            hora_inicio: this.hora_inicio,
-            hora_fin: this.hora_fin,
+            //hora_inicio: this.hora_inicio,
+            //hora_fin: this.hora_fin,
             estampillas: this.estampillas,
             status: (this.pausar == 1) ? 4 : 1
         };
@@ -176,8 +176,8 @@ export class LoteComponent implements OnInit {
         form.controls['precio'].setValue('');
         this.fecha_inicio = {};
         this.fecha_fin = {};
-        this.hora_inicio = {};
-        this.hora_fin = {};
+        //this.hora_inicio = {};
+        //this.hora_fin = {};
         this.status = 1;
 
         if (this.id !== -1) {
@@ -189,9 +189,9 @@ export class LoteComponent implements OnInit {
             let aux1 = new Date(this.lote[0].fecha_inicio);
             let aux2 = new Date(this.lote[0].fecha_fin);
             this.fecha_inicio = { year: aux1.getFullYear(), month: aux1.getMonth() + 1, day: aux1.getDate() };
-            this.hora_inicio = { hour: aux1.getHours(), minute: aux1.getMinutes(), second: 0 };
+            //this.hora_inicio = { hour: aux1.getHours(), minute: aux1.getMinutes(), second: 0 };
             this.fecha_fin = { year: aux2.getFullYear(), month: aux2.getMonth() + 1, day: aux2.getDate() };
-            this.hora_fin = { hour: aux2.getHours(), minute: aux2.getMinutes(), second: 0 };
+            //this.hora_fin = { hour: aux2.getHours(), minute: aux2.getMinutes(), second: 0 };
 
             let aux = this.lote["estampillas"];
             let temp = new Array();
