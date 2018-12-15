@@ -19,6 +19,8 @@ import {
     ValidatorFn
 } from '@angular/forms';
 import { Location } from '@angular/common';
+import { LocalDataSource } from 'ng2-smart-table';
+
 
 @Component({
     selector: 'lfa-lote',
@@ -65,6 +67,55 @@ export class LoteComponent implements OnInit {
         }
     };
 
+
+    settings = {
+        mode: 'external',
+        actions: {
+            add: false,
+            edit: false,
+            delete: true
+        },
+        add: {
+            addButtonContent: '<i class="nb-plus"></i>',
+            createButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+            confirmCreate: true
+        },
+        edit: {
+            editButtonContent: '<i class="nb-edit"></i>',
+            saveButtonContent: '<i class="nb-checkmark"></i>',
+            cancelButtonContent: '<i class="nb-close"></i>',
+            confirmEdit: true
+        },
+        delete: {
+            deleteButtonContent: '<i class="nb-trash"></i>',
+            confirmDelete: true
+        },
+        columns: {
+            estampilla_id: {
+                title: 'estampilla_id',
+                type: 'string'
+            },
+            codigo_yt: {
+                title: 'codigo_yt',
+                type: 'string'
+            },
+            codigo_arg: {
+                title: 'codigo_arg',
+                type: 'string'
+            },
+            nombre: {
+                title: 'nombre',
+                type: 'string'
+            }
+        }
+    };
+
+    allRows: Array<any> = [];
+    source: LocalDataSource = new LocalDataSource();
+    data = [];
+
+
     constructor(
         private coreService: CoreService,
         private router: Router,
@@ -107,35 +158,39 @@ export class LoteComponent implements OnInit {
             status: (this.pausar == 1) ? 4 : 1
         };
 
-        let aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month, this.fecha_inicio.day);
-        let aux2 = new Date(this.fecha_fin.year, this.fecha_fin.month, this.fecha_fin.day);
+        let aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month - 1, this.fecha_inicio.day);
+        let aux2 = new Date(this.fecha_fin.year, this.fecha_fin.month - 1, this.fecha_fin.day);
+        let today = new Date();
 
-        if(aux1 <= aux2) {
-            if(plu.estampillas.length > 0) {
-                if(plu.id > 0) {
-                    this.proxy.updateLote(plu).subscribe( data => {
-                            this.toasterService.pop("success", "Exito", "Se actualizo el lote satisfactoriamente");
-                            this.router.navigate(['lotes']);
-                        }, error => {
-                            this.err = error;
-                        }
-                    );
-                } else {
-                    this.proxy.createLote(plu).subscribe( data => {
-                            this.toasterService.pop("success", "Exito", "Se creó el lote satisfactoriamente");
-                            this.router.navigate(['lotes']);
-                        }, error => {
-                            this.err = error;
-                        }
-                    );
+        if(aux1 >= today) {
+            if(aux1 <= aux2) {
+                if(plu.estampillas.length > 0) {
+                    if(plu.id > 0) {
+                        this.proxy.updateLote(plu).subscribe( data => {
+                                this.toasterService.pop("success", "Exito", "Se actualizo el lote satisfactoriamente");
+                                this.router.navigate(['lotes']);
+                            }, error => {
+                                this.err = error;
+                            }
+                        );
+                    } else {
+                        this.proxy.createLote(plu).subscribe( data => {
+                                this.toasterService.pop("success", "Exito", "Se creó el lote satisfactoriamente");
+                                this.router.navigate(['lotes']);
+                            }, error => {
+                                this.err = error;
+                            }
+                        );
+                    }
                 }
+                else {
+                    this.toasterService.pop("warning", "Advertencia", "Debe agregar estampillas al lote");
+                }
+            } else {
+                this.toasterService.pop("warning", "Advertencia", "La Fecha Fin debe ser mayor que la Fecha de Inicio");
             }
-            else {
-                this.toasterService.pop("warning", "Advertencia", "Debe agregar estampillas al lote");
-            }
-
         } else {
-            this.toasterService.pop("warning", "Advertencia", "La Fecha Fin debe ser mayor que la Fecha de Inicio");
+            this.toasterService.pop("warning", "Advertencia", "La Fecha Inicio no puede ser menor que la Fecha Actual");
         }
 
     }
@@ -197,7 +252,6 @@ export class LoteComponent implements OnInit {
             let temp = new Array();
 
             aux.forEach(function(element) {
-                console.log(element);
                 temp.push({
                     estampilla_id: element.estampilla_id,
                     codigo_yt: element.codigo_yt,
@@ -208,9 +262,32 @@ export class LoteComponent implements OnInit {
             });
 
             this.estampillas = temp;
+            console.log(this.estampillas);
+
+            this.loadGrid();
+
         }
 
         this.form = form;
+    }
+
+    loadGrid() {
+        this.data = this.estampillas;
+        this.source.load(this.data);
+    }
+
+    onDeleteConfirm(event): void {
+        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
+            console.log(event);
+            for (var i = 0; i < this.estampillas.length; i++) {
+                if (event.data.estampilla_variedad_id == this.estampillas[i].estampilla_variedad_id) {
+                    this.estampillas.splice(i, 1);
+                    this.loadGrid();
+                }
+            }
+        } else {
+            // event.confirm.reject();
+        }
     }
 
     onActivate(e) {
@@ -221,6 +298,7 @@ export class LoteComponent implements OnInit {
     searchYT() {
         this.proxy.buscarEstampillas().subscribe(data => {
             if (data) {
+                console.log(data);
                 let encontrado = false;
                 for (var i = 0; i < data.length; i++) {
                     if (this.codigo_yt == data[i].codigo_yt) {
@@ -234,6 +312,7 @@ export class LoteComponent implements OnInit {
                         this.estampillas.push(aux);
                         this.codigo_yt = "";
                         encontrado = true;
+                        this.loadGrid();
                     }
                 }
                 if(!encontrado) {
@@ -259,6 +338,7 @@ export class LoteComponent implements OnInit {
                         this.estampillas.push(aux);
                         this.codigo_arg = "";
                         encontrado = true;
+                        this.loadGrid();
                     }
                 }
                 if(!encontrado) {
@@ -269,9 +349,11 @@ export class LoteComponent implements OnInit {
     }
 
     quitarEstampilla(item) {
+        console.log(item);
         for (var i = 0; i < this.estampillas.length; i++) {
-            if (item.estampilla_id == this.estampillas[i].estampilla_id) {
+            if (item.estampilla_variedad_id == this.estampillas[i].estampilla_variedad_id) {
                 this.estampillas.splice(i, 1);
+                this.loadGrid();
             }
         }
     }

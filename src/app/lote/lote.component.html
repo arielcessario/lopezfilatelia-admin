@@ -155,33 +155,37 @@
                     </div>
                 </div>
                 <div class="col-12" style="margin-top: 20px;">
-                    <table class="table table-bordered table-hover " style="font-size: 0.8rem;">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Estampilla</th>
-                            <th scope="col">Código YT</th>
-                            <th scope="col">Código Arg</th>
-                            <th scope="col">Estampilla</th>
-                            <th scope="col">Quitar</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr *ngFor="let item of estampillas" >
-                            <th scope="row">{{item.estampilla_id}}</th>
-                            <td>{{item.codigo_yt}}</td>
-                            <td>{{item.codigo_arg}}</td>
-                            <td>{{item.nombre}}</td>
-                            <td>
-                                <!--<button type="button" style="padding: 0.2rem 0.5rem;"-->
-                                        <!--(click)="quitarEstampilla(item)"-->
-                                        <!--class="btn">-->
-                                    <!--<span class="fa fa-trash" aria-hidden="true"></span>-->
-                                <!--</button>-->
-                                <a (click)="quitarEstampilla(item)" title="Quitar" style="cursor: pointer;"><span class="fa fa-trash" aria-hidden="true"></span></a>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <!--<table class="table table-bordered table-hover " style="font-size: 0.8rem;">-->
+                        <!--<thead class="thead-dark">-->
+                        <!--<tr>-->
+                            <!--<th scope="col">Estampilla</th>-->
+                            <!--<th scope="col">Código YT</th>-->
+                            <!--<th scope="col">Código Arg</th>-->
+                            <!--<th scope="col">Estampilla</th>-->
+                            <!--<th scope="col">Quitar</th>-->
+                        <!--</tr>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr *ngFor="let item of estampillas" >-->
+                            <!--<th scope="row">{{item.estampilla_id}}</th>-->
+                            <!--<td>{{item.codigo_yt}}</td>-->
+                            <!--<td>{{item.codigo_arg}}</td>-->
+                            <!--<td>{{item.nombre}}</td>-->
+                            <!--<td>-->
+                                <!--<a (click)="quitarEstampilla(item)" title="Quitar" style="cursor: pointer;"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+
+                    <ng2-smart-table
+                            [settings]="settings"
+                            [source]="source"
+                            (deleteConfirm)="onDeleteConfirm($event)"
+                            (delete)="onDeleteConfirm($event)"
+                            (userRowSelect)="update($event)"
+                            >
+                    </ng2-smart-table>
                 </div>
             </div>
         </form>

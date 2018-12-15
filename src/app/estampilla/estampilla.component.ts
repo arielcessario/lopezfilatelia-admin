@@ -57,7 +57,7 @@ export class EstampillaComponent implements OnInit {
   public estado_id = 0;
   public catalogo_id = 0;
   public estampilla_variedad_id = 0;
-  public anio = 0;
+  public anio = '';
   //public color_id = 0;
   //public oferta = 0;
 
@@ -65,7 +65,7 @@ export class EstampillaComponent implements OnInit {
   formErrors: any = {
     estampilla_id: '',
     nombre: '',
-    anio: 0,
+    anio: '',
     estado_id: '',
     catalogo_id: '',
     descripcion: ''
@@ -100,7 +100,7 @@ export class EstampillaComponent implements OnInit {
     this.cargarPaises();
     this.cargarColores();
     //Determino si es update o insert
-    this.getEmpleado();
+    this.getEstampilla();
   }
 
   cargarPaises() {
@@ -115,7 +115,7 @@ export class EstampillaComponent implements OnInit {
     });
   }
 
-  getEmpleado() {
+  getEstampilla() {
     this.route.params.subscribe((p: { id: number }) => {
       if (p.id) {
         this.accion = 'Modificar';
@@ -123,8 +123,9 @@ export class EstampillaComponent implements OnInit {
         this.proxy.getEstampilla(this.id).subscribe(e => {
           this.estampilla = e;
 
+          console.log(this.estampilla);
           this.buildForm();
-          this.proxy.getEstampillaImagenes(this.id).subscribe(imagenes => {
+          this.proxy.getEstampillaImagenes(this.estampilla.estampilla_id).subscribe(imagenes => {
             this.images = [];
             for (let i = 0; i < imagenes.length; i++) {
               this.images.push(imagenes[i].path);
@@ -240,7 +241,7 @@ export class EstampillaComponent implements OnInit {
     //form.controls['estampilla_id'].setValue(0);
     form.controls['nombre'].setValue('');
     //form.controls['pais_id'].setValue(0);
-    form.controls['anio'].setValue(0);
+    form.controls['anio'].setValue('');
     form.controls['estado_id'].setValue(0);
     form.controls['descripcion'].setValue('');
 

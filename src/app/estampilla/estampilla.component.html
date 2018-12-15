@@ -30,7 +30,6 @@
               formControlName="nombre"
               class="form-control"
               id="nombre"
-              placeholder="Nombre Estampilla"
               [ngClass]="{
                 'form-control-danger': form.controls['nombre'].invalid
               }"
@@ -53,11 +52,10 @@
                   <input
                           placement="bottom"
                           triggers="focus keyup keydown"
-                          type="number"
+                          type="text"
                           formControlName="anio"
                           class="form-control"
                           id="anio"
-                          placeholder="0000"
                           [ngClass]="{
                 'form-control-danger': form.controls['anio'].invalid
               }"
@@ -153,7 +151,6 @@
                     triggers="focus keyup keydown"
                     type="text"
                     class="form-control"
-                    placeholder="Código YT"
                     [(ngModel)]="item.codigo_yt"
                     [ngModelOptions]="{standalone: true}"
                     />
@@ -167,7 +164,6 @@
                     triggers="focus keyup keydown"
                     type="text"
                     class="form-control"
-                    placeholder="Código Arg"
                     [(ngModel)]="item.codigo_arg"
                     [ngModelOptions]="{standalone: true}"
                     />
@@ -181,7 +177,6 @@
                           triggers="focus keyup keydown"
                           type="text"
                           class="form-control"
-                          placeholder="Código. Jalil"
                           [(ngModel)]="item.codigo_jalil"
                           [ngModelOptions]="{standalone: true}"
                           />
@@ -195,7 +190,6 @@
                     triggers="focus keyup keydown"
                     type="text"
                     class="form-control"
-                    placeholder="variedad"
                     [(ngModel)]="item.variedad"
                     [ngModelOptions]="{standalone: true}"
                     />
