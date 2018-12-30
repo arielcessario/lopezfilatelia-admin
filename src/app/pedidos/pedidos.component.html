@@ -1,0 +1,13 @@
+<nb-card>
+  <nb-card-header> Pedidos </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="source"
+      (edit)="update($event)"
+      (userRowSelect)="update($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

@@ -34,6 +34,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ColoresComponent } from './colores/colores.component';
 import { ColorComponent } from './color/color.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidoComponent } from './pedido/pedido.component';
 
 
 let env = 'dev';
@@ -60,7 +62,9 @@ const projectConfig = {
     LoteComponent,
     PaisComponent,
     ColoresComponent,
-    ColorComponent
+    ColorComponent,
+    PedidosComponent,
+    PedidoComponent
   ],
   imports: [
     BrowserModule,

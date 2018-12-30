@@ -91,6 +91,10 @@ export class AppComponent implements OnInit {
         {
           title: 'Colores',
           link: '/colores'
+        },
+        {
+          title: 'Pedidos',
+          link: '/pedidos'
         }
       ],
     }

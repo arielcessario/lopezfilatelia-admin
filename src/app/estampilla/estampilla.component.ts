@@ -120,6 +120,7 @@ export class EstampillaComponent implements OnInit {
       if (p.id) {
         this.accion = 'Modificar';
         this.id = p.id;
+        console.log(this.id );
         this.proxy.getEstampilla(this.id).subscribe(e => {
           this.estampilla = e;
 

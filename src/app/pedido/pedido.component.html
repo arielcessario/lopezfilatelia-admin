@@ -1,0 +1,171 @@
+<nb-card>
+  <nb-card-header style="padding: 10px 20px;">
+      <div class="row">
+          <div class="col-6">
+              Pedido #{{ carrito_id }}
+          </div>
+          <div class="col-6" style="text-align: right;">
+              <a (click)="showHelp(content)" title="Ayuda" style="cursor: pointer"><span class="fa fa-question-circle-o" aria-hidden="true"></span></a>
+          </div>
+      </div>
+  </nb-card-header>
+
+  <nb-card-body>
+    <form [formGroup]="form" *ngIf="form">
+      <!-- Document type and number -->
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group  tooltip-danger">
+            <label>Apellido</label>
+            <input
+              placement="bottom"
+              triggers="focus keyup keydown"
+              type="text"
+              formControlName="apellido"
+              class="form-control"
+              id="apellido"
+              readonly
+            />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group  tooltip-danger">
+              <label>Nombre</label>
+              <input
+                      placement="bottom"
+                      triggers="focus keyup keydown"
+                      type="text"
+                      formControlName="nombre"
+                      class="form-control"
+                      id="nombre"
+                      readonly
+                      />
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group  tooltip-danger">
+              <label>Mail</label>
+              <input
+                      placement="bottom"
+                      triggers="focus keyup keydown"
+                      type="text"
+                      formControlName="mail"
+                      class="form-control"
+                      id="mail"
+                      readonly
+                      />
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group  tooltip-danger">
+              <label>Fecha</label>
+              <input
+                      placement="bottom"
+                      triggers="focus keyup keydown"
+                      type="text"
+                      formControlName="fecha"
+                      class="form-control"
+                      id="fecha"
+                      readonly
+                      />
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="form-group  tooltip-danger">
+              <label>Total</label>
+              <input
+                      placement="bottom"
+                      triggers="focus keyup keydown"
+                      type="text"
+                      formControlName="total"
+                      class="form-control"
+                      id="total"
+                      readonly
+                      />
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="form-group  tooltip-danger">
+              <label>Estado</label>
+              <input
+                      placement="bottom"
+                      triggers="focus keyup keydown"
+                      type="text"
+                      formControlName="status_name"
+                      class="form-control"
+                      id="status_name"
+                      readonly
+                      />
+          </div>
+        </div>
+        <div class="col-6 col-sm-4 col-md-4 col-lg-4">
+          <div class="form-check" style="margin-top:25px;">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                     [checked]="confirmar_entrega" (change)="confirmar_entrega = !confirmar_entrega"
+                     [attr.disabled]="!showSave ? '' : null">
+              <label class="form-check-label" for="exampleCheck1">CONFIRMAR ENTREGA</label>
+          </div>
+        </div>
+      </div>
+    </form>
+      <ng2-smart-table
+              [settings]="settings"
+              [source]="source"
+              (deleteConfirm)="onDeleteConfirm($event)"
+              (delete)="onDeleteConfirm($event)"
+              (userRowSelect)="update($event)"
+              >
+      </ng2-smart-table>
+    <div class="btn-group" style="margin-top: 20px">
+      <button
+        *ngIf="showSave"
+        type="button"
+        (click)="submit()"
+        class="btn btn-primary"
+      >
+        Guardar
+      </button>
+
+      <button
+        *ngIf="form"
+        type="button"
+        (click)="cancel()"
+        class="btn btn-default"
+      >
+        Cancelar
+      </button>
+    </div>
+  </nb-card-body>
+</nb-card>
+<!--./Fin del panel-->
+
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Crear/Modificar Estampillas</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="body-panel" style="max-height: 360px; overflow-y: auto;">
+            <p>Para poder crear o modificar una estampilla debe ingresar los siguientes campos:</p>
+            <p><strong>Nombre:</strong> Representa el nombre de la estampilla. Es un campo obligatorio y acepta un maximo de 150 carácteres.</p>
+            <p><strong>Pais:</strong> Listado de Paises cargados desde el mantenedor de Paises.</p>
+            <p><strong>Año:</strong> Representa el año de la estampilla. Solo se admiten valores numericos.</p>
+            <p><strong>Descripción:</strong> Es una descripción de la estampilla. Se muestra en la web que ve el cliente y le sirve de ayuda para saber más detalle de la estampilla.</p>
+            <p><strong>Fotos:</strong> Se pueden adjuntar hasta un máximo de 5 imagenes.</p>
+            <p><strong>Nro YT:</strong> Código YT para identificar la estampilla.</p>
+            <p><strong>Nro Arg:</strong> Código Arg para identificar la estampilla.</p>
+            <p><strong>Variedad:</strong> Nombre de la variedad de una estampilla, ya que una estampilla puede tener distintas variedades.</p>
+            <p><strong>Precios:</strong> Son los distintos precios que puede tener una estampilla.</p>
+            <p>Ya que una estampilla puede tener N variedades, la carga de las variedades es dinamica. Solo basta con darle click al botón azul "Agregar Variedad".
+                En caso de querer quitar una variedad, solo basta con presionar el botón que dice "Quitar Variedad".Luego se presiona "Guardar" y la nueva estampilla
+                aparacerá en la grilla de estampillas.</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+    </div>
+</ng-template>
+<!--./Fin de la ayuda modal-->

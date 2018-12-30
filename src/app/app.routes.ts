@@ -10,8 +10,9 @@ import { PaisComponent } from './pais/pais.component';
 import { LotesComponent } from './lotes/lotes.component';
 import { LoteComponent } from './lote/lote.component';
 import { ColoresComponent } from './colores/colores.component';
-import { ColorComponent } from './color/color.component'
-
+import { ColorComponent } from './color/color.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidoComponent } from './pedido/pedido.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -81,6 +82,16 @@ const routes: Routes = [
     component: ColorComponent,
     //canActivate: [AuthGuard]
   },
+  {
+    path: 'pedidos',
+    component: PedidosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'pedido/:id',
+    component: PedidoComponent,
+    //canActivate: [AuthGuard]
+  }
 ];
 
 export const Routing: ModuleWithProviders = RouterModule.forRoot(routes);
