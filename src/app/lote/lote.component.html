@@ -5,7 +5,7 @@
         <form [formGroup]="form" *ngIf="form">
             <!-- Document type and number -->
             <div class="row">
-                <div class="col-sm-10">
+                <div class="col-sm-8">
                     <div class="form-group  tooltip-danger">
                         <label>Nombre Lote</label>
                         <input
@@ -22,7 +22,7 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group  tooltip-danger">
-                        <label>Precio</label>
+                        <label>Precio Base</label>
                         <input
                                 placement="bottom"
                                 triggers="focus keyup keydown"
@@ -32,6 +32,20 @@
                                 id="precio"
                                 placeholder="Precio"
                                 />
+                    </div>
+                </div>
+                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                    <div class="form-group">
+                        <ac-upload
+                                [img]="imagen"
+                                (status)="loadedImage($event)" >
+                        </ac-upload>
+                        <h5 class="col-form-label text-heading"
+                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                            for="nombre"
+                            [title]="imagen" >
+                            {{ imagen}}
+                        </h5>
                     </div>
                 </div>
                 <div class="col-6">
@@ -152,6 +166,45 @@
                         <input type="checkbox" class="form-check-input" id="exampleCheck1"
                                [checked]="pausar" (change)="pausar = !pausar">
                         <label class="form-check-label" for="exampleCheck1">Pausar</label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Oferta Base 1</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                formControlName="precio_1"
+                                class="form-control"
+                                id="precio_1"
+                                />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Oferta Base 2</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                formControlName="precio_2"
+                                class="form-control"
+                                id="precio_2"
+                                />
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group  tooltip-danger">
+                        <label>Oferta Base 3</label>
+                        <input
+                                placement="bottom"
+                                triggers="focus keyup keydown"
+                                type="text"
+                                formControlName="precio_3"
+                                class="form-control"
+                                id="precio_3"
+                                />
                     </div>
                 </div>
                 <div class="col-12" style="margin-top: 20px;">

@@ -95,6 +95,10 @@ export class AppComponent implements OnInit {
         {
           title: 'Pedidos',
           link: '/pedidos'
+        },
+        {
+          title: 'Usuarios Lotes',
+          link: '/usuarioslotes'
         }
       ],
     }
@@ -130,13 +134,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.logged = this.authService.getLoginStatus();
-
-    console.log(this.authService.getLoginStatus());
-
-    //this.proxy.getEstampillas().subscribe(data=>{
-    //  console.log(data);
-    //
-    //})
 
     this.coreService.getLoginStatus.subscribe(data => {
       this.logged = data;

@@ -36,6 +36,8 @@ import { ColoresComponent } from './colores/colores.component';
 import { ColorComponent } from './color/color.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
+import { UsuariosLotesComponent } from './usuarioslotes/usuarioslotes.component';
+import { UsuarioLoteComponent } from './usuariolote/usuariolote.component';
 
 
 let env = 'dev';
@@ -64,7 +66,9 @@ const projectConfig = {
     ColoresComponent,
     ColorComponent,
     PedidosComponent,
-    PedidoComponent
+    PedidoComponent,
+    UsuariosLotesComponent,
+    UsuarioLoteComponent
   ],
   imports: [
     BrowserModule,
