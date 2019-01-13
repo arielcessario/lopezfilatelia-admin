@@ -16,7 +16,7 @@ import { LocalDataSource } from 'ng2-smart-table';
     templateUrl: './lote.component.html',
     styleUrls: ['./lote.component.scss'],
     providers: [
-        //{ provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
+        // { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
     ]
 })
 export class LoteComponent implements OnInit {
@@ -35,11 +35,11 @@ export class LoteComponent implements OnInit {
     public nombre = '';
     public fecha_inicio: any = {};
     public fecha_fin: any = {};
-    //public hora_inicio: any = {};
-    //public hora_fin: any = {};
+    // public hora_inicio: any = {};
+    // public hora_fin: any = {};
     public precio = '';
-    public codigo_yt = "";
-    public codigo_arg = "";
+    public codigo_yt = '';
+    public codigo_arg = '';
     public status = 1;
     public pausar = 0;
     public imagen = 'no_image.png';
@@ -58,7 +58,7 @@ export class LoteComponent implements OnInit {
     validationMessages = {
         nombre: {
             required: 'Requerido',
-            minlength: 'El nombre debe tener más de 10 letras o números'
+            minlength: 'El nombre debe tener mï¿½s de 10 letras o nï¿½meros'
         }
     };
 
@@ -141,22 +141,23 @@ export class LoteComponent implements OnInit {
     }
 
     submit() {
-        if (this.form.get('precio_1').value > 0) {
-            if (this.form.get('precio_1').value <= this.form.get('precio').value) {
-                this.toasterService.pop("warning", "Advertencia", "La oferta base 1 no puede ser menor o igual que la oferta base");
-                return
+        const precio1 = this.form.get('precio_1').value;
+        const precio2 = this.form.get('precio_2').value;
+        const precio3 = this.form.get('precio_3').value;
+
+        console.log(Number(precio1));
+        console.log(Number(precio2));
+
+        if (Number(precio2) > 0) {
+            if (Number(precio2) <= Number(precio1)) {
+                this.toasterService.pop('warning', 'Advertencia', 'La oferta base 2 no puede ser menor o igual que la oferta base 1');
+                return;
             }
         }
-        if (this.form.get('precio_2').value > 0) {
-            if (this.form.get('precio_2').value <= this.form.get('precio_1').value) {
-                this.toasterService.pop("warning", "Advertencia", "La oferta base 2 no puede ser menor o igual que la oferta base 1");
-                return
-            }
-        }
-        if (this.form.get('precio_3').value > 0) {
-            if (this.form.get('precio_3').value <= this.form.get('precio_2').value) {
-                this.toasterService.pop("warning", "Advertencia", "La oferta base 3 no puede ser menor o igual que la oferta base 2");
-                return
+        if (Number(precio3) > 0) {
+            if (Number(precio3) <= Number(precio2)) {
+                this.toasterService.pop('warning', 'Advertencia', 'La oferta base 3 no puede ser menor o igual que la oferta base 2');
+                return;
             }
         }
 
@@ -171,25 +172,25 @@ export class LoteComponent implements OnInit {
             precio_base_3: this.form.get('precio_3').value,
             fecha_inicio: this.fecha_inicio,
             fecha_fin: this.fecha_fin,
-            //hora_inicio: this.hora_inicio,
-            //hora_fin: this.hora_fin,
+            // hora_inicio: this.hora_inicio,
+            // hora_fin: this.hora_fin,
             estampillas: this.estampillas,
-            status: (this.pausar == 1) ? 4 : 1,
+            status: (this.pausar === 1) ? 4 : 1,
             path: this.imagen
         };
 
-        let aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month - 1, this.fecha_inicio.day);
-        let aux2 = new Date(this.fecha_fin.year, this.fecha_fin.month - 1, this.fecha_fin.day);
-        let today = new Date();
+        const aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month - 1, this.fecha_inicio.day);
+        const aux2 = new Date(this.fecha_fin.year, this.fecha_fin.month - 1, this.fecha_fin.day);
+        const today = new Date();
 
-        if(aux1 >= today) {
-            if(aux1 <= aux2) {
-                if(plu.estampillas.length > 0) {
-                    if(plu.id > 0) {
+        if (aux1 >= today) {
+            if (aux1 <= aux2) {
+                if (plu.estampillas.length > 0) {
+                    if (plu.id > 0) {
                         this.proxy.updateLote(plu).subscribe(
                                 data => {
                                     this.sendLote(this.id);
-                                    this.toasterService.pop("success", "Exito", "Se actualizo el lote satisfactoriamente");
+                                    this.toasterService.pop('success', 'Exito', 'Se actualizo el lote satisfactoriamente');
                                     this.router.navigate(['lotes']);
                             }, error => {
                                     this.err = error;
@@ -200,22 +201,21 @@ export class LoteComponent implements OnInit {
                                 data => {
                                     console.log(data);
                                     this.sendLote(data);
-                                    this.toasterService.pop("success", "Exito", "Se creó el lote satisfactoriamente");
+                                    this.toasterService.pop('success', 'Exito', 'Se creÃ³ el lote satisfactoriamente');
                                     this.router.navigate(['lotes']);
                             }, error => {
                                     this.err = error;
                             }
                         );
                     }
-                }
-                else {
-                    this.toasterService.pop("warning", "Advertencia", "Debe agregar estampillas al lote");
+                } else {
+                    this.toasterService.pop('warning', 'Advertencia', 'Debe agregar estampillas al lote');
                 }
             } else {
-                this.toasterService.pop("warning", "Advertencia", "La Fecha Fin debe ser mayor que la Fecha de Inicio");
+                this.toasterService.pop('warning', 'Advertencia', 'La Fecha Fin debe ser mayor que la Fecha de Inicio');
             }
         } else {
-            this.toasterService.pop("warning", "Advertencia", "La Fecha Inicio no puede ser menor que la Fecha Actual");
+            this.toasterService.pop('warning', 'Advertencia', 'La Fecha Inicio no puede ser menor que la Fecha Actual');
         }
 
     }
@@ -225,8 +225,7 @@ export class LoteComponent implements OnInit {
         // Notifico via mail que hay un nuevo lote creado
         this.proxy.informarLote(lote_id).subscribe(
                 data => {
-                    // this.toasterService.pop("success", "Exito", "Se creó el lote satisfactoriamente");
-                    // this.router.navigate(['lotes']);
+                  console.log(data);
             }, error => {
                     this.err = error;
             }
@@ -238,9 +237,9 @@ export class LoteComponent implements OnInit {
     }
 
     changeStatus() {
-        if(this.status == 1) {
+        if (this.status === 1) {
             this.status = 4;
-        } else if(this.status == 4) {
+        } else if (this.status === 4) {
             this.status = 1;
         }
 
@@ -257,8 +256,8 @@ export class LoteComponent implements OnInit {
                     Validators.maxLength(15)
                 ]
             ],
-            //fecha_inicio: [this.fecha_inicio, [Validators.required]],
-            //fecha_fin: [this.fecha_fin, [Validators.required]],
+            // fecha_inicio: [this.fecha_inicio, [Validators.required]],
+            // fecha_fin: [this.fecha_fin, [Validators.required]],
             precio: [this.precio, [Validators.required]],
             precio_1: [this.precio_1, [Validators.required]],
             precio_2: [this.precio_2, [Validators.required]],
@@ -275,8 +274,8 @@ export class LoteComponent implements OnInit {
         form.controls['precio_3'].setValue('');
         this.fecha_inicio = {};
         this.fecha_fin = {};
-        //this.hora_inicio = {};
-        //this.hora_fin = {};
+        // this.hora_inicio = {};
+        // this.hora_fin = {};
         this.status = 1;
         this.imagen = '';
 
@@ -287,18 +286,18 @@ export class LoteComponent implements OnInit {
             form.controls['precio_2'].setValue(this.lote[0].precio_base_2);
             form.controls['precio_3'].setValue(this.lote[0].precio_base_3);
             this.status = this.lote[0].status;
-            this.pausar = (this.lote[0].status == 4) ? 1 : 0;
+            this.pausar = (this.lote[0].status === 4) ? 1 : 0;
             this.imagen = this.lote[0].path;
 
-            let aux1 = new Date(this.lote[0].fecha_inicio);
-            let aux2 = new Date(this.lote[0].fecha_fin);
+            const aux1 = new Date(this.lote[0].fecha_inicio);
+            const aux2 = new Date(this.lote[0].fecha_fin);
             this.fecha_inicio = { year: aux1.getFullYear(), month: aux1.getMonth() + 1, day: aux1.getDate() };
-            //this.hora_inicio = { hour: aux1.getHours(), minute: aux1.getMinutes(), second: 0 };
+            // this.hora_inicio = { hour: aux1.getHours(), minute: aux1.getMinutes(), second: 0 };
             this.fecha_fin = { year: aux2.getFullYear(), month: aux2.getMonth() + 1, day: aux2.getDate() };
-            //this.hora_fin = { hour: aux2.getHours(), minute: aux2.getMinutes(), second: 0 };
+            // this.hora_fin = { hour: aux2.getHours(), minute: aux2.getMinutes(), second: 0 };
 
-            let aux = this.lote["estampillas"];
-            let temp = new Array();
+            const aux = this.lote['estampillas'];
+            const temp = new Array();
 
             aux.forEach(function(element) {
                 temp.push({
@@ -326,10 +325,10 @@ export class LoteComponent implements OnInit {
     }
 
     onDeleteConfirm(event): void {
-        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
+        if (window.confirm('ï¿½Esta seguro que desea eliminar el registro seleccionado?')) {
             console.log(event);
-            for (var i = 0; i < this.estampillas.length; i++) {
-                if (event.data.estampilla_variedad_id == this.estampillas[i].estampilla_variedad_id) {
+            for (let i = 0; i < this.estampillas.length; i++) {
+                if (event.data.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
                     this.estampillas.splice(i, 1);
                     this.loadGrid();
                 }
@@ -349,9 +348,9 @@ export class LoteComponent implements OnInit {
             if (data) {
                 console.log(data);
                 let encontrado = false;
-                for (var i = 0; i < data.length; i++) {
-                    if (this.codigo_yt == data[i].codigo_yt) {
-                        let aux = {
+                for (let i = 0; i < data.length; i++) {
+                    if (this.codigo_yt === data[i].codigo_yt) {
+                      const aux = {
                             estampilla_id: data[i].estampilla_id,
                             codigo_yt: data[i].codigo_yt,
                             codigo_arg: data[i].codigo_arg,
@@ -359,13 +358,13 @@ export class LoteComponent implements OnInit {
                             estampilla_variedad_id: data[i].estampilla_variedad_id
                         };
                         this.estampillas.push(aux);
-                        this.codigo_yt = "";
+                        this.codigo_yt = '';
                         encontrado = true;
                         this.loadGrid();
                     }
                 }
-                if(!encontrado) {
-                    this.toasterService.pop("warning", "Advertencia", "No existe el codigo ingresado");
+                if (!encontrado) {
+                    this.toasterService.pop('warning', 'Advertencia', 'No existe el codigo ingresado');
                 }
             }
         });
@@ -375,9 +374,9 @@ export class LoteComponent implements OnInit {
         this.proxy.buscarEstampillas().subscribe(data => {
             if (data) {
                 let encontrado = false;
-                for (var i = 0; i < data.length; i++) {
-                    if (this.codigo_arg == data[i].codigo_arg) {
-                        let aux = {
+                for (let i = 0; i < data.length; i++) {
+                    if (this.codigo_arg === data[i].codigo_arg) {
+                      const aux = {
                             estampilla_id: data[i].estampilla_id,
                             codigo_yt: data[i].codigo_yt,
                             codigo_arg: data[i].codigo_arg,
@@ -385,13 +384,13 @@ export class LoteComponent implements OnInit {
                             estampilla_variedad_id: data[i].estampilla_variedad_id
                         };
                         this.estampillas.push(aux);
-                        this.codigo_arg = "";
+                        this.codigo_arg = '';
                         encontrado = true;
                         this.loadGrid();
                     }
                 }
-                if(!encontrado) {
-                    this.toasterService.pop("warning", "Advertencia", "No existe el codigo ingresado");
+                if (!encontrado) {
+                    this.toasterService.pop('warning', 'Advertencia', 'No existe el codigo ingresado');
                 }
             }
         });
@@ -399,8 +398,8 @@ export class LoteComponent implements OnInit {
 
     quitarEstampilla(item) {
         console.log(item);
-        for (var i = 0; i < this.estampillas.length; i++) {
-            if (item.estampilla_variedad_id == this.estampillas[i].estampilla_variedad_id) {
+        for (let i = 0; i < this.estampillas.length; i++) {
+            if (item.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
                 this.estampillas.splice(i, 1);
                 this.loadGrid();
             }

@@ -1,5 +1,4 @@
 import { CoreService } from 'ac-core';
-
 import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -49,22 +48,6 @@ export class EstampillasComponent implements OnInit {
         title: 'Descripción',
         type: 'string'
       },
-      //catalogo_codigo: {
-      //  title: 'Catalogo Código',
-      //  type: 'string'
-      //},
-      //catalogo_id: {
-      //  title: 'Catalogo',
-      //  type: 'string'
-      //},
-      //variedad: {
-      //  title: 'Variedad',
-      //  type: 'string'
-      //},
-      //precio: {
-      //  title: 'Precio',
-      //  type: 'string'
-      //}
     }
   };
 
@@ -82,13 +65,13 @@ export class EstampillasComponent implements OnInit {
     this.loadGrid();
   }
 
-  loadGrid(){
-    //this.proxy.getEstampillas().subscribe(d => {
+  loadGrid() {
+    // this.proxy.getEstampillas().subscribe(d => {
     //  if (d) {
     //    this.data = d;
     //    this.source.load(this.data);
     //  }
-    //});
+    // });
     this.proxy.getEstampillasActivas().subscribe(d => {
       if (d) {
         this.data = d;
@@ -104,26 +87,26 @@ export class EstampillasComponent implements OnInit {
 
       this.proxy.deleteEstampilla(event.data.estampilla_id)
           .subscribe(r => {
-              //this.data.splice(encontrado, 1);
-              //this.source.load(this.data);
+              // this.data.splice(encontrado, 1);
+              // this.source.load(this.data);
             this.loadGrid();
           });
 
-      //let encontrado = -1;
-      //for (let i = 0; i < this.data.length; i++) {
+      // let encontrado = -1;
+      // for (let i = 0; i < this.data.length; i++) {
       //  if ('' + this.data[i].id === '' + event.data.id) {
       //    encontrado = i;
       //  }
-      //}
+      // }
       //
-      //if (encontrado > -1) {
+      // if (encontrado > -1) {
       //  this.proxy
       //    .deleteEstampilla(this.data[encontrado].estampilla_id)
       //    .subscribe(r => {
       //      this.data.splice(encontrado, 1);
       //      this.source.load(this.data);
       //    });
-      //}
+      // }
     } else {
       // event.confirm.reject();
     }
