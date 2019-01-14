@@ -113,19 +113,16 @@ export class EstampillaComponent implements OnInit {
       if (p.id) {
         this.accion = 'Modificar';
         this.id = p.id;
-        console.log(this.id );
         this.proxy.getEstampilla(this.id).subscribe(e => {
           this.estampilla = e;
-
-          console.log(this.estampilla);
-          this.buildForm();
-          this.proxy.getEstampillaImagenes(this.estampilla.estampilla_id).subscribe(imagenes => {
-            this.images = [];
-            for (let i = 0; i < imagenes.length; i++) {
-              this.images.push(imagenes[i].path);
-            }
+          this.proxy.getEstampillaImagenes(this.id).subscribe(
+              imagenes => {
+                this.images = [];
+                for (let i = 0; i <= imagenes.length - 1; i++) {
+                  this.images.push(imagenes[i].path);
+                }
           });
-
+          this.buildForm();
         });
       } else {
         this.accion = 'Nueva';
@@ -152,29 +149,22 @@ export class EstampillaComponent implements OnInit {
         imagenes: this.images
       };
 
-      console.log('guardar', plu);
-
       if (plu.id > 0) {
-        this.proxy.updateEstampilla(plu).subscribe( data => {
-              this.proxy.informarOferta(plu).subscribe( data2 => {
-                    console.log(data2);
-                  }, error => {
-                    this.err = error;
-                  }
-              );
+        this.proxy.updateEstampilla(plu).subscribe(
+            data => {
+              this.toasterService.pop('success', 'Exito', 'Se actualizó la estampilla satisfactoriamente');
+              this.sendMail(plu);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;
             }
         );
       } else {
-        this.proxy.createEstampilla(plu).subscribe( data => {
-              this.proxy.informarOferta(plu).subscribe( data2 => {
-                    console.log(data2);
-                  }, error => {
-                    this.err = error;
-                  }
-              );
+        this.proxy.createEstampilla(plu).subscribe(
+            data => {
+              plu.estampilla_id = data;
+              this.toasterService.pop('success', 'Exito', 'Se creó la estampilla satisfactoriamente');
+              this.sendMail(plu);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;
@@ -184,10 +174,19 @@ export class EstampillaComponent implements OnInit {
     } else {
       this.toasterService.pop('warning', 'Advertencia', 'Debe cargar una variedad');
     }
-
-
-
   }
+
+  sendMail(estampilla) {
+    // Notifico via mail que hay nuevas ofertas
+    this.proxy.informarOferta(estampilla).subscribe(
+            data => {
+              console.log(data);
+        }, error => {
+              this.err = error;
+        }
+    );
+  }
+
 
   cancel() {
     this.router.navigate(['estampillas']);
@@ -343,9 +342,9 @@ export class EstampillaComponent implements OnInit {
   selectChange($event, item) {
     // In my case $event come with a id value
     // item = this.colores[$event];
-    console.log($event);
-    console.log(item);
-    console.log(this.colores[$event]);
+    // console.log($event);
+    // console.log(item);
+    // console.log(this.colores[$event]);
     item.color_id = $event;
   }
 

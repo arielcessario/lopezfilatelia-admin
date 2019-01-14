@@ -79,7 +79,7 @@ export class LotesComponent implements OnInit {
         this.loadGrid();
     }
 
-    loadGrid(){
+    loadGrid() {
         this.proxy.getLotes().subscribe(d => {
             if (d) {
                 this.data = d;
@@ -89,25 +89,28 @@ export class LotesComponent implements OnInit {
     }
 
     onDeleteConfirm(event): void {
-        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
-            this.proxy.deleteLote(event.data.lote_id)
-                .subscribe(r => {
-                    this.loadGrid();
-                });
+        if (event.data.status === 1 || event.data.status === 4) {
+            if (window.confirm('Â¿Esta seguro que desea eliminar el registro seleccionado?')) {
+              this.proxy.deleteLote(event.data.lote_id)
+                  .subscribe(r => {
+                      this.loadGrid();
+                  });
+            }
+        } else if (event.data.status === 2) {
+            this.toasterService.pop('warning', 'Advertencia', 'No se puede eliminar un Lote Vendido');
         } else {
-            // event.confirm.reject();
+            this.toasterService.pop('warning', 'Advertencia', 'No se puede eliminar un Lote Finalizado');
         }
     }
 
     update(event): void {
-        if(event.data.status === 1 || event.data.status === 4) {
+        if (event.data.status === 1 || event.data.status === 4) {
             this.router.navigate(['lote', event.data.lote_id]);
-        } else if (event.data.status === 2){
-            this.toasterService.pop("warning", "Advertencia", "No se puede modificar un Lote Vendido");
+        } else if (event.data.status === 2) {
+            this.toasterService.pop('warning', 'Advertencia', 'No se puede modificar un Lote Vendido');
         } else {
-            this.toasterService.pop("warning", "Advertencia", "No se puede modificar un Lote Finalizado");
+            this.toasterService.pop('warning', 'Advertencia', 'No se puede modificar un Lote Finalizado');
         }
-
     }
 
     create() {

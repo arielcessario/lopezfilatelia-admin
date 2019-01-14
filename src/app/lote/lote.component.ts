@@ -141,21 +141,26 @@ export class LoteComponent implements OnInit {
     }
 
     submit() {
-        const precio1 = this.form.get('precio_1').value;
-        const precio2 = this.form.get('precio_2').value;
-        const precio3 = this.form.get('precio_3').value;
+        const precio1 = parseInt(this.form.get('precio_1').value.toString(), 0);
+        const precio2 = parseInt(this.form.get('precio_2').value.toString(), 0);
+        const precio3 = parseInt(this.form.get('precio_3').value.toString(), 0);
 
-        console.log(Number(precio1));
-        console.log(Number(precio2));
-
-        if (Number(precio2) > 0) {
-            if (Number(precio2) <= Number(precio1)) {
+        if (precio1 === 0 && precio2 > 0) {
+          this.toasterService.pop('warning', 'Advertencia', 'La oferta base 1 debe tener un valor');
+          return;
+        }
+        if (precio2 > 0) {
+            if (precio2 <= precio1) {
                 this.toasterService.pop('warning', 'Advertencia', 'La oferta base 2 no puede ser menor o igual que la oferta base 1');
                 return;
             }
         }
-        if (Number(precio3) > 0) {
-            if (Number(precio3) <= Number(precio2)) {
+        if (precio2 === 0 && precio3 > 0) {
+          this.toasterService.pop('warning', 'Advertencia', 'La oferta base 2 debe tener un valor');
+          return;
+        }
+        if (precio3 > 0) {
+            if (precio3 <= precio2) {
                 this.toasterService.pop('warning', 'Advertencia', 'La oferta base 3 no puede ser menor o igual que la oferta base 2');
                 return;
             }
@@ -189,7 +194,7 @@ export class LoteComponent implements OnInit {
                     if (plu.id > 0) {
                         this.proxy.updateLote(plu).subscribe(
                                 data => {
-                                    this.sendLote(this.id);
+                                    this.sendMail(this.id);
                                     this.toasterService.pop('success', 'Exito', 'Se actualizo el lote satisfactoriamente');
                                     this.router.navigate(['lotes']);
                             }, error => {
@@ -199,8 +204,7 @@ export class LoteComponent implements OnInit {
                     } else {
                         this.proxy.createLote(plu).subscribe(
                                 data => {
-                                    console.log(data);
-                                    this.sendLote(data);
+                                    this.sendMail(data);
                                     this.toasterService.pop('success', 'Exito', 'Se creó el lote satisfactoriamente');
                                     this.router.navigate(['lotes']);
                             }, error => {
@@ -221,7 +225,7 @@ export class LoteComponent implements OnInit {
     }
 
 
-    sendLote(lote_id) {
+    sendMail(lote_id) {
         // Notifico via mail que hay un nuevo lote creado
         this.proxy.informarLote(lote_id).subscribe(
                 data => {
@@ -325,7 +329,7 @@ export class LoteComponent implements OnInit {
     }
 
     onDeleteConfirm(event): void {
-        if (window.confirm('�Esta seguro que desea eliminar el registro seleccionado?')) {
+        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
             console.log(event);
             for (let i = 0; i < this.estampillas.length; i++) {
                 if (event.data.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
