@@ -14,7 +14,7 @@ export class UsuariosLotesComponent implements OnInit {
         mode: 'external',
         actions: {
             add: false,
-            edit: true,
+            edit: false,
             delete: false
         },
         add: {
@@ -75,7 +75,7 @@ export class UsuariosLotesComponent implements OnInit {
         this.loadGrid();
     }
 
-    loadGrid(){
+    loadGrid() {
         this.proxy.getLotesUsuarios().subscribe(data => {
             if (data) {
                 this.data = data;

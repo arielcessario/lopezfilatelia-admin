@@ -1,86 +1,51 @@
 <nb-card>
-    <nb-card-header> Usuarios Lote </nb-card-header>
+    <nb-card-header>LOTE: {{nombre}}</nb-card-header>
     <nb-card-body>
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>Nombre Lote</label>
-                    <input  class="form-control"
-                            [(ngModel)]="nombre"
-                            placement="bottom"
-                            type="text"
-                            readonly/>
-                </div>
-            </div>
-            <div class="col-sm-2">
-                <div class="form-group">
-                    <label>Precio Base</label>
-                    <input  class="form-control"
-                            [(ngModel)]="precio"
-                            placement="bottom"
-                            type="text"
-                            readonly/>
-                </div>
-            </div>
-            <div class="col-sm-2" style="">
-                <div class="form-group">
-                    <label>Fecha Inicio</label>
-                    <input class="form-control"
-                           [(ngModel)]="fecha_inicio"
-                           readonly  />
-                </div>
-            </div>
-            <div class="col-sm-2" style="">
-                <div class="form-group">
-                    <label>Fecha Fin</label>
-                    <input class="form-control"
-                           [(ngModel)]="fecha_fin"
-                           readonly />
-                </div>
-            </div>
-            <div class="col-12" style="margin-top: 20px;">
-                <ng2-smart-table
-                        [settings]="settings"
-                        [source]="source" >
-                </ng2-smart-table>
-            </div>
-            <div class="col-12" style="margin-top: 20px;">
-                <div class="row">
-                    <div class="col-sm-6" style="">
-                        <div class="form-group">
-                            <label>Cliente</label>
-                            <input class="form-control"
-                                   [(ngModel)]="cliente"
-                                   readonly  />
-                        </div>
-                    </div>
-                    <div class="col-sm-2" style="">
-                        <div class="form-group">
-                            <label>Mayor Oferta</label>
-                            <input class="form-control"
-                                   [(ngModel)]="mayor_oferta"
-                                   readonly  />
-                        </div>
-                    </div>
-                    <div class="col-sm-2" style="">
-                        <div class="form-group">
-                            <label>Fecha Oferta</label>
-                            <input class="form-control"
-                                   [(ngModel)]="fecha_oferta"
-                                   readonly  />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12" style="margin-top: 20px;">
-                <ng2-smart-table
-                        [settings]="settings1"
-                        [source]="source1" >
-                </ng2-smart-table>
-            </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Precio Base: </label>
+            <label class="col-sm-9 col-form-label">{{precio | currency}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Fecha Inicio: </label>
+            <label class="col-sm-9 col-form-label">{{fecha_inicio | date: 'dd/MM/yyyy'}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Fecha Fin: </label>
+            <label class="col-sm-9 col-form-label">{{fecha_fin | date: 'dd/MM/yyyy'}}</label>
+        </div>
+        <div class="col-12 row" style="margin-top: 35px;">
+            <h3>Mejor Oferta</h3>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Cliente: </label>
+            <label class="col-sm-9 col-form-label">{{cliente}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Mejor Oferta: </label>
+            <label class="col-sm-9 col-form-label">{{mayor_oferta | currency}}</label>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-3 col-form-label">Fecha de Oferta: </label>
+            <label class="col-sm-9 col-form-label">{{fecha_oferta | date: 'dd/MM/yyyy'}}</label>
+        </div>
+        <div class="col-12 row" style="margin-top: 35px;">
+            <h3>Histórico de Ofertas</h3>
+        </div>
+        <div class="col-12 row" style="margin-top: 20px;">
+            <ng2-smart-table
+                    [settings]="settings1"
+                    [source]="source1" >
+            </ng2-smart-table>
         </div>
 
+
         <div class="btn-group" style="margin-top: 20px">
+            <button
+                    type="button"
+                    (click)="verLote()"
+                    class="btn btn-primary">
+                Ver Lote
+            </button>
             <button
                     type="button"
                     (click)="cancel()"

@@ -15,6 +15,9 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { UsuariosLotesComponent } from './usuarioslotes/usuarioslotes.component';
 import { UsuarioLoteComponent } from './usuariolote/usuariolote.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full' },
@@ -37,7 +40,7 @@ const routes: Routes = [
   {
     path: 'estampilla/:id',
     component: EstampillaComponent,
-    //canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'paises',
@@ -52,7 +55,7 @@ const routes: Routes = [
   {
     path: 'pais/:id',
     component: PaisComponent,
-    //canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
   },
   {
     path: 'lotes',
@@ -102,6 +105,21 @@ const routes: Routes = [
   {
     path: 'usuariolote/:id',
     component: UsuarioLoteComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'usuarios',
+    component: UsuariosComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'usuario',
+    component: UsuarioComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'usuario/:id',
+    component: UsuarioComponent,
     canActivate: [AuthGuard]
   },
 ];

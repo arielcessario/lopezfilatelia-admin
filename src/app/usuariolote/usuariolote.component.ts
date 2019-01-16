@@ -16,7 +16,7 @@ import { LocalDataSource } from 'ng2-smart-table';
     templateUrl: './usuariolote.component.html',
     styleUrls: ['./usuariolote.component.scss'],
     providers: [
-        //{ provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
+        // { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
     ]
 })
 export class UsuarioLoteComponent implements OnInit {
@@ -40,49 +40,6 @@ export class UsuarioLoteComponent implements OnInit {
 
     imagesPath = environment.imagesPath;
 
-
-    settings = {
-        mode: 'external',
-        actions: {
-            add: false,
-            edit: false,
-            delete: false
-        },
-        add: {
-            addButtonContent: '<i class="nb-plus"></i>',
-            createButtonContent: '<i class="nb-checkmark"></i>',
-            cancelButtonContent: '<i class="nb-close"></i>',
-            confirmCreate: true
-        },
-        edit: {
-            editButtonContent: '<i class="nb-edit"></i>',
-            saveButtonContent: '<i class="nb-checkmark"></i>',
-            cancelButtonContent: '<i class="nb-close"></i>',
-            confirmEdit: true
-        },
-        delete: {
-            deleteButtonContent: '<i class="nb-trash"></i>',
-            confirmDelete: true
-        },
-        columns: {
-            estampilla_id: {
-                title: 'estampilla_id',
-                type: 'string'
-            },
-            nombre: {
-                title: 'Estampilla',
-                type: 'string'
-            },
-            anio: {
-                title: 'Anio',
-                type: 'string'
-            },
-            variedad: {
-                title: 'Variedad',
-                type: 'string'
-            }
-        }
-    };
 
     settings1 = {
         mode: 'external',
@@ -109,31 +66,28 @@ export class UsuarioLoteComponent implements OnInit {
         },
         columns: {
             apellido: {
-                title: 'apellido',
+                title: 'Apellido',
                 type: 'string'
             },
             nombre: {
-                title: 'nombre',
+                title: 'Nombre',
                 type: 'string'
             },
             mail: {
-                title: 'mail',
+                title: 'Mail',
                 type: 'string'
             },
             precio: {
-                title: 'precio',
+                title: 'Valor Ofertado',
                 type: 'string'
             },
             fecha_oferta: {
-                title: 'fecha_oferta',
+                title: 'Fecha de Oferta',
                 type: 'string'
             }
         }
     };
 
-    allRows: Array<any> = [];
-    source: LocalDataSource = new LocalDataSource();
-    data = [];
 
     allRows1: Array<any> = [];
     source1: LocalDataSource = new LocalDataSource();
@@ -156,7 +110,6 @@ export class UsuarioLoteComponent implements OnInit {
             if (p.id) {
                 this.id = p.id;
                 this.proxy.getUsuariosLote(this.id).subscribe(e => {
-                    console.log(e);
                     this.nombre = e.nombre;
                     this.fecha_inicio = e.fecha_inicio.replace('00:00:00', '');
                     this.fecha_fin = e.fecha_fin.replace('23:59:59', '');
@@ -165,12 +118,11 @@ export class UsuarioLoteComponent implements OnInit {
                     this.mayor_oferta = e.mayor_oferta;
                     this.fecha_oferta = e.fecha_oferta;
 
-                    this.data = e.estampillas;
-                    this.source.load(this.data);
+                    this.estampillas = e.estampillas;
+
 
                     this.data1 = e.ofertas;
                     this.source1.load(this.data1);
-
                 });
             }
         });
@@ -184,11 +136,13 @@ export class UsuarioLoteComponent implements OnInit {
         this.router.navigate(['usuarioslotes']);
     }
 
-
     onActivate(e) {
         console.log(e);
     }
 
+    verLote() {
+      this.router.navigate(['lote', this.id]);
+    }
 
 
 }

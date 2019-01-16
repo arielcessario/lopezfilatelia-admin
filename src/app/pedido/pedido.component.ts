@@ -35,7 +35,7 @@ export class PedidoComponent implements OnInit {
   public status_name = '';
   public carrito_id = 0;
   public mail = '';
-  //public confirmar_entrega = false;
+  // public confirmar_entrega = false;
 
   formErrors: any = {
     apellido: '',
@@ -81,10 +81,6 @@ export class PedidoComponent implements OnInit {
       },
       nombre: {
         title: 'Variedad',
-        type: 'string'
-      },
-      cantidad: {
-        title: 'Cantidad',
         type: 'string'
       },
       precio_unitario: {
@@ -164,11 +160,11 @@ export class PedidoComponent implements OnInit {
     // TODO: hacer el update del carrito con el id para cambiar el estado a 2.
     // Mandar la fecha para que no la modifique con la fecha actual.
 
-    let carrito = {
+    const carrito = {
       carrito_id: this.id,
       fecha: this.fecha,
       status: this.confirmar_entrega ? 2 : 1
-    }
+    };
 
     this.proxy.updateCarritoStatus(carrito).subscribe(
             data => {
@@ -184,7 +180,7 @@ export class PedidoComponent implements OnInit {
     this.router.navigate(['pedidos']);
   }
 
-
+/*
   buildForm() {
     const group: any = {
       carrito_id: [this.carrito_id, [Validators.required]],
@@ -250,15 +246,59 @@ export class PedidoComponent implements OnInit {
 
     this.form = form;
 
+  }*/
+
+  buildForm() {
+
+      const aux = this.detalles;
+      const temp = new Array();
+
+      aux.forEach(function(element) {
+        temp.push({
+          estampilla_id: element.estampilla_id,
+          estampilla_variedad_id: element.estampilla_variedad_id,
+          codigo_jalil: element.codigo_jalil,
+          codigo_yt: element.codigo_yt,
+          codigo_arg: element.codigo_arg,
+          variedad: element.nombre,
+          oferta: element.oferta,
+          color_id: element.color_id,
+          precio: element.precio,
+          precio2: element.precio2,
+          precio3: element.precio3,
+          precio4: element.precio4,
+          precio5: element.precio5
+        });
+      });
+
+      this.detalles = temp;
+
   }
 
   onActivate(e) {
-    //console.log(e);
+    // console.log(e);
   }
 
   showHelp(content) {
     this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
   }
 
+
+  confirmarEntrega() {
+    const carrito = {
+      carrito_id: this.id,
+      fecha: this.fecha,
+      status: 2
+    };
+
+    this.proxy.confirmarEntrega(carrito).subscribe(
+            data => {
+                this.toasterService.pop('success', 'Exito', 'Se Confirmo la Entrega satisfactoriamente');
+                this.router.navigate(['pedidos']);
+        }, error => {
+                this.err = error;
+        }
+    );
+  }
 
 }

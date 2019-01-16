@@ -41,11 +41,10 @@ export class LoteComponent implements OnInit {
     public codigo_yt = '';
     public codigo_arg = '';
     public status = 1;
-    public pausar = 0;
+    public pausar = true;
     public imagen = 'no_image.png';
     public precio_1 = '';
-    public precio_2 = '';
-    public precio_3 = '';
+    public boton = 'Pausar Lote';
 
     imagesPath = environment.imagesPath;
 
@@ -87,10 +86,6 @@ export class LoteComponent implements OnInit {
             confirmDelete: true
         },
         columns: {
-            estampilla_id: {
-                title: 'estampilla_id',
-                type: 'string'
-            },
             codigo_yt: {
                 title: 'codigo_yt',
                 type: 'string'
@@ -142,30 +137,12 @@ export class LoteComponent implements OnInit {
 
     submit() {
         const precio1 = parseInt(this.form.get('precio_1').value.toString(), 0);
-        const precio2 = parseInt(this.form.get('precio_2').value.toString(), 0);
-        const precio3 = parseInt(this.form.get('precio_3').value.toString(), 0);
-
+        /*
         if (precio1 === 0 && precio2 > 0) {
           this.toasterService.pop('warning', 'Advertencia', 'La oferta base 1 debe tener un valor');
           return;
         }
-        if (precio2 > 0) {
-            if (precio2 <= precio1) {
-                this.toasterService.pop('warning', 'Advertencia', 'La oferta base 2 no puede ser menor o igual que la oferta base 1');
-                return;
-            }
-        }
-        if (precio2 === 0 && precio3 > 0) {
-          this.toasterService.pop('warning', 'Advertencia', 'La oferta base 2 debe tener un valor');
-          return;
-        }
-        if (precio3 > 0) {
-            if (precio3 <= precio2) {
-                this.toasterService.pop('warning', 'Advertencia', 'La oferta base 3 no puede ser menor o igual que la oferta base 2');
-                return;
-            }
-        }
-
+        */
 
         const plu = {
             id: this.id,
@@ -173,14 +150,13 @@ export class LoteComponent implements OnInit {
             nombre: this.form.get('nombre').value,
             precio: this.form.get('precio').value,
             precio_base_1: this.form.get('precio_1').value,
-            precio_base_2: this.form.get('precio_2').value,
-            precio_base_3: this.form.get('precio_3').value,
+            precio_base_2: 0,
+            precio_base_3: 0,
             fecha_inicio: this.fecha_inicio,
             fecha_fin: this.fecha_fin,
             // hora_inicio: this.hora_inicio,
             // hora_fin: this.hora_fin,
             estampillas: this.estampillas,
-            status: (this.pausar === 1) ? 4 : 1,
             path: this.imagen
         };
 
@@ -264,8 +240,6 @@ export class LoteComponent implements OnInit {
             // fecha_fin: [this.fecha_fin, [Validators.required]],
             precio: [this.precio, [Validators.required]],
             precio_1: [this.precio_1, [Validators.required]],
-            precio_2: [this.precio_2, [Validators.required]],
-            precio_3: [this.precio_3, [Validators.required]],
         };
 
         this.fb = new FormBuilder();
@@ -274,8 +248,6 @@ export class LoteComponent implements OnInit {
         form.controls['nombre'].setValue('');
         form.controls['precio'].setValue('');
         form.controls['precio_1'].setValue('');
-        form.controls['precio_2'].setValue('');
-        form.controls['precio_3'].setValue('');
         this.fecha_inicio = {};
         this.fecha_fin = {};
         // this.hora_inicio = {};
@@ -287,11 +259,10 @@ export class LoteComponent implements OnInit {
             form.controls['nombre'].setValue(this.lote[0].nombre);
             form.controls['precio'].setValue(this.lote[0].precio);
             form.controls['precio_1'].setValue(this.lote[0].precio_base_1);
-            form.controls['precio_2'].setValue(this.lote[0].precio_base_2);
-            form.controls['precio_3'].setValue(this.lote[0].precio_base_3);
             this.status = this.lote[0].status;
-            this.pausar = (this.lote[0].status === 4) ? 1 : 0;
+            this.pausar = (this.lote[0].status === 4) ? false : true;
             this.imagen = this.lote[0].path;
+            this.boton = (this.lote[0].status === 4) ? 'Quitar Pausa' : 'Pausar Lote';
 
             const aux1 = new Date(this.lote[0].fecha_inicio);
             const aux2 = new Date(this.lote[0].fecha_fin);
@@ -418,6 +389,24 @@ export class LoteComponent implements OnInit {
         setTimeout(() => {
             this[_obj] = val;
         }, 0);
+    }
+
+    pausarLote() {
+      const lote = {
+        lote_id: this.id,
+        status: (this.status === 4) ? 1 : 4
+      };
+
+      const mensaje = (this.status === 4) ? 'Se quito la pausa del lote satisfactoriamente' : 'Se pauso el lote satisfactoriamente';
+
+      this.proxy.pausarLote(lote).subscribe(
+              data => {
+                  this.toasterService.pop('success', 'Exito', mensaje);
+                  this.router.navigate(['lotes']);
+          }, error => {
+                  this.err = error;
+          }
+      );
     }
 
 }

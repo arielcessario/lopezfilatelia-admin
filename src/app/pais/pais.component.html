@@ -1,11 +1,11 @@
 <nb-card>
-    <nb-card-header> {{ accion }} Pais </nb-card-header>
+    <nb-card-header> {{ accion }} País </nb-card-header>
     <nb-card-body>
         <form [formGroup]="form" *ngIf="form">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group  tooltip-danger">
-                        <label>Pais</label>
+                        <label>País</label>
                         <input
                             placement="bottom"
                             triggers="focus keyup keydown"
@@ -13,7 +13,7 @@
                             formControlName="nombre"
                             class="form-control" style="text-transform: uppercase;"
                             id="nombre"
-                            placeholder="Pais"
+                            placeholder="País"
                             />
                     </div>
                 </div>

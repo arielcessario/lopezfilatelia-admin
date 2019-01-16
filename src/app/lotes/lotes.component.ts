@@ -39,7 +39,7 @@ export class LotesComponent implements OnInit {
         },
         columns: {
             nombre: {
-                title: 'Nombre',
+                title: 'Nombre del Lote',
                 type: 'string'
             },
             fecha_inicio: {
@@ -51,7 +51,7 @@ export class LotesComponent implements OnInit {
                 type: 'string'
             },
             precio: {
-                title: 'Precio',
+                title: 'Precio Base',
                 type: 'string'
             },
             status_nombre: {

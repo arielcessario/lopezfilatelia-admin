@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from 'ac-core';
+import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
+
 
 @Component({
   selector: 'lfa-login',
@@ -7,11 +9,16 @@ import { AuthenticationService } from 'ac-core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  email: string;
+
   password: string;
   err: string;
 
-  constructor(private authService: AuthenticationService) {}
+  public email = '';
+
+  constructor(private authService: AuthenticationService,
+              private proxy: LopezfilateliaAdminProxy) {
+
+              }
 
   ngOnInit() {}
 
@@ -27,4 +34,29 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  resetPassword() {
+    if (this.email.trim().length === 0) {
+        this.err = 'El mail es obligatorio';
+        setTimeout(() => (this.err = undefined), 4000);
+        return;
+    }
+
+    const usuario = {
+      nombre: 'Mateo Maneff',
+      mail: this.email.trim(),
+      admin: true
+    };
+
+    this.proxy.filateliaResetPassword(usuario).subscribe(
+            data => {
+                // console.log(data);
+            },
+            error => {
+                this.err = error;
+                setTimeout(() => (this.err = undefined), 4000);
+        }
+    );
+  }
+
 }

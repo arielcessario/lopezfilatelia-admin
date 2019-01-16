@@ -153,7 +153,7 @@ export class EstampillaComponent implements OnInit {
         this.proxy.updateEstampilla(plu).subscribe(
             data => {
               this.toasterService.pop('success', 'Exito', 'Se actualizó la estampilla satisfactoriamente');
-              this.sendMail(plu);
+              // this.sendMail(plu);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;
@@ -164,7 +164,7 @@ export class EstampillaComponent implements OnInit {
             data => {
               plu.estampilla_id = data;
               this.toasterService.pop('success', 'Exito', 'Se creó la estampilla satisfactoriamente');
-              this.sendMail(plu);
+              // this.sendMail(plu);
               this.router.navigate(['estampillas']);
             }, error => {
               this.err = error;

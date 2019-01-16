@@ -1,23 +1,23 @@
 <nb-card class="col-xs-12 offset-sm-2 col-sm-8 offset-md-4 col-md-4 offset-lg-4 col-lg-4">
   <nb-card-body>
     <div class="">
+      <div class="alert alert-danger" role="alert" *ngIf="err">
+          <strong>Error!</strong> {{err}}
+      </div>
       <h2 class="title">Ingresar</h2>
       <small class="form-text sub-title">Ingrese su usuario y contraseña</small><br>
       <form autocomplete="nope" novalidate="" class="ng-touched ng-dirty ng-invalid">
-        <!---->
         <!---->
         <div class="form-group">
           <label class="sr-only" for="input-email">Email</label>
           <input autofocus="" class="form-control ng-untouched ng-pristine ng-invalid" id="input-email" name="email" pattern=".+@.+..+"
             placeholder="Email address" required="" [(ngModel)]="email">
           <!---->
-          <!---->
         </div>
         <div class="form-group">
           <label class="sr-only" for="input-password">Contraseña</label>
           <input class="form-control ng-untouched ng-pristine ng-invalid" id="input-password" name="password" placeholder="Password"
             type="password" required="" minlength="4" maxlength="50"  [(ngModel)]="password">
-          <!---->
           <!---->
         </div>
         <div class="form-group accept-group col-sm-12">
@@ -32,6 +32,9 @@
         </div>
         <button class="btn btn-block btn-hero-success" (click)="login()"> Ingresar </button>
       </form>
+    </div>
+    <div style="margin-top: 20px; text-align: center;">
+      <a class="forgot" (click)="resetPassword()" style="cursor: pointer;">¿Olvidó su contraseña?</a>
     </div>
   </nb-card-body>
 </nb-card>

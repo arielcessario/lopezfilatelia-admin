@@ -34,7 +34,7 @@ export class PaisesComponent implements OnInit {
         },
         columns: {
             nombre: {
-                title: 'Pais',
+                title: 'PaÃ­s',
                 type: 'string'
             },
         }
@@ -65,10 +65,10 @@ export class PaisesComponent implements OnInit {
 
     onDeleteConfirm(event): void {
         console.log(event);
-        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
+        if (window.confirm('ï¿½Esta seguro que desea eliminar el registro seleccionado?')) {
             console.log(event.data.pais_id);
 
-            //this.proxy.deletePais(event.data.pais_id)
+            // this.proxy.deletePais(event.data.pais_id)
             //    .subscribe(r => {
             //        //this.data.splice(encontrado, 1);
             //        //this.source.load(this.data);

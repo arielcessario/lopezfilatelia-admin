@@ -10,7 +10,7 @@ import {
     NbSidebarService,
     NbThemeService,
 } from '@nebular/theme';
-//import { StateService } from '../../../@core/data/state.service';
+// import { StateService } from '../../../@core/data/state.service';
 
 import {
     ToasterService,
@@ -25,7 +25,7 @@ import {
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  //title = 'app';
+  // title = 'app';
   logged = false;
 
   position = 'toast-top-center';
@@ -85,6 +85,18 @@ export class AppComponent implements OnInit {
           link: '/lotes'
         },
         {
+          title: 'Pedidos',
+          link: '/pedidos'
+        },
+        {
+          title: 'Ofertas',
+          link: '/usuarioslotes'
+        },
+        {
+          title: 'Usuarios',
+          link: '/usuarios'
+        },
+        {
           title: 'Paises',
           link: '/paises'
         },
@@ -92,14 +104,6 @@ export class AppComponent implements OnInit {
           title: 'Colores',
           link: '/colores'
         },
-        {
-          title: 'Pedidos',
-          link: '/pedidos'
-        },
-        {
-          title: 'Usuarios Lotes',
-          link: '/usuarioslotes'
-        }
       ],
     }
   ];
@@ -118,9 +122,9 @@ export class AppComponent implements OnInit {
     private proxy: LopezfilateliaAdminProxy,
     private authService: AuthenticationService,
     toasterService: ToasterService,
-    //protected menuService: NbMenuService,
-    //protected themeService: NbThemeService,
-    //protected bpService: NbMediaBreakpointsService,
+    // protected menuService: NbMenuService,
+    // protected themeService: NbThemeService,
+    // protected bpService: NbMediaBreakpointsService,
     protected sidebarService: NbSidebarService) {
 
       this.toasterService = toasterService;
@@ -142,7 +146,8 @@ export class AppComponent implements OnInit {
         // this.selectedNavLink = '/login';
         // this.sharedService.navigateTo('/login');
       } else {
-        this.router.navigate(['/main']);
+        // this.router.navigate(['/main']);
+        this.router.navigate(['/estampillas']);
         // this.selectedNavLink = '/cotizador';
         // this.sharedService.navigateTo('/cotizador');
       }

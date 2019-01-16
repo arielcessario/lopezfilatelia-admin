@@ -14,7 +14,7 @@ export class PedidosComponent implements OnInit {
     mode: 'external',
     actions: {
       add: false,
-      edit: true,
+      edit: false,
       delete: false
     },
     add: {
@@ -47,7 +47,7 @@ export class PedidosComponent implements OnInit {
         type: 'string'
       },
       fecha: {
-        title: 'Fecha Pedido',
+        title: 'Fecha del Pedido',
         type: 'string'
       },
       precio: {

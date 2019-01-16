@@ -48,6 +48,8 @@
                         </h5>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-6">
                     <div class="row">
                         <div class="col-sm-6" style="">
@@ -61,13 +63,10 @@
                                             ngbDatepicker
                                             #d="ngbDatepicker"
                                             [(ngModel)]="fecha_inicio"
-                                            [ngModelOptions]="{standalone: true}"
-
-                                            />
+                                            [ngModelOptions]="{standalone: true}"/>
                                     <button
                                             class="btn btn-primary btn-group-icon btn-group-divider"
-                                            (click)="d.toggle()"
-                                            >
+                                            (click)="d.toggle()">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -92,13 +91,10 @@
                                             ngbDatepicker
                                             #d2="ngbDatepicker"
                                             [(ngModel)]="fecha_fin"
-                                            [ngModelOptions]="{standalone: true}"
-
-                                            />
+                                            [ngModelOptions]="{standalone: true}"/>
                                     <button
                                             class="btn btn-primary btn-group-icon btn-group-divider"
-                                            (click)="d2.toggle()"
-                                            >
+                                            (click)="d2.toggle()">
                                         <i class="fa fa-calendar" aria-hidden="true"></i>
                                     </button>
                                 </div>
@@ -114,130 +110,102 @@
                         <!--</div>-->
                     </div>
                 </div>
-
-                <div class="col-sm-2">
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
                     <div class="form-group  tooltip-danger">
-                        <label>Código YT</label>
-                        <div class="input-group">
-                            <input
-                                    placement="bottom"
-                                    triggers="focus keyup keydown"
-                                    type="text"
-                                    class="form-control"
-                                    [(ngModel)]="codigo_yt"
-                                    [ngModelOptions]="{standalone: true}"
-                                    placeholder="Código YT"
-                                    />
-                            <div class="input-group-append">
-                                <button type="button"
-                                        (click)="searchYT()"
-                                        class="btn btn-primary" title="Buscar por Código YT">
-                                    <span class="fa fa-search fa-lg" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group  tooltip-danger">
-                        <label>Código Arg</label>
-                        <div class="input-group">
-                            <input
-                                    placement="bottom"
-                                    triggers="focus keyup keydown"
-                                    type="text"
-                                    class="form-control"
-                                    [(ngModel)]="codigo_arg"
-                                    [ngModelOptions]="{standalone: true}"
-                                    placeholder="Código Arg"
-                                    />
-                            <div class="input-group-append">
-                                <button type="button"
-                                        (click)="searchArg()"
-                                        class="btn btn-primary" title="Buscar por Código Arg">
-                                    <span class="fa fa-search fa-lg" aria-hidden="true"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-3 col-md-3 col-lg-1">
-                    <div class="form-check" style="margin-top:25px;">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                               [checked]="pausar" (change)="pausar = !pausar">
-                        <label class="form-check-label" for="exampleCheck1">Pausar</label>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="form-group  tooltip-danger">
-                        <label>Oferta Base 1</label>
+                        <label>$ Incremento Oferta Rapida</label>
                         <input
                                 placement="bottom"
                                 triggers="focus keyup keydown"
                                 type="text"
                                 formControlName="precio_1"
                                 class="form-control"
-                                id="precio_1"
-                                />
+                                id="precio_1" />
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group  tooltip-danger">
-                        <label>Oferta Base 2</label>
-                        <input
+                <!--div class="col-6 col-sm-3 col-md-3 col-lg-1">
+                    <div class="form-check" style="margin-top:25px;">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
+                               [checked]="pausar" (change)="pausar = !pausar">
+                        <label class="form-check-label" for="exampleCheck1">Pausar</label>
+                    </div>
+                </div-->
+            </div>
+            <div class="row">
+
+                <!--div class="col-12">
+                    <label class="col-form-label">Puede ingresar estampillas buscando por Código YT, Arg o Jalil </label>
+                </div-->
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-sm-5">
+                          <h5 for="inputFirstName" class="col-form-label text-heading">
+                              Código YT
+                          </h5>
+                          <label>Ingrese el código de YT y luego presione el signo más</label>
+                        </div>
+                        <div class="form-group col-sm-3 ">
+                            <div class="input-group">
+                                <input
+                                        placement="bottom"
+                                        triggers="focus keyup keydown"
+                                        type="text"
+                                        class="form-control"
+                                        [(ngModel)]="codigo_yt"
+                                        [ngModelOptions]="{standalone: true}"
+                                        placeholder="Código YT"
+                                        />
+                                <div class="input-group-append">
+                                    <button type="button"
+                                            (click)="searchYT()"
+                                            class="btn btn-primary" title="Buscar por Código YT">
+                                        <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group row">
+                        <div class="col-sm-5">
+                          <h5 for="inputFirstName" class="col-form-label text-heading">
+                              Código Arg
+                          </h5>
+                          <label>Ingrese el código de Arg y luego presione el signo más</label>
+                        </div>
+                        <div class="form-group col-sm-3 ">
+                            <div class="input-group">
+                                <input
                                 placement="bottom"
                                 triggers="focus keyup keydown"
                                 type="text"
-                                formControlName="precio_2"
                                 class="form-control"
-                                id="precio_2"
-                                />
+                                [(ngModel)]="codigo_arg"
+                                [ngModelOptions]="{standalone: true}"
+                                placeholder="Código Arg"
+                                        />
+                                <div class="input-group-append">
+                                    <button type="button"
+                                        (click)="searchArg()"
+                                        class="btn btn-primary" title="Buscar por Código Arg">
+                                    <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
+                                </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group  tooltip-danger">
-                        <label>Oferta Base 3</label>
-                        <input
-                                placement="bottom"
-                                triggers="focus keyup keydown"
-                                type="text"
-                                formControlName="precio_3"
-                                class="form-control"
-                                id="precio_3"
-                                />
-                    </div>
+                <div class="col-12" style="margin-top: 35px;">
+                    <h3>Estampillas que conforman el Lote</h3>
                 </div>
                 <div class="col-12" style="margin-top: 20px;">
-                    <!--<table class="table table-bordered table-hover " style="font-size: 0.8rem;">-->
-                        <!--<thead class="thead-dark">-->
-                        <!--<tr>-->
-                            <!--<th scope="col">Estampilla</th>-->
-                            <!--<th scope="col">Código YT</th>-->
-                            <!--<th scope="col">Código Arg</th>-->
-                            <!--<th scope="col">Estampilla</th>-->
-                            <!--<th scope="col">Quitar</th>-->
-                        <!--</tr>-->
-                        <!--</thead>-->
-                        <!--<tbody>-->
-                        <!--<tr *ngFor="let item of estampillas" >-->
-                            <!--<th scope="row">{{item.estampilla_id}}</th>-->
-                            <!--<td>{{item.codigo_yt}}</td>-->
-                            <!--<td>{{item.codigo_arg}}</td>-->
-                            <!--<td>{{item.nombre}}</td>-->
-                            <!--<td>-->
-                                <!--<a (click)="quitarEstampilla(item)" title="Quitar" style="cursor: pointer;"><span class="fa fa-trash" aria-hidden="true"></span></a>-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                        <!--</tbody>-->
-                    <!--</table>-->
-
                     <ng2-smart-table
                             [settings]="settings"
                             [source]="source"
                             (deleteConfirm)="onDeleteConfirm($event)"
-                            (delete)="onDeleteConfirm($event)"
-                            (userRowSelect)="update($event)"
-                            >
+                            (delete)="onDeleteConfirm($event)" >
                     </ng2-smart-table>
                 </div>
             </div>
@@ -247,17 +215,20 @@
                     *ngIf="form"
                     type="button"
                     (click)="submit()"
-                    class="btn btn-primary"
-                    >
+                    class="btn btn-primary" >
                 Guardar
             </button>
-
+            <button
+                    type="button"
+                    (click)="pausarLote()"
+                    class="btn btn-success" >
+                {{boton}}
+            </button>
             <button
                     *ngIf="form"
                     type="button"
                     (click)="cancel()"
-                    class="btn btn-default"
-                    >
+                    class="btn btn-default" >
                 Cancelar
             </button>
         </div>
