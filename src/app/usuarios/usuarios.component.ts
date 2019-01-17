@@ -3,30 +3,28 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
-import { DatePipe } from '@angular/common';
-
 
 @Component({
-  selector: 'lfa-pedidos',
-  templateUrl: './pedidos.component.html',
-  styleUrls: ['./pedidos.component.scss'],
-  providers: [
-    DatePipe
-  ]
+  selector: 'lfa-usuarios',
+  templateUrl: './usuarios.component.html',
+  styleUrls: ['./usuarios.component.scss']
 })
-export class PedidosComponent implements OnInit {
+export class UsuariosComponent implements OnInit {
+
+  err: string;
+
   settings = {
     mode: 'external',
     actions: {
-      add: false,
-      edit: false,
-      delete: false
+      add: true,
+      edit: true,
+      delete: true
     },
     add: {
       addButtonContent: '<i class="nb-plus"></i>',
       createButtonContent: '<i class="nb-checkmark"></i>',
       cancelButtonContent: '<i class="nb-close"></i>',
-      confirmCreate: false
+      confirmCreate: true
     },
     edit: {
       editButtonContent: '<i class="nb-edit"></i>',
@@ -39,10 +37,6 @@ export class PedidosComponent implements OnInit {
       confirmDelete: true
     },
     columns: {
-      carrito_id: {
-        title: 'N° Pedido',
-        type: 'string'
-      },
       apellido: {
         title: 'Apellido',
         type: 'string'
@@ -51,19 +45,12 @@ export class PedidosComponent implements OnInit {
         title: 'Nombre',
         type: 'string'
       },
-      fecha: {
-        title: 'Fecha del Pedido',
-        type: 'string',
-        valuePrepareFunction: (fecha) => {
-          return this.datePipe.transform(new Date(fecha), 'dd/MM/yyyy HH:mm:ss');
-        }
-      },
-      precio: {
-        title: 'Total del Pedido',
+      mail: {
+        title: 'Mail',
         type: 'string'
       },
-      status_name: {
-        title: 'Estado del Pedido',
+      rol: {
+        title: 'Rol',
         type: 'string'
       }
     }
@@ -76,30 +63,42 @@ export class PedidosComponent implements OnInit {
   constructor(
     private router: Router,
     private coreService: CoreService,
-    private datePipe: DatePipe,
-    private proxy: LopezfilateliaAdminProxy) {
-
-    }
+    private proxy: LopezfilateliaAdminProxy
+  ) {}
 
   ngOnInit() {
     this.loadGrid();
   }
 
   loadGrid() {
-    this.proxy.getPedidos().subscribe(data => {
-      if (data) {
-        this.data = data;
-        this.source.load(this.data);
-      }
-    });
+    this.proxy.getUsuarios().subscribe(
+        data => {
+            console.log(data);
+            this.data = data;
+            this.source.load(this.data);
+        },
+        error => {
+          this.err = error;
+        }
+    );
   }
 
+  onDeleteConfirm(event): void {
+    /*
+    if (window.confirm('¿Esta seguro que desea eliminar el usuario seleccionado?')) {
+      this.proxy.deleteLote(event.data.usuario_id)
+          .subscribe(r => {
+              this.loadGrid();
+          });
+    }
+    */
+  }
 
   update(event): void {
-    this.router.navigate(['pedido', event.data.carrito_id]);
+    this.router.navigate(['usuario', event.data.usuario_id]);
   }
 
   create() {
-    this.router.navigate(['pedido']);
+    this.router.navigate(['usuario']);
   }
 }

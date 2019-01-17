@@ -5,7 +5,7 @@
         <form [formGroup]="form" *ngIf="form">
             <!-- Document type and number -->
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-12 col-md-6">
                     <div class="form-group  tooltip-danger">
                         <label>Nombre Lote</label>
                         <input
@@ -20,7 +20,7 @@
                                 />
                     </div>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-6 col-md-3">
                     <div class="form-group  tooltip-danger">
                         <label>Precio Base</label>
                         <input
@@ -34,25 +34,23 @@
                                 />
                     </div>
                 </div>
-                <div class="col-6 col-sm-4 col-md-3 col-lg-2">
-                    <div class="form-group">
-                        <ac-upload
-                                [img]="imagen"
-                                (status)="loadedImage($event)" >
-                        </ac-upload>
-                        <h5 class="col-form-label text-heading"
-                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                            for="nombre"
-                            [title]="imagen" >
-                            {{ imagen}}
-                        </h5>
-                    </div>
+                <div class="col-sm-6 col-md-3">
+                  <div class="form-group  tooltip-danger">
+                      <label>$ Inc. Oferta Rapida</label>
+                      <input
+                              placement="bottom"
+                              triggers="focus keyup keydown"
+                              type="text"
+                              formControlName="precio_1"
+                              class="form-control"
+                              id="precio_1" />
+                  </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-6">
                     <div class="row">
-                        <div class="col-sm-6" style="">
+                        <div class="col-sm-6" >
                             <div class="form-group">
                                 <label>Fecha Inicio</label>
                                 <div class="btn-group">
@@ -112,91 +110,93 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="form-group  tooltip-danger">
-                        <label>$ Incremento Oferta Rapida</label>
-                        <input
-                                placement="bottom"
-                                triggers="focus keyup keydown"
-                                type="text"
-                                formControlName="precio_1"
-                                class="form-control"
-                                id="precio_1" />
-                    </div>
+              <div class="col-sm-6 col-md-2">
+                <div class="form-group">
+                    <ac-upload
+                            [img]="imagen"
+                            (status)="loadedImage($event)" >
+                    </ac-upload>
+                    <h5 class="col-form-label text-heading"
+                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                        for="nombre"
+                        [title]="imagen" >
+                        {{ imagen}}
+                    </h5>
                 </div>
-                <!--div class="col-6 col-sm-3 col-md-3 col-lg-1">
-                    <div class="form-check" style="margin-top:25px;">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1"
-                               [checked]="pausar" (change)="pausar = !pausar">
-                        <label class="form-check-label" for="exampleCheck1">Pausar</label>
-                    </div>
-                </div-->
+              </div>
             </div>
             <div class="row">
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Buscar por Cód. YT</label>
+                        <div class="input-group">
+                            <input
+                                    class="form-control"
+                                    placeholder="Buscar..."
+                                    [(ngModel)]="filterDiagsYT"
+                                    [ngModelOptions]="{standalone: true}"/>
+                            <button
+                                    class="btn btn-primary btn-group-icon btn-group-divider"
+                                    (click)="addEstampillaYT(content)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!--div class="form-group">
+                        <label>Buscar por Cód. YT</label>
+                        <input style="margin-bottom: 10px;"
+                          class="form-control"
+                          type="text"
+                          [(ngModel)]="filterDiags"
+                          [ngModelOptions]="{ standalone: true }"
+                          placeholder="Buscar...">
+                        <div class="" style="max-height: 160px; overflow-y: scroll; padding: 0 10px 0 10px;" >
+                            <div class="truncate"
+                            *ngFor="
+                              let d of (filtros
+                                | fusejs: filterDiags:{ keys: ['nombre'], threshold: 0.3 });
+                              let i = index  "
+                            (click)="addEstampilla(d, i)" >
+                            {{ d.nombre }}
+                          </div>
+                        </div>
+                    </div-->
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group">
+                        <label>Buscar por Cód. Arg</label>
+                        <div class="input-group">
+                            <input
+                                    class="form-control"
+                                    placeholder="Buscar..."
+                                    [(ngModel)]="filterDiagsArg"
+                                    [ngModelOptions]="{standalone: true}"/>
+                            <button
+                                    class="btn btn-primary btn-group-icon btn-group-divider"
+                                    (click)="addEstampillaArg(content)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-4">
+                    <div class="form-group ">
+                        <label>Buscar por Cód. Jalil</label>
+                        <div class="input-group">
+                            <input
+                                    class="form-control"
+                                    placeholder="Buscar..."
+                                    [(ngModel)]="filterDiagsJalil"
+                                    [ngModelOptions]="{standalone: true}"/>
+                            <button
+                                    class="btn btn-primary btn-group-icon btn-group-divider"
+                                    (click)="addEstampillaJalil(content)">
+                                <i class="fa fa-plus" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
 
-                <!--div class="col-12">
-                    <label class="col-form-label">Puede ingresar estampillas buscando por Código YT, Arg o Jalil </label>
-                </div-->
-                <div class="col-12">
-                    <div class="form-group row">
-                        <div class="col-sm-5">
-                          <h5 for="inputFirstName" class="col-form-label text-heading">
-                              Código YT
-                          </h5>
-                          <label>Ingrese el código de YT y luego presione el signo más</label>
-                        </div>
-                        <div class="form-group col-sm-3 ">
-                            <div class="input-group">
-                                <input
-                                        placement="bottom"
-                                        triggers="focus keyup keydown"
-                                        type="text"
-                                        class="form-control"
-                                        [(ngModel)]="codigo_yt"
-                                        [ngModelOptions]="{standalone: true}"
-                                        placeholder="Código YT"
-                                        />
-                                <div class="input-group-append">
-                                    <button type="button"
-                                            (click)="searchYT()"
-                                            class="btn btn-primary" title="Buscar por Código YT">
-                                        <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="form-group row">
-                        <div class="col-sm-5">
-                          <h5 for="inputFirstName" class="col-form-label text-heading">
-                              Código Arg
-                          </h5>
-                          <label>Ingrese el código de Arg y luego presione el signo más</label>
-                        </div>
-                        <div class="form-group col-sm-3 ">
-                            <div class="input-group">
-                                <input
-                                placement="bottom"
-                                triggers="focus keyup keydown"
-                                type="text"
-                                class="form-control"
-                                [(ngModel)]="codigo_arg"
-                                [ngModelOptions]="{standalone: true}"
-                                placeholder="Código Arg"
-                                        />
-                                <div class="input-group-append">
-                                    <button type="button"
-                                        (click)="searchArg()"
-                                        class="btn btn-primary" title="Buscar por Código Arg">
-                                    <span class="fa fa-plus fa-lg" aria-hidden="true"></span>
-                                </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-12" style="margin-top: 35px;">
                     <h3>Estampillas que conforman el Lote</h3>
                 </div>
@@ -234,3 +234,28 @@
         </div>
     </nb-card-body>
 </nb-card>
+
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+      <h4 class="modal-title">Resultado de la busqueda</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+      <div class="body-panel" style="max-height: 360px; overflow-y: auto;">
+          <p>{{codigoTitulo}}</p>
+          <nb-list>
+            <nb-list-item *ngFor="let item of filtros" (click)="addItem(item)" style="cursor: pointer;">
+              <div style="text-overflow: ellipsis;">Estampilla: {{item.estampilla}}</div>
+              <div>Variedad: {{item.variedad}}</div>
+            </nb-list-item>
+          </nb-list>
+      </div>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>

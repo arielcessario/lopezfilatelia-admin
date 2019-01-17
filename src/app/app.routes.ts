@@ -55,7 +55,7 @@ const routes: Routes = [
   {
     path: 'pais/:id',
     component: PaisComponent,
-    // canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   {
     path: 'lotes',

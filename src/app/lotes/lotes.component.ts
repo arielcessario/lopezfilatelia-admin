@@ -4,13 +4,16 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { LopezfilateliaAdminProxy } from 'lopezfilatelia-admin-core';
 import { ToasterService } from 'angular2-toaster';
-
+import { DatePipe } from '@angular/common';
 
 
 @Component({
     selector: 'lfa-lotes',
     templateUrl: './lotes.component.html',
-    styleUrls: ['./lotes.component.scss']
+    styleUrls: ['./lotes.component.scss'],
+    providers: [
+      DatePipe
+    ]
 })
 export class LotesComponent implements OnInit {
 
@@ -44,18 +47,24 @@ export class LotesComponent implements OnInit {
             },
             fecha_inicio: {
                 title: 'Fecha Inicio',
-                type: 'string'
+                type: 'string',
+                valuePrepareFunction: (fecha_inicio) => {
+                  return this.datePipe.transform(new Date(fecha_inicio), 'dd/MM/yyyy');
+                }
             },
             fecha_fin: {
                 title: 'Fecha Fin',
-                type: 'string'
+                type: 'string',
+                valuePrepareFunction: (fecha_fin) => {
+                  return this.datePipe.transform(new Date(fecha_fin), 'dd/MM/yyyy');
+                }
             },
             precio: {
                 title: 'Precio Base',
                 type: 'string'
             },
             status_nombre: {
-                title: 'Estado',
+                title: 'Estado del Lote',
                 type: 'string'
             },
         }
@@ -69,6 +78,7 @@ export class LotesComponent implements OnInit {
         private router: Router,
         private coreService: CoreService,
         private proxy: LopezfilateliaAdminProxy,
+        private datePipe: DatePipe,
         toasterService: ToasterService) {
 
         this.toasterService = toasterService;

@@ -1,0 +1,226 @@
+<nb-card>
+  <nb-card-header> {{ accion }} Usuario </nb-card-header>
+
+  <nb-card-body>
+      <form [formGroup]="form" *ngIf="form">
+          <!-- Document type and number -->
+          <div class="row">
+              <div class="col-sm-4">
+                  <div class="form-group  tooltip-danger">
+                      <label>Apellido</label>
+                      <input
+                              placement="bottom"
+                              triggers="focus keyup keydown"
+                              type="text"
+                              formControlName="apellido"
+                              class="form-control"
+                              id="apellido"
+                              placeholder="Apellido"
+
+                              />
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                  <div class="form-group  tooltip-danger">
+                      <label>Nombre</label>
+                      <input
+                              placement="bottom"
+                              triggers="focus keyup keydown"
+                              type="text"
+                              formControlName="nombre"
+                              class="form-control"
+                              id="nombre"
+                              placeholder="Nombre"
+                              />
+                  </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Documento</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="documento"
+                            class="form-control"
+                            id="documento"
+                            placeholder="Documento"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Teléfono</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="telefono"
+                            class="form-control"
+                            id="telefono"
+                            placeholder="Telefono"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Fecha Nacimiento</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="fecha_nacimiento"
+                            class="form-control"
+                            id="fecha_nacimiento"
+                            placeholder="dd/mm/yyyy"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Rol</label>
+                  <select [(ngModel)]="rol_id" [ngModelOptions]="{standalone: true}" class="form-control"  >
+                      <option *ngFor="let item of roles"
+                              [ngValue]="item.rol_id"
+                              [attr.selected]="item.rol_id == rol_id ? true : null">{{item.nombre}}</option>
+                  </select>
+                </div>
+              </div>
+              <!--div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Dirección</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="direccion"
+                            class="form-control"
+                            id="direccion"
+                            placeholder="Dirección"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group  tooltip-danger">
+                    <label>Número</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="nro"
+                            class="form-control"
+                            id="nro"
+                            placeholder="Número"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group  tooltip-danger">
+                    <label>Piso</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="piso"
+                            class="form-control"
+                            id="piso"
+                            placeholder="Piso"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group  tooltip-danger">
+                    <label>Puerta</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="puerta"
+                            class="form-control"
+                            id="puerta"
+                            placeholder="Puerta"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>País</label>
+                  <select [(ngModel)]="pais_id" [ngModelOptions]="{standalone: true}" class="form-control"  >
+                      <option *ngFor="let item of paises"
+                              [ngValue]="item.pais_id"
+                              [attr.selected]="item.pais_id==pais_id ? true : null">{{item.nombre}}</option>
+                  </select>
+                </div>
+              </div-->
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Mail</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="text"
+                            formControlName="mail"
+                            class="form-control"
+                            id="mail"
+                            placeholder="Mail"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Contraseña</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="password"
+                            class="form-control"
+                            placeholder="Contraseña"
+                            [(ngModel)]="password"
+                            [ngModelOptions]="{standalone: true}"
+                            />
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="form-group  tooltip-danger">
+                    <label>Repetir Contraseña</label>
+                    <input
+                            placement="bottom"
+                            triggers="focus keyup keydown"
+                            type="password"
+                            class="form-control"
+                            placeholder="Repetir Contraseña"
+                            [(ngModel)]="password2"
+                            [ngModelOptions]="{standalone: true}"
+                            />
+                </div>
+              </div>
+          </div>
+      </form>
+      <div class="btn-group" style="margin-top: 20px">
+          <button
+                  *ngIf="form"
+                  type="button"
+                  (click)="submit()"
+                  class="btn btn-primary"
+                  >
+              Guardar
+          </button>
+          <button
+                  *ngIf="forgotPassword"
+                  type="button"
+                  (click)="resetPassword()"
+                  class="btn btn-success"
+                  >
+              Generar Contraseña
+          </button>
+          <button
+                  *ngIf="form"
+                  type="button"
+                  (click)="cancel()"
+                  class="btn btn-default"
+                  >
+              Cancelar
+          </button>
+      </div>
+  </nb-card-body>
+</nb-card>

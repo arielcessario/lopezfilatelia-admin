@@ -9,6 +9,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { Location } from '@angular/common';
 import { LocalDataSource } from 'ng2-smart-table';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { LocalDataSource } from 'ng2-smart-table';
     styleUrls: ['./usuariolote.component.scss'],
     providers: [
         // { provide: NgbDateParserFormatter, useClass: NgbDateFRParserFormatter }
+        DatePipe
     ]
 })
 export class UsuarioLoteComponent implements OnInit {
@@ -83,7 +85,10 @@ export class UsuarioLoteComponent implements OnInit {
             },
             fecha_oferta: {
                 title: 'Fecha de Oferta',
-                type: 'string'
+                type: 'string',
+                valuePrepareFunction: (fecha_oferta) => {
+                  return this.datePipe.transform(new Date(fecha_oferta), 'dd/MM/yyyy HH:mm:ss');
+                }
             }
         }
     };
@@ -99,6 +104,7 @@ export class UsuarioLoteComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private proxy: LopezfilateliaAdminProxy,
+        private datePipe: DatePipe,
         toasterService: ToasterService) {
 
         this.toasterService = toasterService;

@@ -35,7 +35,6 @@ export class PedidoComponent implements OnInit {
   public status_name = '';
   public carrito_id = 0;
   public mail = '';
-  // public confirmar_entrega = false;
 
   formErrors: any = {
     apellido: '',
@@ -128,7 +127,6 @@ export class PedidoComponent implements OnInit {
       if (p.id) {
         this.id = p.id;
         this.proxy.getPedido(this.id).subscribe(data => {
-          console.log(data);
           this.carrito_id = data.carrito_id;
           this.apellido = data.apellido;
           this.nombre = data.nombre;
@@ -157,9 +155,6 @@ export class PedidoComponent implements OnInit {
 
 
   submit() {
-    // TODO: hacer el update del carrito con el id para cambiar el estado a 2.
-    // Mandar la fecha para que no la modifique con la fecha actual.
-
     const carrito = {
       carrito_id: this.id,
       fecha: this.fecha,
@@ -179,74 +174,6 @@ export class PedidoComponent implements OnInit {
   cancel() {
     this.router.navigate(['pedidos']);
   }
-
-/*
-  buildForm() {
-    const group: any = {
-      carrito_id: [this.carrito_id, [Validators.required]],
-      apellido: [
-        this.apellido,
-        [
-          Validators.required,
-          Validators.minLength(15),
-          Validators.maxLength(15)
-        ]
-      ],
-      nombre: [this.nombre, [Validators.required]],
-      fecha: [this.fecha, [Validators.required]],
-      total: [this.total, [Validators.required]],
-      status_name: [this.status_name, [Validators.required]],
-      mail: [this.mail, [Validators.required]],
-    };
-
-    this.fb = new FormBuilder();
-    const form = this.fb.group(group);
-
-    form.controls['apellido'].setValue('');
-    form.controls['nombre'].setValue('');
-    form.controls['fecha'].setValue('');
-    form.controls['total'].setValue('');
-    form.controls['carrito_id'].setValue(0);
-    form.controls['status_name'].setValue('');
-    form.controls['mail'].setValue('');
-
-    if (this.id !== -1) {
-      form.controls['apellido'].setValue(this.apellido);
-      form.controls['nombre'].setValue(this.nombre);
-      form.controls['fecha'].setValue(this.fecha);
-      form.controls['total'].setValue(this.total);
-      form.controls['carrito_id'].setValue(this.carrito_id);
-      form.controls['status_name'].setValue(this.status_name);
-      form.controls['mail'].setValue(this.mail);
-
-      let aux = this.detalles;
-      let temp = new Array();
-
-      aux.forEach(function(element) {
-        temp.push({
-          estampilla_id: element.estampilla_id,
-          estampilla_variedad_id: element.estampilla_variedad_id,
-          codigo_jalil: element.codigo_jalil,
-          codigo_yt: element.codigo_yt,
-          codigo_arg: element.codigo_arg,
-          variedad: element.nombre,
-          oferta: element.oferta,
-          color_id: element.color_id,
-          precio: element.precio,
-          precio2: element.precio2,
-          precio3: element.precio3,
-          precio4: element.precio4,
-          precio5: element.precio5
-        });
-      });
-
-      this.detalles = temp;
-
-    }
-
-    this.form = form;
-
-  }*/
 
   buildForm() {
 

@@ -9,6 +9,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray, ValidatorFn } from '@angular/forms';
 import { Location } from '@angular/common';
 import { LocalDataSource } from 'ng2-smart-table';
+import { NgbModalConfig, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -44,7 +45,18 @@ export class LoteComponent implements OnInit {
     public pausar = true;
     public imagen = 'no_image.png';
     public precio_1 = '';
-    public boton = 'Pausar Lote';
+    public boton = 'Pausar Subasta';
+    public filterDiags = '';
+    public filterDiagsYT = '';
+    public filterDiagsArg = '';
+    public filterDiagsJalil = '';
+    public codigoTitulo = '';
+
+    filtros: Array<any> = [];
+    // filtrosYT: Array<any> = [];
+    // filtrosArg: Array<any> = [];
+    // filtrosJalil: Array<any> = [];
+    filtrosEstamp: Array<any> = [];
 
     imagesPath = environment.imagesPath;
 
@@ -57,7 +69,7 @@ export class LoteComponent implements OnInit {
     validationMessages = {
         nombre: {
             required: 'Requerido',
-            minlength: 'El nombre debe tener m�s de 10 letras o n�meros'
+            minlength: 'El nombre debe tener más de 10 letras o n�meros'
         }
     };
 
@@ -87,15 +99,19 @@ export class LoteComponent implements OnInit {
         },
         columns: {
             codigo_yt: {
-                title: 'codigo_yt',
+                title: 'Código YT',
                 type: 'string'
             },
             codigo_arg: {
-                title: 'codigo_arg',
+                title: 'Código Arg',
                 type: 'string'
             },
+            codigo_jalil: {
+              title: 'Código Jalil',
+              type: 'string'
+          },
             nombre: {
-                title: 'nombre',
+                title: 'Estampilla',
                 type: 'string'
             }
         }
@@ -112,6 +128,7 @@ export class LoteComponent implements OnInit {
         private route: ActivatedRoute,
         private location: Location,
         private proxy: LopezfilateliaAdminProxy,
+        private modalService: NgbModal,
         toasterService: ToasterService) {
 
         this.toasterService = toasterService;
@@ -119,12 +136,13 @@ export class LoteComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.buscarEstampillas();
+
         this.route.params.subscribe((p: { id: number }) => {
             if (p.id) {
                 this.accion = 'Modificar';
                 this.id = p.id;
                 this.proxy.getLote(this.id).subscribe(e => {
-                    console.log(e);
                     this.lote = e;
                     this.buildForm();
                 });
@@ -135,14 +153,20 @@ export class LoteComponent implements OnInit {
         });
     }
 
+    buscarEstampillas() {
+      this.proxy.buscarEstampillas().subscribe(data => {
+          // console.log(data);
+          // this.filtros = data.estampillas;
+          // this.filtrosYT = data.codigos_yt;
+          // this.filtrosArg = data.codigos_arg;
+          // this.filtrosJalil = data.codigos_jalil;
+          this.filtrosEstamp = data.estampillas;
+      });
+    }
+
+
     submit() {
         const precio1 = parseInt(this.form.get('precio_1').value.toString(), 0);
-        /*
-        if (precio1 === 0 && precio2 > 0) {
-          this.toasterService.pop('warning', 'Advertencia', 'La oferta base 1 debe tener un valor');
-          return;
-        }
-        */
 
         const plu = {
             id: this.id,
@@ -170,7 +194,9 @@ export class LoteComponent implements OnInit {
                     if (plu.id > 0) {
                         this.proxy.updateLote(plu).subscribe(
                                 data => {
-                                    this.sendMail(this.id);
+                                    if (this.status === 1) {
+                                      this.sendMail(this.id);
+                                    }
                                     this.toasterService.pop('success', 'Exito', 'Se actualizo el lote satisfactoriamente');
                                     this.router.navigate(['lotes']);
                             }, error => {
@@ -207,7 +233,7 @@ export class LoteComponent implements OnInit {
                 data => {
                   console.log(data);
             }, error => {
-                    this.err = error;
+                  this.err = error;
             }
         );
     }
@@ -262,7 +288,7 @@ export class LoteComponent implements OnInit {
             this.status = this.lote[0].status;
             this.pausar = (this.lote[0].status === 4) ? false : true;
             this.imagen = this.lote[0].path;
-            this.boton = (this.lote[0].status === 4) ? 'Quitar Pausa' : 'Pausar Lote';
+            this.boton = (this.lote[0].status === 4) ? 'Activar Subasta' : 'Pausar Subasta';
 
             const aux1 = new Date(this.lote[0].fecha_inicio);
             const aux2 = new Date(this.lote[0].fecha_fin);
@@ -279,14 +305,14 @@ export class LoteComponent implements OnInit {
                     estampilla_id: element.estampilla_id,
                     codigo_yt: element.codigo_yt,
                     codigo_arg: element.codigo_arg,
+                    codigo_jalil: element.codigo_jalil,
                     nombre: element.nombre,
                     estampilla_variedad_id: element.estampilla_variedad_id
                 });
             });
 
             this.estampillas = temp;
-            console.log(this.estampillas);
-
+            // console.log(this.estampillas);
             this.loadGrid();
 
         }
@@ -301,7 +327,6 @@ export class LoteComponent implements OnInit {
 
     onDeleteConfirm(event): void {
         if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
-            console.log(event);
             for (let i = 0; i < this.estampillas.length; i++) {
                 if (event.data.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
                     this.estampillas.splice(i, 1);
@@ -317,7 +342,7 @@ export class LoteComponent implements OnInit {
         console.log(e);
     }
 
-
+/*
     searchYT() {
         this.proxy.buscarEstampillas().subscribe(data => {
             if (data) {
@@ -344,35 +369,10 @@ export class LoteComponent implements OnInit {
             }
         });
     }
+*/
 
-    searchArg() {
-        this.proxy.buscarEstampillas().subscribe(data => {
-            if (data) {
-                let encontrado = false;
-                for (let i = 0; i < data.length; i++) {
-                    if (this.codigo_arg === data[i].codigo_arg) {
-                      const aux = {
-                            estampilla_id: data[i].estampilla_id,
-                            codigo_yt: data[i].codigo_yt,
-                            codigo_arg: data[i].codigo_arg,
-                            nombre: data[i].nombre,
-                            estampilla_variedad_id: data[i].estampilla_variedad_id
-                        };
-                        this.estampillas.push(aux);
-                        this.codigo_arg = '';
-                        encontrado = true;
-                        this.loadGrid();
-                    }
-                }
-                if (!encontrado) {
-                    this.toasterService.pop('warning', 'Advertencia', 'No existe el codigo ingresado');
-                }
-            }
-        });
-    }
 
     quitarEstampilla(item) {
-        console.log(item);
         for (let i = 0; i < this.estampillas.length; i++) {
             if (item.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
                 this.estampillas.splice(i, 1);
@@ -397,7 +397,7 @@ export class LoteComponent implements OnInit {
         status: (this.status === 4) ? 1 : 4
       };
 
-      const mensaje = (this.status === 4) ? 'Se quito la pausa del lote satisfactoriamente' : 'Se pauso el lote satisfactoriamente';
+      const mensaje = (this.status === 4) ? 'Se Activo la Subasta satisfactoriamente' : 'Se Pauso la Subasta satisfactoriamente';
 
       this.proxy.pausarLote(lote).subscribe(
               data => {
@@ -407,6 +407,96 @@ export class LoteComponent implements OnInit {
                   this.err = error;
           }
       );
+    }
+
+
+    addEstampillaYT(content) {
+      if (this.filterDiagsYT.trim() === '') {
+        this.toasterService.pop('warning', 'Advertencia', 'Ingrese un Código YT para realizar la busqueda.');
+        return;
+      }
+
+      const temp = [];
+      for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
+        const codigo = this.filtrosEstamp[i].codigo_yt.toLowerCase();
+        if (codigo.includes(this.filterDiagsYT.toLowerCase())) {
+            temp.push(this.filtrosEstamp[i]);
+        }
+      }
+
+      if (temp.length === 0) {
+        this.toasterService.pop('warning', 'Advertencia', 'El Código YT ingresado no existe. Por favor ingrese otro código.');
+      } else if (temp.length === 1) {
+        this.addItem(temp[0]);
+      } else {
+        this.codigoTitulo = 'Código YT: ' + this.filterDiagsYT.toLowerCase();
+        this.filtros = temp;
+        this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+      }
+    }
+
+    addEstampillaArg(content) {
+      if (this.filterDiagsArg.trim() === '') {
+        this.toasterService.pop('warning', 'Advertencia', 'Ingrese un Código Arg para realizar la busqueda.');
+        return;
+      }
+
+      const temp = [];
+      for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
+        const codigo = this.filtrosEstamp[i].codigo_arg.toLowerCase();
+        if (codigo.includes(this.filterDiagsArg.toLowerCase())) {
+            temp.push(this.filtrosEstamp[i]);
+        }
+      }
+
+      if (temp.length === 0) {
+        this.toasterService.pop('warning', 'Advertencia', 'El Código Arg ingresado no existe. Por favor ingrese otro código.');
+      } else if (temp.length === 1) {
+        this.addItem(temp[0]);
+      } else {
+        this.codigoTitulo = 'Código Arg: ' + this.filterDiagsArg.toLowerCase();
+        this.filtros = temp;
+        this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+      }
+    }
+
+    addEstampillaJalil(content) {
+      if (this.filterDiagsJalil.trim() === '') {
+        this.toasterService.pop('warning', 'Advertencia', 'Ingrese un Código Jalil para realizar la busqueda.');
+        return;
+      }
+
+      const temp = [];
+      for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
+        const codigo = this.filtrosEstamp[i].codigo_jalil.toLowerCase();
+        if (codigo.includes(this.filterDiagsJalil.toLowerCase())) {
+            temp.push(this.filtrosEstamp[i]);
+        }
+      }
+
+      if (temp.length === 0) {
+        this.toasterService.pop('warning', 'Advertencia', 'El Código Jalil ingresado no existe. Por favor ingrese otro código.');
+      } else if (temp.length === 1) {
+        this.addItem(temp[0]);
+      } else {
+        this.codigoTitulo = 'Código Jalil: ' + this.filterDiagsJalil.toLowerCase();
+        this.filtros = temp;
+        this.modalService.open(content, {backdropClass: 'light-blue-backdrop'});
+      }
+    }
+
+    addItem(item) {
+      const aux = {
+        estampilla_id: item.estampilla_id,
+        codigo_yt: item.codigo_yt,
+        codigo_arg: item.codigo_arg,
+        codigo_jalil: item.codigo_jalil,
+        nombre: item.estampilla,
+        estampilla_variedad_id: item.estampilla_variedad_id
+      };
+      this.estampillas.push(aux);
+      this.loadGrid();
+      this.toasterService.pop('success', 'Exito', 'Se agrego la Estampilla al Lote satisfactoriamente.');
     }
 
 }

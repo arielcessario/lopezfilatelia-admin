@@ -13,7 +13,8 @@ import {
   NbCardModule,
   NbMenuModule,
   NbMenuItem,
-  NbCheckboxModule
+  NbCheckboxModule,
+  NbListModule
 } from '@nebular/theme';
 import { RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
@@ -40,6 +41,8 @@ import { UsuariosLotesComponent } from './usuarioslotes/usuarioslotes.component'
 import { UsuarioLoteComponent } from './usuariolote/usuariolote.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { SharedModule } from './shared/shared.module';
+import { FusejsService } from './core/fusejs.service';
 
 
 let env = 'dev';
@@ -76,7 +79,8 @@ const projectConfig = {
   ],
   imports: [
     BrowserModule,
-    NbThemeModule.forRoot({ name: 'default' }),
+    // NbThemeModule.forRoot({ name: 'default' }),
+    NbThemeModule.forRoot({ name: 'corporate' }),
     FormsModule,
     ReactiveFormsModule,
     Routing,
@@ -91,14 +95,17 @@ const projectConfig = {
     NbCheckboxModule,
     Ng2SmartTableModule,
     ToasterModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SharedModule,
+    NbListModule
   ],
   providers: [
     NbSidebarService,
     NbMenuService,
     LopezfilateliaAdminProxy,
     NgbModalConfig,
-    NgbModal
+    NgbModal,
+    FusejsService,
   ],
   bootstrap: [AppComponent]
 })

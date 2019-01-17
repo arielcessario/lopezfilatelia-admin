@@ -35,15 +35,15 @@ export class UsuariosLotesComponent implements OnInit {
         },
         columns: {
             lote_id: {
-                title: 'Lote',
+                title: 'N° Lote',
                 type: 'string'
             },
             nombre: {
-                title: 'Nombre',
+                title: 'Nombre del Lote',
                 type: 'string'
             },
             precio: {
-                title: 'Precio',
+                title: 'Precio Base',
                 type: 'string'
             },
             cantidad: {
@@ -51,11 +51,11 @@ export class UsuariosLotesComponent implements OnInit {
                 type: 'string'
             },
             max_precio: {
-                title: 'Mayor Oferta',
+                title: 'Mejor Oferta',
                 type: 'string'
             },
             status_nombre: {
-                title: 'Estado',
+                title: 'Estado del Lote',
                 type: 'string'
             }
         }
