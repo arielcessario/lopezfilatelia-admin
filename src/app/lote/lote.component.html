@@ -126,7 +126,13 @@
               </div>
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <p>Por favor, para agregar estampillas al Lote, debe realizar la busqueda por Código YT, Arg o Jalil
+                           y luego dar click sobre el botón (+).</p>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Buscar por Cód. YT</label>
                         <div class="input-group">
@@ -162,7 +168,7 @@
                         </div>
                     </div-->
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group">
                         <label>Buscar por Cód. Arg</label>
                         <div class="input-group">
@@ -179,7 +185,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-md-3">
                     <div class="form-group ">
                         <label>Buscar por Cód. Jalil</label>
                         <div class="input-group">
@@ -248,9 +254,10 @@
       <div class="body-panel" style="max-height: 360px; overflow-y: auto;">
           <p>{{codigoTitulo}}</p>
           <nb-list>
-            <nb-list-item *ngFor="let item of filtros" (click)="addItem(item)" style="cursor: pointer;">
-              <div style="text-overflow: ellipsis;">Estampilla: {{item.estampilla}}</div>
-              <div>Variedad: {{item.variedad}}</div>
+            <nb-list-item *ngFor="let item of filtros" (click)="addItem(item)"
+              [ngClass]="{'selected': item.selected == 1}" style="cursor: pointer;">
+              <div><b>Estampilla:</b> {{item.estampilla}}</div>
+              <div><b>Variedad:</b> {{item.variedad}}</div>
             </nb-list-item>
           </nb-list>
       </div>

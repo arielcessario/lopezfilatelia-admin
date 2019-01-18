@@ -283,7 +283,7 @@ export class UsuarioComponent implements OnInit {
 
       this.proxy.filateliaResetPassword(usuario).subscribe(
               data => {
-                  // console.log(data);
+                   console.log(data);
               },
               error => {
                   console.log(error);

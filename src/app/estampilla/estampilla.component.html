@@ -99,19 +99,22 @@
                   </h5>
               </div>
           </div>
-
-        <div class="col-6 col-sm-4 col-md-3 col-lg-2" style="padding-right: 45px">
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="margin: 5px 0 25px 0; text-align: center;">
           <div class="" style="margin-top:10px; ">
-            <!--<button-->
-                    <!--type="button"-->
-                    <!--(click)="addVariedad()"-->
-                    <!--class="btn btn-primary" title="Agregar Variedad">-->
-              <!--<span class="fa fa-plus fa-lg" aria-hidden="true"></span>-->
-            <!--</button>-->
-              <a (click)="addVariedad()" title="Agregar Variedad" style="cursor: pointer"><span class="fa fa-plus fa-lg" aria-hidden="true"></span></a>
+            <button
+                    type="button"
+                    (click)="addVariedad()"
+                    class="btn btn-primary" title="Agregar Variedad">
+                    Agregar Variedad
+            </button>
+              <!--a (click)="addVariedad()" title="Agregar Variedad" style="cursor: pointer"><span class="fa fa-plus fa-lg" aria-hidden="true"></span></a-->
           </div>
         </div>
       </div>
+
+
       <!--Fin seccion imagen-->
       <div *ngFor="let item of variedades" class="row">
         <div class="col-6 col-sm-3 col-md-3 col-lg-2">
@@ -280,25 +283,20 @@
         </div>
       </div>
       <!--Fin del row de variedades denamico-->
-
-
     </form>
     <div class="btn-group" style="margin-top: 20px">
       <button
         *ngIf="form"
         type="button"
         (click)="submit()"
-        class="btn btn-primary"
-      >
+        class="btn btn-primary" >
         Guardar
       </button>
-
       <button
         *ngIf="form"
         type="button"
         (click)="cancel()"
-        class="btn btn-default"
-      >
+        class="btn btn-default" >
         Cancelar
       </button>
     </div>

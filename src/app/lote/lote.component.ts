@@ -333,6 +333,13 @@ export class LoteComponent implements OnInit {
                     this.loadGrid();
                 }
             }
+
+            for (let i = 0; i <= this.filtros.length - 1; i++) {
+              const estampilla_variedad_id = this.filtros[i].estampilla_variedad_id;
+              if (estampilla_variedad_id === event.data.estampilla_variedad_id) {
+                  this.filtros[i].selected = 0;
+              }
+            }
         } else {
             // event.confirm.reject();
         }
@@ -373,11 +380,20 @@ export class LoteComponent implements OnInit {
 
 
     quitarEstampilla(item) {
-        for (let i = 0; i < this.estampillas.length; i++) {
+        for (let i = 0; i <= this.estampillas.length - 1; i++) {
             if (item.estampilla_variedad_id === this.estampillas[i].estampilla_variedad_id) {
+                // this.estampillas[i].selected = 0;
                 this.estampillas.splice(i, 1);
                 this.loadGrid();
             }
+        }
+
+        for (let i = 0; i <= this.filtros.length - 1; i++) {
+          const estampilla_id = this.filtros[i].estampilla_id;
+          const estampilla_variedad_id = this.filtros[i].estampilla_variedad_id;
+          if (estampilla_id === item.estampilla_id && estampilla_variedad_id === item.estampilla_variedad_id) {
+              this.filtros[i].selected = 0;
+          }
         }
     }
 
@@ -420,6 +436,7 @@ export class LoteComponent implements OnInit {
       for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
         const codigo = this.filtrosEstamp[i].codigo_yt.toLowerCase();
         if (codigo.includes(this.filterDiagsYT.toLowerCase())) {
+            this.filtrosEstamp[i].selected = this.filtrosEstamp[i].selected;
             temp.push(this.filtrosEstamp[i]);
         }
       }
@@ -445,6 +462,7 @@ export class LoteComponent implements OnInit {
       for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
         const codigo = this.filtrosEstamp[i].codigo_arg.toLowerCase();
         if (codigo.includes(this.filterDiagsArg.toLowerCase())) {
+          this.filtrosEstamp[i].selected = this.filtrosEstamp[i].selected;
             temp.push(this.filtrosEstamp[i]);
         }
       }
@@ -470,6 +488,7 @@ export class LoteComponent implements OnInit {
       for (let i = 0; i <= this.filtrosEstamp.length - 1; i++) {
         const codigo = this.filtrosEstamp[i].codigo_jalil.toLowerCase();
         if (codigo.includes(this.filterDiagsJalil.toLowerCase())) {
+          this.filtrosEstamp[i].selected = this.filtrosEstamp[i].selected;
             temp.push(this.filtrosEstamp[i]);
         }
       }
@@ -486,14 +505,24 @@ export class LoteComponent implements OnInit {
     }
 
     addItem(item) {
+      for (let i = 0; i <= this.filtros.length - 1; i++) {
+        const estampilla_id = this.filtros[i].estampilla_id;
+        const estampilla_variedad_id = this.filtros[i].estampilla_variedad_id;
+        if (estampilla_id === item.estampilla_id && estampilla_variedad_id === item.estampilla_variedad_id) {
+            this.filtros[i].selected = 1;
+        }
+      }
+
       const aux = {
         estampilla_id: item.estampilla_id,
         codigo_yt: item.codigo_yt,
         codigo_arg: item.codigo_arg,
         codigo_jalil: item.codigo_jalil,
         nombre: item.estampilla,
-        estampilla_variedad_id: item.estampilla_variedad_id
+        estampilla_variedad_id: item.estampilla_variedad_id,
+        selected: 1
       };
+
       this.estampillas.push(aux);
       this.loadGrid();
       this.toasterService.pop('success', 'Exito', 'Se agrego la Estampilla al Lote satisfactoriamente.');
