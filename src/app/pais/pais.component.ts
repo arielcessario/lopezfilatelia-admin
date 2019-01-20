@@ -43,7 +43,7 @@ export class PaisComponent implements OnInit {
     validationMessages = {
         nombre: {
             required: 'Requerido',
-            minlength: 'El nombre debe tener más de 10 letras o números'
+            minlength: 'El nombre debe tener mï¿½s de 10 letras o nï¿½meros'
         }
     };
 
@@ -78,8 +78,8 @@ export class PaisComponent implements OnInit {
 
     submit() {
 
-        var nombre = this.form.get('nombre').value;
-        if(nombre.trim().length > 0) {
+        const nombre = this.form.get('nombre').value;
+        if (nombre.trim().length > 0) {
 
             const plu = {
                 id: this.id,
@@ -87,9 +87,9 @@ export class PaisComponent implements OnInit {
                 nombre: this.form.get('nombre').value
             };
 
-            if(plu.id > 0) {
+            if (plu.id > 0) {
                 this.proxy.updatePais(plu).subscribe( data => {
-                        this.toasterService.pop("success", "Exito", "Se actualizo el pais satisfactoriamente");
+                        this.toasterService.pop('success', 'Exito', 'Se actualizo el pais satisfactoriamente');
                         this.router.navigate(['paises']);
                     }, error => {
                         this.toasterService.pop('error', 'Error', 'Error actualizando el Pais');
@@ -98,7 +98,7 @@ export class PaisComponent implements OnInit {
                 );
             } else {
                 this.proxy.createPais(plu).subscribe( data => {
-                        this.toasterService.pop("success", "Exito", "Se creo el pais satisfactoriamente");
+                        this.toasterService.pop('success', 'Exito', 'Se creo el pais satisfactoriamente');
                         this.router.navigate(['paises']);
                     }, error => {
                         this.toasterService.pop('error', 'Error', 'Error creando el Pais');
@@ -107,7 +107,7 @@ export class PaisComponent implements OnInit {
                 );
             }
         } else {
-            this.toasterService.pop("warning", "Advertencia", "El campo pais es obligatorio");
+            this.toasterService.pop('warning', 'Advertencia', 'El campo pais es obligatorio');
         }
     }
 

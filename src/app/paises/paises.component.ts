@@ -54,7 +54,7 @@ export class PaisesComponent implements OnInit {
         this.loadGrid();
     }
 
-    loadGrid(){
+    loadGrid() {
         this.proxy.getPaises().subscribe(d => {
             if (d) {
                 this.data = d;
@@ -65,7 +65,7 @@ export class PaisesComponent implements OnInit {
 
     onDeleteConfirm(event): void {
         console.log(event);
-        if (window.confirm('�Esta seguro que desea eliminar el registro seleccionado?')) {
+        if (window.confirm('¿Esta seguro que desea eliminar el registro seleccionado?')) {
             console.log(event.data.pais_id);
 
             // this.proxy.deletePais(event.data.pais_id)
