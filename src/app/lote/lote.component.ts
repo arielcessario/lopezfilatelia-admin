@@ -43,7 +43,6 @@ export class LoteComponent implements OnInit {
     public codigo_arg = '';
     public status = 1;
     public pausar = true;
-    public imagen = 'no_image.png';
     public precio_1 = '';
     public boton = 'Pausar Subasta';
     public filterDiags = '';
@@ -51,11 +50,15 @@ export class LoteComponent implements OnInit {
     public filterDiagsArg = '';
     public filterDiagsJalil = '';
     public codigoTitulo = '';
+    // public imagen = 'no_image.png';
+
+    _img01Name = 'no_image.png';
+    _img02Name = 'no_image.png';
+    _img03Name = 'no_image.png';
+
+    images = [];
 
     filtros: Array<any> = [];
-    // filtrosYT: Array<any> = [];
-    // filtrosArg: Array<any> = [];
-    // filtrosJalil: Array<any> = [];
     filtrosEstamp: Array<any> = [];
 
     imagesPath = environment.imagesPath;
@@ -156,10 +159,6 @@ export class LoteComponent implements OnInit {
     buscarEstampillas() {
       this.proxy.buscarEstampillas().subscribe(data => {
           // console.log(data);
-          // this.filtros = data.estampillas;
-          // this.filtrosYT = data.codigos_yt;
-          // this.filtrosArg = data.codigos_arg;
-          // this.filtrosJalil = data.codigos_jalil;
           this.filtrosEstamp = data.estampillas;
       });
     }
@@ -181,48 +180,72 @@ export class LoteComponent implements OnInit {
             // hora_inicio: this.hora_inicio,
             // hora_fin: this.hora_fin,
             estampillas: this.estampillas,
-            path: this.imagen
+            // path: this.imagen,
+            path: '',
+            path2: '',
+            path3: ''
+
         };
+
+        if (this.images.length === 1) {
+          plu.path = this.images[0];
+        } else if (this.images.length === 2) {
+          plu.path = this.images[0];
+          plu.path2 = this.images[1];
+        } else if (this.images.length === 3) {
+          plu.path = this.images[0];
+          plu.path2 = this.images[1];
+          plu.path3 = this.images[2];
+        }
+
 
         const aux1 = new Date(this.fecha_inicio.year, this.fecha_inicio.month - 1, this.fecha_inicio.day);
         const aux2 = new Date(this.fecha_fin.year, this.fecha_fin.month - 1, this.fecha_fin.day);
         const today = new Date();
+        aux1.setHours(0, 0, 0, 0);
+        aux2.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
 
-        if (aux1 >= today) {
-            if (aux1 <= aux2) {
-                if (plu.estampillas.length > 0) {
-                    if (plu.id > 0) {
-                        this.proxy.updateLote(plu).subscribe(
-                                data => {
-                                    if (this.status === 1) {
-                                      this.sendMail(this.id);
-                                    }
-                                    this.toasterService.pop('success', 'Exito', 'Se actualizo el lote satisfactoriamente');
-                                    this.router.navigate(['lotes']);
-                            }, error => {
-                                    this.err = error;
-                            }
-                        );
-                    } else {
-                        this.proxy.createLote(plu).subscribe(
-                                data => {
-                                    this.sendMail(data);
-                                    this.toasterService.pop('success', 'Exito', 'Se creó el lote satisfactoriamente');
-                                    this.router.navigate(['lotes']);
-                            }, error => {
-                                    this.err = error;
-                            }
-                        );
-                    }
-                } else {
-                    this.toasterService.pop('warning', 'Advertencia', 'Debe agregar estampillas al lote');
-                }
-            } else {
-                this.toasterService.pop('warning', 'Advertencia', 'La Fecha Fin debe ser mayor que la Fecha de Inicio');
-            }
-        } else {
-            this.toasterService.pop('warning', 'Advertencia', 'La Fecha Inicio no puede ser menor que la Fecha Actual');
+        if (aux1 < today) {
+          this.toasterService.pop('warning', 'Advertencia', 'La Fecha Inicio no puede ser menor que la Fecha Actual');
+          return;
         }
+        if (aux1 > today) {
+          this.toasterService.pop('warning', 'Advertencia', 'La Fecha Inicio no puede ser mayor que la Fecha Actual');
+          return;
+        }
+        if (aux1 > aux2) {
+          this.toasterService.pop('warning', 'Advertencia', 'La Fecha Fin debe ser mayor que la Fecha de Inicio');
+          return;
+        }
+
+        if (plu.estampillas.length > 0) {
+          if (plu.id > 0) {
+              this.proxy.updateLote(plu).subscribe(
+                      data => {
+                          if (this.status === 1) {
+                            this.sendMail(this.id);
+                          }
+                          this.toasterService.pop('success', 'Exito', 'Se actualizo el lote satisfactoriamente');
+                          this.router.navigate(['lotes']);
+                  }, error => {
+                          this.err = error;
+                  }
+              );
+          } else {
+              this.proxy.createLote(plu).subscribe(
+                      data => {
+                          this.sendMail(data);
+                          this.toasterService.pop('success', 'Exito', 'Se creó el lote satisfactoriamente');
+                          this.router.navigate(['lotes']);
+                  }, error => {
+                          this.err = error;
+                  }
+              );
+          }
+      } else {
+          this.toasterService.pop('warning', 'Advertencia', 'Debe agregar estampillas al lote');
+      }
 
     }
 
@@ -279,7 +302,9 @@ export class LoteComponent implements OnInit {
         // this.hora_inicio = {};
         // this.hora_fin = {};
         this.status = 1;
-        this.imagen = '';
+        // this.imagen = '';
+        this.images = [];
+
 
         if (this.id !== -1) {
             form.controls['nombre'].setValue(this.lote[0].nombre);
@@ -287,7 +312,11 @@ export class LoteComponent implements OnInit {
             form.controls['precio_1'].setValue(this.lote[0].precio_base_1);
             this.status = this.lote[0].status;
             this.pausar = (this.lote[0].status === 4) ? false : true;
-            this.imagen = this.lote[0].path;
+            // this.imagen = this.lote[0].path;
+            this.images.push(this.lote[0].path);
+            this.images.push(this.lote[0].path2);
+            this.images.push(this.lote[0].path3);
+
             this.boton = (this.lote[0].status === 4) ? 'Activar Subasta' : 'Pausar Subasta';
 
             const aux1 = new Date(this.lote[0].fecha_inicio);
@@ -349,35 +378,6 @@ export class LoteComponent implements OnInit {
         console.log(e);
     }
 
-/*
-    searchYT() {
-        this.proxy.buscarEstampillas().subscribe(data => {
-            if (data) {
-                console.log(data);
-                let encontrado = false;
-                for (let i = 0; i < data.length; i++) {
-                    if (this.codigo_yt === data[i].codigo_yt) {
-                      const aux = {
-                            estampilla_id: data[i].estampilla_id,
-                            codigo_yt: data[i].codigo_yt,
-                            codigo_arg: data[i].codigo_arg,
-                            nombre: data[i].nombre,
-                            estampilla_variedad_id: data[i].estampilla_variedad_id
-                        };
-                        this.estampillas.push(aux);
-                        this.codigo_yt = '';
-                        encontrado = true;
-                        this.loadGrid();
-                    }
-                }
-                if (!encontrado) {
-                    this.toasterService.pop('warning', 'Advertencia', 'No existe el codigo ingresado');
-                }
-            }
-        });
-    }
-*/
-
 
     quitarEstampilla(item) {
         for (let i = 0; i <= this.estampillas.length - 1; i++) {
@@ -397,8 +397,15 @@ export class LoteComponent implements OnInit {
         }
     }
 
-    loadedImage(e) {
-        this.imagen = e.originalName;
+    updateEstampillaImages(e, id) {
+      const _id = 'img' + id;
+      // this.definicion[_id] = e[_id];
+      // console.log(this.definicion);
+    }
+
+    loadedImage(e, index) {
+        // this.imagen = e.originalName;
+        this.images[index] = e.originalName;
     }
 
     setImageName(_obj, val) {

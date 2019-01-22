@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  imagesPath: 'http://localhost:80/lopezfilatelia-admin/src/images/'
+  imagesPath: 'http://gator4184.temp.domains/~arielces/filatelialopez-admin/images/'
 };
 
 /*

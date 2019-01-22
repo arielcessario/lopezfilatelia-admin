@@ -110,7 +110,7 @@
                 </div>
             </div>
             <div class="row">
-              <div class="col-sm-6 col-md-2">
+              <!--div class="col-sm-6 col-md-2">
                 <div class="form-group">
                     <ac-upload
                             [img]="imagen"
@@ -120,15 +120,32 @@
                         style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
                         for="nombre"
                         [title]="imagen" >
-                        {{ imagen}}
+                        {{imagen}}
                     </h5>
+                </div>
+              </div-->
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2"
+                  *ngFor="let img of [0, 1, 2]; let i = index" >
+                <div class="form-group">
+                  <ac-upload
+                          [img]="images[i] ? images[i] : undefined"
+                          (status)="loadedImage($event, i)"
+                          ></ac-upload>
+                  <h5
+                          class="col-form-label text-heading"
+                          style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                          for="nombre"
+                          [title]="images[i] ? images[i] : ''"
+                          >
+                      {{ images[i] ? images[i] : '' }}
+                  </h5>
                 </div>
               </div>
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-3">
                     <div class="form-group">
-                        <p>Por favor, para agregar estampillas al Lote, debe realizar la busqueda por Código YT, Arg o Jalil
+                        <p>Para agregar estampillas al Lote, ingrese el Código YT, Arg o Jalil
                            y luego dar click sobre el botón (+).</p>
                     </div>
                 </div>
