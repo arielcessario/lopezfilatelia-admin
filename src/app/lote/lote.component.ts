@@ -254,7 +254,7 @@ export class LoteComponent implements OnInit {
         // Notifico via mail que hay un nuevo lote creado
         this.proxy.informarLote(lote_id).subscribe(
                 data => {
-                  console.log(data);
+                  // console.log(data);
             }, error => {
                   this.err = error;
             }

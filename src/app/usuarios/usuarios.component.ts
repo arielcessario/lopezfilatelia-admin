@@ -73,7 +73,6 @@ export class UsuariosComponent implements OnInit {
   loadGrid() {
     this.proxy.getUsuarios().subscribe(
         data => {
-            console.log(data);
             this.data = data;
             this.source.load(this.data);
         },

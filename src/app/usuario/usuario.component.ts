@@ -283,10 +283,9 @@ export class UsuarioComponent implements OnInit {
 
       this.proxy.filateliaResetPassword(usuario).subscribe(
               data => {
-                   console.log(data);
+                   this.toasterService.pop('success', 'Mail', 'La nueva contraseña fue enviada satisfactoriamente');
               },
               error => {
-                  console.log(error);
                   this.err = error;
                   setTimeout(() => (this.err = undefined), 4000);
           }
